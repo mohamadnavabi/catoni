@@ -1,3 +1,7 @@
+body {
+  direction: rtl;
+}
+
 .root {
   overflow: hidden;
 }
@@ -70,7 +74,7 @@
     content: "New!";
     position: absolute;
     top: -2px;
-    right: 0;
+    left: 0;
     display: inline-block;
     padding: 0 5px;
     line-height: 15px;
@@ -91,7 +95,7 @@
     background-color: #f35656;
     color: #fff;
     font-size: 10px;
-    margin-left: 6px;
+    margin-right: 6px;
   }
 }
 
@@ -166,25 +170,6 @@ button.gm-control-active.gm-fullscreen-control {
 }
 
 .nc-p-l-container {
-  padding-left: 16px;
-  @screen sm {
-    padding-left: calc((100vw + 32px - 640px) / 2);
-  }
-  @screen md {
-    padding-left: calc((100vw + 32px - 768px) / 2);
-  }
-  @screen lg {
-    padding-left: calc((100vw + 32px - 1024px) / 2);
-  }
-  @screen xl {
-    padding-left: calc((100vw + 80px - 1280px) / 2);
-  }
-  @screen 2xl {
-    padding-left: calc((100vw + 256px - 1536px) / 2);
-  }
-}
-
-.nc-p-r-container {
   padding-right: 16px;
   @screen sm {
     padding-right: calc((100vw + 32px - 640px) / 2);
@@ -200,6 +185,25 @@ button.gm-control-active.gm-fullscreen-control {
   }
   @screen 2xl {
     padding-right: calc((100vw + 256px - 1536px) / 2);
+  }
+}
+
+.nc-p-r-container {
+  padding-left: 16px;
+  @screen sm {
+    padding-left: calc((100vw + 32px - 640px) / 2);
+  }
+  @screen md {
+    padding-left: calc((100vw + 32px - 768px) / 2);
+  }
+  @screen lg {
+    padding-left: calc((100vw + 32px - 1024px) / 2);
+  }
+  @screen xl {
+    padding-left: calc((100vw + 80px - 1280px) / 2);
+  }
+  @screen 2xl {
+    padding-left: calc((100vw + 256px - 1536px) / 2);
   }
 }
 
@@ -227,18 +231,18 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 //
 .nc-product-notify-animation {
-  animation-name: ncSlideLeft;
+  animation-name: ncSlideright;
   animation-duration: 300ms;
   animation-timing-function: ease-in-out;
 }
 
 .nc-product-notify-animation-out {
-  animation-name: ncSlideRight;
+  animation-name: ncSlideleft;
   animation-duration: 300ms;
   animation-timing-function: ease-in-out;
 }
 
-@keyframes ncSlideLeft {
+@keyframes ncSlideright {
   from {
     transform: translateX(200px);
     opacity: 0;
@@ -249,7 +253,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 
-@keyframes ncSlideRight {
+@keyframes ncSlideleft {
   from {
     transform: translateX(0px);
     opacity: 1;
@@ -260,7 +264,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 
-@keyframes CardLarge1ExampleRight {
+@keyframes CardLarge1Exampleleft {
   from {
     transform: scale(1.05) translateY(20px);
     opacity: 0;
@@ -271,7 +275,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 
-@keyframes CardLarge1ExampleLeft {
+@keyframes CardLarge1Exampleright {
   from {
     transform: translateX(-50px);
     opacity: 0;
@@ -282,7 +286,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 
-@keyframes SectionHero2ItemLeft {
+@keyframes SectionHero2Itemright {
   from {
     opacity: 0;
   }
@@ -310,29 +314,29 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 
   .nc-SectionHero2Item__image {
-    animation-name: CardLarge1ExampleRight;
+    animation-name: CardLarge1Exampleleft;
     animation-duration: 650ms;
     animation-timing-function: ease-in-out;
   }
 
-  .nc-SectionHero2Item__left {
-    animation-name: SectionHero2ItemLeft;
+  .nc-SectionHero2Item__right {
+    animation-name: SectionHero2Itemright;
     animation-duration: 600ms;
     animation-timing-function: ease-in-out;
   }
 
   .nc-SectionHero2Item__button {
-    animation-name: CardLarge1ExampleLeft;
+    animation-name: CardLarge1Exampleright;
     animation-duration: 800ms;
     animation-timing-function: ease-in-out;
   }
   .nc-SectionHero2Item__heading {
-    animation-name: CardLarge1ExampleLeft;
+    animation-name: CardLarge1Exampleright;
     animation-duration: 600ms;
     animation-timing-function: ease-in-out;
   }
   .nc-SectionHero2Item__subheading {
-    animation-name: CardLarge1ExampleLeft;
+    animation-name: CardLarge1Exampleright;
     animation-timing-function: ease-in-out;
     animation-duration: 400ms;
   }

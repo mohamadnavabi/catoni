@@ -42,31 +42,31 @@ export interface Product {
 const DEMO_VARIANTS: ProductVariant[] = [
   {
     id: 1,
-    name: "Black",
+    name: "مشکی",
     thumbnail: productVariantImg6,
     featuredImage: productImgs[0],
   },
   {
     id: 2,
-    name: "White",
+    name: "سفید",
     thumbnail: productVariantImg2,
     featuredImage: productImgs[1],
   },
   {
     id: 3,
-    name: "Orange",
+    name: "پرتقالی",
     thumbnail: productVariantImg3,
     featuredImage: productImgs[2],
   },
   {
     id: 4,
-    name: "Sky Blue",
+    name: "آبی آسمانی",
     thumbnail: productVariantImg4,
     featuredImage: productImgs[3],
   },
   {
     id: 5,
-    name: "Natural",
+    name: "قرمز",
     thumbnail: productVariantImg5,
     featuredImage: productImgs[4],
   },
@@ -107,9 +107,9 @@ const DEMO_VARIANT_COLORS: ProductVariant[] = [
 export const PRODUCTS: Product[] = [
   {
     id: 1,
-    name: "Rey Nylon Backpack",
+    name: "سوئیشرت مردانه نایک",
     description: "Brown cockroach wings",
-    price: 74,
+    price: 740000,
     image: productImgs[16],
     category: "Category 1",
     tags: ["tag1", "tag2"],
@@ -122,9 +122,9 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 2,
-    name: 'Round Buckle 1" Belt',
+    name: "کوله پشتی جنس خوب",
     description: "Classic green",
-    price: 68,
+    price: 68000,
     image: productImgs[1],
     category: "Category 1",
     tags: ["tag1", "tag2"],
@@ -135,9 +135,9 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 3,
-    name: "Waffle Knit Beanie",
+    name: "کلاه دزدی",
     description: "New blue aqua",
-    price: 132,
+    price: 13200,
     image: productImgs[15],
     category: "Category 1",
     tags: ["tag1", "tag2"],

@@ -36,11 +36,7 @@ const SearchDropdown = () => {
                   className="absolute right-0 z-10 w-screen max-w-sm mt-3"
                 >
                   <form action="" method="POST">
-                    <Input
-                      ref={inputRef}
-                      type="search"
-                      placeholder="Type and press enter"
-                    />
+                    <Input ref={inputRef} type="search" placeholder="جستجو" />
                     <input type="submit" hidden value="" />
                   </form>
                 </Popover.Panel>

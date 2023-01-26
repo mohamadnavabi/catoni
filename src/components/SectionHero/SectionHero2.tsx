@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
-import imageRightPng from "images/hero-right.png";
-import imageRightPng2 from "images/hero-right-2.png";
-import imageRightPng3 from "images/hero-right-3.png";
+import imagerightPng from "images/hero-right.png";
+import imagerightPng2 from "images/hero-right-2.png";
+import imagerightPng3 from "images/hero-right-3.png";
 
 import backgroundLineSvg from "images/Moon.svg";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
@@ -23,24 +23,24 @@ export interface SectionHero2Props {
 
 const DATA: Hero2DataType[] = [
   {
-    image: imageRightPng2,
-    heading: "Exclusive collection for everyone",
-    subHeading: "In this season, find the best 🔥",
-    btnText: "Explore now",
+    image: imagerightPng2,
+    heading: "درب منزل پرو کنید",
+    subHeading: "درب منزل پرو کنید اندازه کنید",
+    btnText: "مشاهده",
     btnLink: "/",
   },
   {
-    image: imageRightPng3,
-    heading: "Exclusive collection for everyone",
-    subHeading: "In this season, find the best 🔥",
-    btnText: "Explore now",
+    image: imagerightPng3,
+    heading: "سال نو کتونی نو",
+    subHeading: "انتخاب از بین کتونی های حرفه ای",
+    btnText: "مشاهده",
     btnLink: "/",
   },
   {
-    image: imageRightPng,
-    heading: "Exclusive collection for everyone",
-    subHeading: "In this season, find the best 🔥",
-    btnText: "Explore now",
+    image: imagerightPng,
+    heading: "به قلب دومت اهمیت بده",
+    subHeading: "انتخاب از بین بهترین کتونی ها",
+    btnText: "مشاهده",
     btnLink: "/",
   },
 ];
@@ -163,13 +163,13 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
 
         <div className="relative container pb-0 pt-14 sm:pt-20 lg:py-44">
           <div
-            className={`relative z-[1] w-full max-w-3xl space-y-8 sm:space-y-14 nc-SectionHero2Item__left`}
+            className={`relative z-[1] w-full max-w-3xl space-y-8 sm:space-y-14 nc-SectionHero2Item__right`}
           >
             <div className="space-y-5 sm:space-y-6">
               <span className="nc-SectionHero2Item__subheading block text-base md:text-xl text-slate-700 font-medium">
                 {item.subHeading}
               </span>
-              <h2 className="nc-SectionHero2Item__heading font-semibold text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl !leading-[114%] text-slate-900">
+              <h2 className="nc-SectionHero2Item__heading font-semibold text-2xl sm:text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl !leading-[114%] text-slate-900">
                 {item.heading}
               </h2>
             </div>
@@ -181,7 +181,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
             >
               <span>{item.btnText}</span>
               <span>
-                <svg className="w-5 h-5 ml-2.5" viewBox="0 0 24 24" fill="none">
+                <svg className="w-5 h-5 mr-2.5" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
                     stroke="currentColor"
@@ -200,9 +200,9 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
               </span>
             </ButtonPrimary>
           </div>
-          <div className="mt-10 lg:mt-0 lg:absolute right-0 bottom-0 top-0 w-full max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
+          <div className="mt-10 lg:mt-0 lg:absolute left-0 bottom-0 top-0 w-full max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
             <img
-              className="w-full h-full object-contain object-right-bottom nc-SectionHero2Item__image"
+              className="w-full h-full object-contain object-left-bottom nc-SectionHero2Item__image"
               src={item.image}
               alt={item.heading}
             />

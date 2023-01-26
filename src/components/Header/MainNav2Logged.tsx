@@ -51,7 +51,7 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Type and press enter"
+            placeholder="جستجو"
             className="border-none bg-transparent focus:outline-none focus:ring-0 w-full text-base"
             autoFocus
           />

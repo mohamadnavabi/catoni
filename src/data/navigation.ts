@@ -230,6 +230,19 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
   },
 ];
 
+export const NAVIGATION_DEMO: NavItemType[] = [
+  {
+    id: ncNanoId(),
+    href: "/#",
+    name: "مردانه",
+  },
+  {
+    id: ncNanoId(),
+    href: "/#",
+    name: "زنـانـه",
+  },
+];
+
 export const NAVIGATION_DEMO_2: NavItemType[] = [
   {
     id: ncNanoId(),

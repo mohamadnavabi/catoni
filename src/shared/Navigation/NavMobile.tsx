@@ -157,7 +157,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
           {renderMagnifyingGlassIcon()}
           <input
             type="search"
-            placeholder="Type and press enter"
+            placeholder="جستجو"
             className="border-none bg-transparent focus:outline-none focus:ring-0 w-full text-sm "
           />
         </div>
