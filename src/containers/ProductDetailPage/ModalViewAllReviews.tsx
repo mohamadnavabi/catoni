@@ -66,12 +66,12 @@ const ModalViewAllReviews: FC<ModalViewAllReviewsProps> = ({
                 <div className="px-8 my-5 flex justify-between flex-wrap">
                   <h2 className="text-xl sm:text-2xl font-semibold flex items-center">
                     <StarIcon className="w-7 h-7 mb-0.5" />
-                    <span className="ml-1.5"> 4,87 · 142 Reviews</span>
+                    <span className="ml-1.5"> 4,87 · 142 نظر</span>
                   </h2>
                   <SortOrderFilter
                     className="my-2"
                     data={[
-                      { name: "Sort order" },
+                      { name: "مرتب سازی" },
                       { name: "Newest rating" },
                       { name: "Highest rating" },
                       { name: "Lowest rating" },

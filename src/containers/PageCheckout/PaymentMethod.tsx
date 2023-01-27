@@ -23,7 +23,7 @@ const PaymentMethod: FC<Props> = ({
   const renderDebitCredit = () => {
     const active = mothodActive === "Credit-Card";
     return (
-      <div className="flex items-start space-x-4 sm:space-x-6">
+      <div className="flex items-start space-x-4 sm:space-x-6 space-x-reverse">
         <Radio
           className="pt-3.5"
           name="payment-method"
@@ -34,7 +34,7 @@ const PaymentMethod: FC<Props> = ({
         <div className="flex-1">
           <label
             htmlFor="Credit-Card"
-            className="flex items-center space-x-4 sm:space-x-6"
+            className="flex items-center space-x-4 sm:space-x-6 space-x-reverse"
           >
             <div
               className={`p-2.5 rounded-xl border-2 ${
@@ -123,7 +123,7 @@ const PaymentMethod: FC<Props> = ({
   const renderInterNetBanking = () => {
     const active = mothodActive === "Internet-banking";
     return (
-      <div className="flex items-start space-x-4 sm:space-x-6">
+      <div className="flex items-start space-x-4 sm:space-x-6 space-x-reverse">
         <Radio
           className="pt-3.5"
           name="payment-method"
@@ -134,7 +134,7 @@ const PaymentMethod: FC<Props> = ({
         <div className="flex-1">
           <label
             htmlFor="Internet-banking"
-            className="flex items-center space-x-4 sm:space-x-6"
+            className="flex items-center space-x-4 sm:space-x-6 space-x-reverse"
           >
             <div
               className={`p-2.5 rounded-xl border-2 ${
@@ -243,7 +243,7 @@ const PaymentMethod: FC<Props> = ({
   const renderWallet = () => {
     const active = mothodActive === "Wallet";
     return (
-      <div className="flex items-start space-x-4 sm:space-x-6">
+      <div className="flex items-start space-x-4 sm:space-x-6 space-x-reverse">
         <Radio
           className="pt-3.5"
           name="payment-method"
@@ -254,7 +254,7 @@ const PaymentMethod: FC<Props> = ({
         <div className="flex-1">
           <label
             htmlFor="Wallet"
-            className="flex items-center space-x-4 sm:space-x-6 "
+            className="flex items-center space-x-4 sm:space-x-6 space-x-reverse"
           >
             <div
               className={`p-2.5 rounded-xl border-2 ${
@@ -365,15 +365,15 @@ const PaymentMethod: FC<Props> = ({
               />
             </svg>
           </span>
-          <div className="sm:ml-8">
+          <div className="sm:mr-8">
             <h3 className=" text-slate-700 dark:text-slate-400 flex ">
-              <span className="uppercase tracking-tight">PAYMENT METHOD</span>
+              <span className="uppercase tracking-tight">روش پرداخت</span>
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="2.5"
                 stroke="currentColor"
-                className="w-5 h-5 ml-3 text-slate-900"
+                className="w-5 h-5 mr-3 text-slate-900"
               >
                 <path
                   strokeLinecap="round"
@@ -383,17 +383,17 @@ const PaymentMethod: FC<Props> = ({
               </svg>
             </h3>
             <div className="font-semibold mt-1 text-sm">
-              <span className="">Google / Apple Wallet</span>
-              <span className="ml-3">xxx-xxx-xx55</span>
+              <span className="">پرداخت آنلاین</span>
+              <span className="mr-3">درگاه پرداخت سامان</span>
             </div>
           </div>
           <ButtonSecondary
             sizeClass="py-2 px-4 "
             fontSize="text-sm font-medium"
-            className="bg-slate-50 dark:bg-slate-800 mt-5 sm:mt-0 sm:ml-auto !rounded-lg"
+            className="bg-slate-50 dark:bg-slate-800 mt-5 sm:mt-0 sm:mr-auto !rounded-lg"
             onClick={onOpenActive}
           >
-            Change
+            ویرایش
           </ButtonSecondary>
         </div>
 
@@ -416,10 +416,10 @@ const PaymentMethod: FC<Props> = ({
               className="w-full max-w-[240px]"
               onClick={onCloseActive}
             >
-              Confirm order
+              پرداخت و ثبت نهایی
             </ButtonPrimary>
-            <ButtonSecondary className="ml-3" onClick={onCloseActive}>
-              Cancel
+            <ButtonSecondary className="mr-3" onClick={onCloseActive}>
+              انصراف
             </ButtonSecondary>
           </div>
         </div>

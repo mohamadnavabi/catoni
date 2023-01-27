@@ -36,7 +36,7 @@ export interface Product {
   variantType?: "color" | "image";
   sizes?: string[];
   allOfSizes?: string[];
-  status?: "New in" | "limited edition" | "Sold Out" | "50% Discount";
+  status?: "جدید" | "تعداد محدود" | "تمام شد" | "50% تخفیف";
 }
 
 const DEMO_VARIANTS: ProductVariant[] = [
@@ -118,7 +118,7 @@ export const PRODUCTS: Product[] = [
     variantType: "image",
     sizes: ["XS", "S", "M", "L", "XL"],
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
-    status: "New in",
+    status: "جدید",
   },
   {
     id: 2,
@@ -131,7 +131,7 @@ export const PRODUCTS: Product[] = [
     link: "/product-detail/",
     variants: DEMO_VARIANT_COLORS,
     variantType: "color",
-    status: "50% Discount",
+    status: "50% تخفیف",
   },
   {
     id: 3,
@@ -158,7 +158,7 @@ export const PRODUCTS: Product[] = [
     variants: DEMO_VARIANT_COLORS,
     variantType: "color",
     link: "/product-detail/",
-    status: "Sold Out",
+    status: "تمام شد",
   },
   {
     id: 5,
@@ -197,7 +197,7 @@ export const PRODUCTS: Product[] = [
     variants: DEMO_VARIANTS,
     variantType: "image",
     link: "/product-detail/",
-    status: "New in",
+    status: "جدید",
   },
   {
     id: 8,
@@ -212,7 +212,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["XS", "S", "M", "L", "XL"],
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     link: "/product-detail/",
-    status: "limited edition",
+    status: "تعداد محدود",
   },
 ];
 
@@ -230,7 +230,7 @@ export const SPORT_PRODUCTS: Product[] = [
     variantType: "color",
     sizes: ["XS", "S", "M", "L", "XL"],
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
-    status: "New in",
+    status: "جدید",
   },
   {
     id: 2,
@@ -243,7 +243,7 @@ export const SPORT_PRODUCTS: Product[] = [
     link: "/product-detail/",
     variants: DEMO_VARIANT_COLORS,
     variantType: "color",
-    status: "50% Discount",
+    status: "50% تخفیف",
   },
   {
     id: 3,
@@ -270,7 +270,7 @@ export const SPORT_PRODUCTS: Product[] = [
     variants: DEMO_VARIANT_COLORS,
     variantType: "color",
     link: "/product-detail/",
-    status: "Sold Out",
+    status: "تمام شد",
   },
   {
     id: 5,
@@ -309,7 +309,7 @@ export const SPORT_PRODUCTS: Product[] = [
     variants: DEMO_VARIANTS,
     variantType: "image",
     link: "/product-detail/",
-    status: "New in",
+    status: "جدید",
   },
   {
     id: 8,
@@ -324,6 +324,6 @@ export const SPORT_PRODUCTS: Product[] = [
     sizes: ["XS", "S", "M", "L", "XL"],
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     link: "/product-detail/",
-    status: "limited edition",
+    status: "تعداد محدود",
   },
 ];

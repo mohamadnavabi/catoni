@@ -18,19 +18,19 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = "" }) => {
     >
       <div className="flex-shrink-0 mb-10 lg:mb-0 lg:mr-10 lg:w-2/5">
         <h2 className="font-semibold text-4xl md:text-5xl">
-          Don't miss out on special offers
+          آفر های ویژه کتونی رو از دست نده
         </h2>
         <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
           Register email to to get freeship & savings combos...
         </span>
         <ul className="space-y-4 mt-10">
-          <li className="flex items-center space-x-4">
+          <li className="flex items-center space-x-4 space-x-reverse">
             <Badge name="01" />
             <span className="font-medium text-neutral-700 dark:text-neutral-300">
               Get more discount
             </span>
           </li>
-          <li className="flex items-center space-x-4">
+          <li className="flex items-center space-x-4 space-x-reverse">
             <Badge color="red" name="02" />
             <span className="font-medium text-neutral-700 dark:text-neutral-300">
               Get premium magazines

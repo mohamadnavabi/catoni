@@ -23,7 +23,7 @@ const SectionGridFeatureItems: FC<SectionGridFeatureItemsProps> = ({
         ))}
       </div>
       <div className="flex mt-16 justify-center items-center">
-        <ButtonPrimary loading>Show me more</ButtonPrimary>
+        <ButtonPrimary loading>نمایش همه</ButtonPrimary>
       </div>
     </div>
   );

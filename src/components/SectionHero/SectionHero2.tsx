@@ -68,7 +68,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
     });
   };
 
-  const handleClickNext = () => {
+  const handleClickPrev = () => {
     setIndexActive((state) => {
       if (state >= DATA.length - 1) {
         return 0;
@@ -78,7 +78,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
     handleAfterClick();
   };
 
-  const handleClickPrev = () => {
+  const handleClickNext = () => {
     setIndexActive((state) => {
       if (state === 0) {
         return DATA.length - 1;

@@ -17,29 +17,29 @@ const DEMO_DATA = [
     id: 1,
     img: HIW1img,
     imgDark: HIW1img,
-    title: "Filter & Discover",
-    desc: "Smart filtering and suggestions make it easy to find",
+    title: "بررسی و انتخاب",
+    desc: "با بررسی و فیلتر گزینه ها کتونی مد نظرتان را انتخاب کنید",
   },
   {
     id: 2,
     img: HIW2img,
     imgDark: HIW2img,
-    title: "Add to bag",
-    desc: "Easily select the correct items and add them to the cart",
+    title: "اضافه کردن به سبد خرید",
+    desc: "پس از اطمینان انتخاب خود را به سبد خریدتان اضافه کنید",
   },
   {
     id: 3,
     img: HIW3img,
     imgDark: HIW3img,
-    title: "Fast shipping",
-    desc: "The carrier will confirm and ship quickly to you",
+    title: "تحویل سریع",
+    desc: "در صورت ثبت سفارش تا ساعت ۱۴ سفارش را در همان روز تحویل بگیرید",
   },
   {
     id: 4,
     img: HIW4img,
     imgDark: HIW4img,
-    title: "Enjoy the product",
-    desc: "Have fun and enjoy your 5-star quality products",
+    title: "طمع شیرین خرید",
+    desc: "می توانید درب منزل پرو کنید و مناسب ترین سایز را انتخاب کنید",
   },
 ];
 
@@ -70,7 +70,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
             />
             <div className="text-center mt-auto space-y-5">
               <Badge
-                name={`Step ${index + 1}`}
+                name={`مرحله ${index + 1}`}
                 color={
                   !index
                     ? "red"

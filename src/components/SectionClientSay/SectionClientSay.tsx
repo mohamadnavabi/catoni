@@ -46,6 +46,7 @@ const SectionClientSay: FC<SectionClientSayProps> = ({ className = "" }) => {
     // @ts-ignore
     const OPTIONS: Glide.Options = {
       perView: 1,
+      direction: "rtl",
     };
 
     let slider = new Glide(`.${UNIQUE_CLASS}`, OPTIONS);
@@ -118,7 +119,7 @@ const SectionClientSay: FC<SectionClientSayProps> = ({ className = "" }) => {
                   <span className="block mt-8 text-2xl font-semibold">
                     {item.clientName}
                   </span>
-                  <div className="flex items-center space-x-0.5 mt-3.5 text-yellow-500">
+                  <div className="flex items-center space-x-0.5 space-x-reverse mt-3.5 text-yellow-500">
                     <StarIcon className="w-6 h-6" />
                     <StarIcon className="w-6 h-6" />
                     <StarIcon className="w-6 h-6" />

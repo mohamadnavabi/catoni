@@ -46,15 +46,17 @@ const ContactInfo: FC<Props> = ({ isActive, onCloseActive, onOpenActive }) => {
               />
             </svg>
           </span>
-          <div className="sm:ml-8">
+          <div className="sm:mr-8">
             <h3 className=" text-slate-700 dark:text-slate-300 flex ">
-              <span className="uppercase tracking-tight">CONTACT INFO</span>
+              <span className="uppercase tracking-tight">
+                مشخصات دریافت کننده
+              </span>
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="2.5"
                 stroke="currentColor"
-                className="w-5 h-5 ml-3 text-slate-900 dark:text-slate-100 "
+                className="w-5 h-5 mr-3 text-slate-900 dark:text-slate-100 "
               >
                 <path
                   strokeLinecap="round"
@@ -64,17 +66,17 @@ const ContactInfo: FC<Props> = ({ isActive, onCloseActive, onOpenActive }) => {
               </svg>
             </h3>
             <div className="font-semibold mt-1 text-sm">
-              <span className="">Enrico Smith</span>
-              <span className="ml-3 tracking-tighter">+855 - 666 - 7744</span>
+              <span className="">آیسان خیابانی</span>
+              <span className="mr-3 tracking-tighter">09142208405</span>
             </div>
           </div>
           <ButtonSecondary
             sizeClass="py-2 px-4 "
             fontSize="text-sm font-medium"
-            className="bg-slate-50 dark:bg-slate-800 mt-5 sm:mt-0 sm:ml-auto !rounded-lg"
+            className="bg-slate-50 dark:bg-slate-800 mt-5 sm:mt-0 sm:mr-auto !rounded-lg"
             onClick={() => onOpenActive()}
           >
-            Change
+            ویرایش
           </ButtonSecondary>
         </div>
         <div
@@ -117,10 +119,10 @@ const ContactInfo: FC<Props> = ({ isActive, onCloseActive, onOpenActive }) => {
               Save and next to Shipping
             </ButtonPrimary>
             <ButtonSecondary
-              className="mt-3 sm:mt-0 sm:ml-3"
+              className="mt-3 sm:mt-0 sm:mr-3"
               onClick={() => onCloseActive()}
             >
-              Cancel
+              انصراف
             </ButtonSecondary>
           </div>
         </div>

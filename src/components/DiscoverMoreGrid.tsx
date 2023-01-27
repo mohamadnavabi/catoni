@@ -7,8 +7,8 @@ import img3 from "images/discover-more-3.png";
 
 const CATS_DISCOVER = [
   {
-    name: "Explore New Arrivals",
-    desc: "Shop the Latest from Top Brands",
+    name: "ست ها",
+    desc: "ست مناسب زوجین",
     featuredImage: img1,
   },
   {

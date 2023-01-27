@@ -20,7 +20,7 @@ const CardAuthorBox3: FC<CardAuthorBox3Props> = ({
       className={`nc-CardAuthorBox3 relative flex flex-col p-4 overflow-hidden [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
       data-nc-id="CardAuthorBox3"
     >
-      <div className="relative flex-shrink-0 flex space-x-2 h-24">
+      <div className="relative flex-shrink-0 flex space-x-2 space-x-reverse h-24">
         <NcImage
           containerClassName="flex flex-grow h-full rounded-xl overflow-hidden"
           src={nftsAbstracts[Math.floor(Math.random() * nftsAbstracts.length)]}

@@ -110,7 +110,7 @@ const TabDetail = () => {
   return (
     <div className="w-full pdx-2 sm:px-0">
       <Tab.Group>
-        <Tab.List className="flex justify-start pd-1 space-x-2.5 rounded-full bordedr border-neutral-300 dark:border-neutral-500">
+        <Tab.List className="flex justify-start pd-1 space-x-2.5 space-x-reverse rounded-full bordedr border-neutral-300 dark:border-neutral-500">
           {TABS.map((tab) => (
             <Tab
               key={tab}

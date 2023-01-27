@@ -19,12 +19,12 @@ const SectionPromo1: FC<SectionPromo1Props> = ({ className = "" }) => {
       <div className="relative flex-shrink-0 mb-16 lg:mb-0 lg:mr-10 lg:w-2/5">
         <Logo className="w-28" />
         <h2 className="font-semibold text-3xl sm:text-4xl xl:text-5xl 2xl:text-6xl mt-6 sm:mt-10 !leading-[1.2] tracking-tight">
-          Earn free money <br /> with Catoni
+          10 درصد از خرید شما <br /> صرف کمک به حیوانات می شود
         </h2>
         <span className="block mt-6 text-slate-500 dark:text-slate-400 ">
           With Catoni you will get freeship & savings combo...
         </span>
-        <div className="flex space-x-2 sm:space-x-5 mt-6 sm:mt-12">
+        <div className="flex space-x-2 space-x-reverse sm:space-x-5 sm:space-x-reverse mt-6 sm:mt-12">
           <ButtonPrimary href="/page-collection" className="">
             Savings combo
           </ButtonPrimary>

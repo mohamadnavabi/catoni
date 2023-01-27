@@ -42,10 +42,10 @@ const ModalTransferToken: FC<ModalTransferTokenProps> = ({
         <div className="mt-8 ">
           <Input ref={textareaRef} placeholder="Paste address" type={"text"} />
         </div>
-        <div className="mt-4 space-x-3">
+        <div className="mt-4 space-x-3 space-x-reverse">
           <ButtonPrimary type="submit">Submit</ButtonPrimary>
           <ButtonSecondary type="button" onClick={onCloseModalTransferToken}>
-            Cancel
+            انصراف
           </ButtonSecondary>
         </div>
       </form>

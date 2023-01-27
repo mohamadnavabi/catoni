@@ -46,7 +46,7 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
         method="POST"
         className="flex-1 py-2 text-slate-900 dark:text-slate-100"
       >
-        <div className="bg-slate-50 dark:bg-slate-800 flex items-center space-x-1.5 px-5 h-full rounded">
+        <div className="bg-slate-50 dark:bg-slate-800 flex items-center space-x-1.5 space-x-reverse px-5 h-full rounded">
           {renderMagnifyingGlassIcon()}
           <input
             ref={inputRef}

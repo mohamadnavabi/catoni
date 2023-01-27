@@ -148,35 +148,35 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
     }
     const CLASSES =
       "absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 text-slate-900 dark:text-slate-300";
-    if (status === "New in") {
+    if (status === "جدید") {
       return (
         <div className={CLASSES}>
           <SparklesIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "50% Discount") {
+    if (status === "50% تخفیف") {
       return (
         <div className={CLASSES}>
           <IconDiscount className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "Sold Out") {
+    if (status === "تمام شد") {
       return (
         <div className={CLASSES}>
           <NoSymbolIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "limited edition") {
+    if (status === "تعداد محدود") {
       return (
         <div className={CLASSES}>
           <ClockIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
@@ -192,7 +192,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
             <Link to="/product-detail">Heavy Weight Shoes</Link>
           </h2>
 
-          <div className="flex items-center mt-5 space-x-4 sm:space-x-5">
+          <div className="flex items-center mt-5 space-x-4 space-x-reverse sm:space-x-5 sm:space-x-reverse">
             {/* <div className="flex text-xl font-semibold">$112.00</div> */}
             <Prices
               contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
@@ -218,7 +218,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
               <span className="hidden sm:block mx-2.5">·</span>
               <div className="hidden sm:flex items-center text-sm">
                 <SparklesIcon className="w-3.5 h-3.5" />
-                <span className="ml-1 leading-none">{status}</span>
+                <span className="mr-1 leading-none">{status}</span>
               </div>
             </div>
           </div>
@@ -229,7 +229,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
         <div className="">{renderSizeList()}</div>
 
         {/*  ---------- 4  QTY AND ADD TO CART BUTTON */}
-        <div className="flex space-x-3.5">
+        <div className="flex space-x-3.5 space-x-reverse">
           <div className="flex items-center justify-center bg-slate-100/70 dark:bg-slate-800/70 px-2 py-3 sm:p-3.5 rounded-full">
             <NcInputNumber
               defaultValue={qualitySelected}
@@ -241,7 +241,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
             onClick={notifyAddTocart}
           >
             <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
-            <span className="ml-3">Add to cart</span>
+            <span className="ml-3">افزودن به سبد</span>
           </ButtonPrimary>
         </div>
 
@@ -253,7 +253,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
         <AccordionInfo
           data={[
             {
-              name: "Description",
+              name: "توضیحات",
               content:
                 "Fashion is a form of self-expression and autonomy at a particular period and place and in a specific context, of clothing, footwear, lifestyle, accessories, makeup, hairstyle, and body posture.",
             },

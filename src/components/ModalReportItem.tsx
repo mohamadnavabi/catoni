@@ -126,12 +126,12 @@ const ModalReportItem: FC<ModalReportItemProps> = ({
             id="report-message"
           />
         </div>
-        <div className="mt-4 space-x-3">
+        <div className="mt-4 space-x-3 space-x-reverse">
           <ButtonPrimary onClick={handleClickSubmitForm} type="submit">
             Submit
           </ButtonPrimary>
           <ButtonSecondary type="button" onClick={onCloseModalReportItem}>
-            Cancel
+            انصراف
           </ButtonSecondary>
         </div>
       </form>

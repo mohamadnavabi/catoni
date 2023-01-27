@@ -3,7 +3,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 
 const DEMO_DATA = [
-  { name: "Sort order" },
+  { name: "مرتب سازی" },
   { name: "Today" },
   { name: "Last 7 days" },
   { name: "Last 30 days" },

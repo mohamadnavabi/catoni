@@ -129,7 +129,7 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
               >
                 <div className="p-6 rounded-2xl bg-white dark:bg-neutral-800 shadow-lg ring-1 ring-black ring-opacity-5">
                   <Tab.Group>
-                    <Tab.List className="flex space-x-1 rounded-full bg-gray-100 dark:bg-slate-700 p-1">
+                    <Tab.List className="flex space-x-1 space-x-reverse rounded-full bg-gray-100 dark:bg-slate-700 p-1">
                       {["Language", "Currency"].map((category) => (
                         <Tab
                           key={category}

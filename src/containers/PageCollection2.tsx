@@ -17,7 +17,7 @@ const PageCollection2: FC<PageCollection2Props> = ({ className = "" }) => {
       data-nc-id="PageCollection2"
     >
       <Helmet>
-        <title>Category || Catoni Ecommerce Template</title>
+        <title>Category || فروشگاه اینترنتی کفش و کتونی</title>
       </Helmet>
 
       <div className="container py-16 lg:pb-28 lg:pt-20 space-y-16 sm:space-y-20 lg:space-y-28">
@@ -25,11 +25,10 @@ const PageCollection2: FC<PageCollection2Props> = ({ className = "" }) => {
           {/* HEADING */}
           <div className="max-w-screen-sm">
             <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold">
-              Man collection
+              مردانه
             </h2>
             <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base">
-              We not only help you design exceptional products, but also make it
-              easy for you to share your designs with more like-minded people.
+              دسته بندی مردانه
             </span>
           </div>
 

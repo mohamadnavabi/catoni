@@ -33,22 +33,22 @@ export const DEMO_LARGE_PRODUCTS = [
   {
     id: 1,
     images: [full1Img, full11Img, full12Img, full13Img],
-    name: "Suede Bomber Jacket",
-    desc: "Orange",
+    name: "کاپشن چرمی",
+    desc: "پرتغالی",
     price: 52,
   },
   {
     id: 2,
     images: [full2Img, full21Img, full22Img, full23Img],
-    name: "Downtown Pet Tote",
-    desc: "Black and Orange",
+    name: "کیف پایین شهر",
+    desc: "مشکی و پرتقالی",
     price: 88,
   },
   {
     id: 3,
     images: [full3Img, full31Img, full32Img, full33Img],
-    name: "Cader Leather Sneakers",
-    desc: "3 Sizes Available",
+    name: "کتونی استن اسمیت",
+    desc: "3 سایز موجود است",
     price: 60,
   },
 ];
@@ -86,6 +86,7 @@ const SectionSliderLargeProduct2: FC<SectionSliderLargeProduct2Props> = ({
           perView: 1,
         },
       },
+      direction: "rtl",
     };
 
     let slider = new Glide(`.${UNIQUE_CLASS}`, OPTIONS);
@@ -155,7 +156,7 @@ const SectionSliderLargeProduct2: FC<SectionSliderLargeProduct2Props> = ({
             isActive={tabActive === item.name}
             onClick={() => setTabActive(item.name)}
           >
-            <div className="flex items-center justify-center sm:space-x-2.5 text-xs sm:text-sm ">
+            <div className="flex items-center justify-center sm:space-x-2.5 md:space-x-reverse text-xs sm:text-sm ">
               <span
                 className="hidden sm:inline-block"
                 dangerouslySetInnerHTML={{ __html: item.icon }}
@@ -210,7 +211,7 @@ const SectionSliderLargeProduct2: FC<SectionSliderLargeProduct2Props> = ({
                           />
                         </svg>
                       </div>
-                      <span className="text-sm mt-1">Show me more</span>
+                      <span className="text-sm mt-1">بیشتر</span>
                     </div>
                   </div>
                   <div className="grid grid-cols-3 gap-1.5 mt-1.5">

@@ -13,8 +13,8 @@ const Comment: FC<CommentProps> = ({ isSmall }) => {
       <div className="pt-1">
         <Avatar sizeClass={`w-6 h-6 ${!isSmall ? "sm:h-8 sm:w-8 " : ""}`} />
       </div>
-      <div className="flex-grow flex flex-col p-4 ml-2 text-sm border border-neutral-200 rounded-xl sm:ml-3 sm:text-base dark:border-neutral-700">
-        <div className="relative flex items-center pr-6">
+      <div className="flex-grow flex flex-col p-4 mr-2 text-sm border border-neutral-200 rounded-xl sm:mr-3 sm:text-base dark:border-neutral-700">
+        <div className="relative flex items-center pl-6">
           <a
             className="flex-shrink-0 font-semibold text-neutral-800 dark:text-neutral-100"
             href="/ncmaz/author/the-demo-author-slug"
@@ -31,14 +31,14 @@ const Comment: FC<CommentProps> = ({ isSmall }) => {
           feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend
           quam a odio. In hac habitasse platea dictumst.
         </span>
-        <div>
+        <div className="flex justify-end">
           <button
             className="inline-flex items-center min-w-[68px] rounded-full text-neutral-6000 bg-neutral-100 dark:text-neutral-200 dark:bg-neutral-800 px-3 h-8 hover:bg-teal-50 hover:text-teal-600 dark:hover:text-teal-500 focus:outline-none "
-            title="Reply"
+            title="پاسخ"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-[18px] w-[18px] mr-2"
+              className="h-[18px] w-[18px] ml-2"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -51,7 +51,7 @@ const Comment: FC<CommentProps> = ({ isSmall }) => {
               ></path>
             </svg>
             <span className="text-xs leading-none text-neutral-900 dark:text-neutral-200">
-              Reply
+              پاسخ
             </span>
           </button>
         </div>

@@ -4,25 +4,25 @@ import Heading from "components/Heading/Heading";
 import NavItem2 from "components/NavItem2";
 import React, { FC } from "react";
 import Nav from "shared/Nav/Nav";
-import explore1Svg from "images/collections/explore1.svg";
-import explore2Svg from "images/collections/explore2.svg";
-import explore3Svg from "images/collections/explore3.svg";
-import explore4Svg from "images/collections/explore4.svg";
-import explore5Svg from "images/collections/explore5.svg";
-import explore6Svg from "images/collections/explore6.svg";
-import explore7Svg from "images/collections/explore7.svg";
-import explore8Svg from "images/collections/explore8.svg";
-import explore9Svg from "images/collections/explore9.svg";
+import explore1Svg from "assets/images/collections/explore1.svg";
+import explore2Svg from "assets/images/collections/explore2.svg";
+import explore3Svg from "assets/images/collections/explore3.svg";
+import explore4Svg from "assets/images/collections/explore4.svg";
+import explore5Svg from "assets/images/collections/explore5.svg";
+import explore6Svg from "assets/images/collections/explore6.svg";
+import explore7Svg from "assets/images/collections/explore7.svg";
+import explore8Svg from "assets/images/collections/explore8.svg";
+import explore9Svg from "assets/images/collections/explore9.svg";
 //
-import explore1Png from "images/collections/explore1.png";
-import explore2Png from "images/collections/explore2.png";
-import explore3Png from "images/collections/explore3.png";
-import explore4Png from "images/collections/explore4.png";
-import explore5Png from "images/collections/explore5.png";
-import explore6Png from "images/collections/explore6.png";
-import explore7Png from "images/collections/explore7.png";
-import explore8Png from "images/collections/explore8.png";
-import explore9Png from "images/collections/explore9.png";
+import explore1Png from "assets/images/collections/explore1.png";
+import explore2Png from "assets/images/collections/explore2.png";
+import explore3Png from "assets/images/collections/explore3.png";
+import explore4Png from "assets/images/collections/explore4.png";
+import explore5Png from "assets/images/collections/explore5.png";
+import explore6Png from "assets/images/collections/explore6.png";
+import explore7Png from "assets/images/collections/explore7.png";
+import explore8Png from "assets/images/collections/explore8.png";
+import explore9Png from "assets/images/collections/explore9.png";
 import CardCategory6 from "components/CardCategories/CardCategory6";
 
 interface ExploreType {
@@ -182,7 +182,7 @@ const SectionGridMoreExplore: FC<SectionGridMoreExploreProps> = ({
           isCenter
           desc=""
         >
-          Start exploring.
+          جستجوگر
         </Heading>
         <Nav
           className="p-1 bg-white dark:bg-neutral-800 rounded-full shadow-lg overflow-x-auto hiddenScrollbar"
@@ -251,7 +251,7 @@ const SectionGridMoreExplore: FC<SectionGridMoreExploreProps> = ({
               isActive={tabActive === item.name}
               onClick={() => setTabActive(item.name)}
             >
-              <div className="flex items-center justify-center space-x-1.5 sm:space-x-2.5 text-xs sm:text-sm ">
+              <div className="flex items-center justify-center space-x-1.5 space-x-reverse sm:space-x-2.5 sm:space-x-reverse text-xs sm:text-sm ">
                 <span
                   className="inline-block"
                   dangerouslySetInnerHTML={{ __html: item.icon }}

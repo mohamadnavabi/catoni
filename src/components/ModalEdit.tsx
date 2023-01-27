@@ -31,7 +31,7 @@ const ModalEdit: FC<ModalEditProps> = ({ show, onCloseModalEdit }) => {
     return (
       <form action="#">
         <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-200">
-          Change price
+          ویرایش price
         </h3>
         <span className="text-sm">Are you sure you want to change price?</span>
         <div className="mt-8 relative rounded-md shadow-sm">
@@ -52,10 +52,10 @@ const ModalEdit: FC<ModalEditProps> = ({ show, onCloseModalEdit }) => {
             </select>
           </div>
         </div>
-        <div className="mt-4 space-x-3">
+        <div className="mt-4 space-x-3 space-x-reverse">
           <ButtonPrimary type="submit">Submit</ButtonPrimary>
           <ButtonSecondary type="button" onClick={onCloseModalEdit}>
-            Cancel
+            انصراف
           </ButtonSecondary>
         </div>
       </form>

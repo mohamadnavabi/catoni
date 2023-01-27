@@ -18,11 +18,11 @@ const PageSearch: FC<PageSearchProps> = ({ className = "" }) => {
   return (
     <div className={`nc-PageSearch  ${className}`} data-nc-id="PageSearch">
       <Helmet>
-        <title>Search || Catoni Ecommerce Template</title>
+        <title>Search || فروشگاه اینترنتی کفش و کتونی</title>
       </Helmet>
 
       <div
-        className={`nc-HeadBackgroundCommon h-24 2xl:h-28 top-0 left-0 right-0 w-full bg-primary-50 dark:bg-neutral-800/20 `}
+        className={`nc-HeadBackgroundCommon h-24 2xl:h-28 top-0 right-0 left-0 w-full bg-primary-50 dark:bg-neutral-800/20 `}
         data-nc-id="HeadBackgroundCommon"
       />
       <div className="container">
@@ -37,18 +37,18 @@ const PageSearch: FC<PageSearchProps> = ({ className = "" }) => {
                 className="shadow-lg border-0 dark:border"
                 id="search-input"
                 type="search"
-                placeholder="Type your keywords"
-                sizeClass="pl-14 py-5 pr-5 md:pl-16"
+                placeholder="جستجو"
+                sizeClass="pr-14 py-5 pl-5 md:pr-16"
                 rounded="rounded-full"
               />
               <ButtonCircle
-                className="absolute right-2.5 top-1/2 transform -translate-y-1/2"
+                className="absolute left-2.5 top-1/2 transform -translate-y-1/2"
                 size=" w-11 h-11"
                 type="submit"
               >
-                <i className="las la-arrow-right text-xl"></i>
+                <i className="las la-arrow-left text-xl"></i>
               </ButtonCircle>
-              <span className="absolute left-5 top-1/2 transform -translate-y-1/2 text-2xl md:left-6">
+              <span className="absolute right-5 top-1/2 transform -translate-y-1/2 text-2xl md:right-6">
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
@@ -89,9 +89,9 @@ const PageSearch: FC<PageSearchProps> = ({ className = "" }) => {
           </div>
 
           {/* PAGINATION */}
-          <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
+          <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 space-x-reverse sm:flex-row sm:justify-between sm:items-center">
             <Pagination />
-            <ButtonPrimary loading>Show me more</ButtonPrimary>
+            <ButtonPrimary loading>بیشتر</ButtonPrimary>
           </div>
         </main>
 

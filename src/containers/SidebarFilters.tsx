@@ -25,13 +25,13 @@ const DATA_categories = [
 ];
 
 const DATA_colors = [
-  { name: "White" },
-  { name: "Beige" },
-  { name: "Blue" },
-  { name: "Black" },
-  { name: "Brown" },
-  { name: "Green" },
-  { name: "Navy" },
+  { name: "سفید" },
+  { name: "کرمی" },
+  { name: "آبی" },
+  { name: "مشکی" },
+  { name: "قهوه ای" },
+  { name: "سبز" },
+  { name: "سرمه ای" },
 ];
 
 const DATA_sizes = [
@@ -44,11 +44,11 @@ const DATA_sizes = [
 ];
 
 const DATA_sortOrderRadios = [
-  { name: "Most Popular", id: "Most-Popular" },
-  { name: "Best Rating", id: "Best-Rating" },
-  { name: "Newest", id: "Newest" },
-  { name: "Price Low - Hight", id: "Price-low-hight" },
-  { name: "Price Hight - Low", id: "Price-hight-low" },
+  { name: "محبوب ترین", id: "Most-Popular" },
+  { name: "بهترین امتیازات", id: "Best-Rating" },
+  { name: "جدیدترین", id: "Newest" },
+  { name: "ارزان ترین", id: "Price-low-hight" },
+  { name: "گران ترین", id: "Price-hight-low" },
 ];
 
 const PRICE_RANGE = [1, 500];
@@ -151,7 +151,7 @@ const SidebarFilters = () => {
     return (
       <div className="relative flex flex-col py-8 space-y-5 pr-3">
         <div className="space-y-5">
-          <span className="font-semibold">Price range</span>
+          {/* <span className="font-semibold">Price range</span> */}
           <Slider
             range
             min={PRICE_RANGE[0]}
@@ -165,17 +165,17 @@ const SidebarFilters = () => {
           />
         </div>
 
-        <div className="flex justify-between space-x-5">
+        <div className="flex justify-between space-x-5 space-x-reverse">
           <div>
             <label
               htmlFor="minPrice"
               className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
             >
-              Min price
+              حداقل قیمت
             </label>
             <div className="mt-1 relative rounded-md">
               <span className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
-                $
+                تومان
               </span>
               <input
                 type="text"
@@ -192,11 +192,11 @@ const SidebarFilters = () => {
               htmlFor="maxPrice"
               className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
             >
-              Max price
+              حداکثر قیمت
             </label>
             <div className="mt-1 relative rounded-md">
               <span className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
-                $
+                تومان
               </span>
               <input
                 type="text"
@@ -217,7 +217,7 @@ const SidebarFilters = () => {
   const renderTabsSortOrder = () => {
     return (
       <div className="relative flex flex-col py-8 space-y-4">
-        <h3 className="font-semibold mb-2.5">Sort order</h3>
+        <h3 className="font-semibold mb-2.5">مرتب سازی</h3>
         {DATA_sortOrderRadios.map((item) => (
           <Radio
             id={item.id}

@@ -22,12 +22,12 @@ const ModalDelete: FC<ModalDeleteProps> = ({ show, onCloseModalDelete }) => {
         <span className="text-sm">
           Are you sure you want to delete this NFT? You cannot undo this action.
         </span>
-        <div className="mt-4 space-x-3">
+        <div className="mt-4 space-x-3 space-x-reverse">
           <ButtonPrimary onClick={handleClickSubmitForm} type="submit">
             Delete
           </ButtonPrimary>
           <ButtonSecondary type="button" onClick={onCloseModalDelete}>
-            Cancel
+            انصراف
           </ButtonSecondary>
         </div>
       </form>

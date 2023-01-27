@@ -49,7 +49,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
         method="POST"
         className="flex-1 py-2 text-slate-900 dark:text-slate-100"
       >
-        <div className="bg-slate-50 dark:bg-slate-800 flex items-center space-x-1.5 px-5 h-full rounded">
+        <div className="bg-slate-50 dark:bg-slate-800 flex items-center space-x-1.5 space-x-reverse px-5 h-full rounded">
           {renderMagnifyingGlassIcon()}
           <input
             type="text"
@@ -74,7 +74,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
             <MenuBar />
           </div>
 
-          <div className="flex lg:flex-1 items-center space-x-3 sm:space-x-8">
+          <div className="flex lg:flex-1 items-center space-x-3 sm:space-x-8 space-x-reverse">
             <Logo />
             {!showSearchForm && (
               <div className="hidden md:block h-10 border-l border-slate-200 dark:border-slate-700"></div>

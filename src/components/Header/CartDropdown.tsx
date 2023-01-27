@@ -43,7 +43,7 @@ export default function CartDropdown() {
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <p className="text-gray-500 dark:text-slate-400">1 {`جفت`}</p>
+            <p className="text-gray-500 dark:text-slate-400">{`جفت`} 1</p>
 
             <div className="flex">
               <button
@@ -144,7 +144,7 @@ export default function CartDropdown() {
                       </span>
                       <span className="">2,000,000 ریال</span>
                     </p>
-                    <div className="flex space-x-2 mt-5 space-x-reverse">
+                    <div className="flex space-x-2 space-x-reverse mt-5">
                       <ButtonSecondary
                         href="/cart"
                         className="flex-1 border border-slate-200 dark:border-slate-700"

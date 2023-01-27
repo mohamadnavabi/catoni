@@ -76,7 +76,7 @@ const ProductCard: FC<ProductCardProps> = ({
           />
         </div>
 
-        <div className="ml-4 flex flex-1 flex-col">
+        <div className="mr-4 flex flex-1 flex-col">
           <div>
             <div className="flex justify-between ">
               <div>
@@ -93,7 +93,7 @@ const ProductCard: FC<ProductCardProps> = ({
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <p className="text-gray-500 dark:text-slate-400">Qty 1</p>
+            <p className="text-gray-500 dark:text-slate-400">جفت 1</p>
 
             <div className="flex">
               <button
@@ -145,7 +145,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
     if (variantType === "color") {
       return (
-        <div className="flex space-x-1">
+        <div className="flex space-x-1 space-x-reverse">
           {variants.map((variant, index) => (
             <div
               key={index}
@@ -202,16 +202,16 @@ const ProductCard: FC<ProductCardProps> = ({
           onClick={() => notifyAddTocart({ size: "XL" })}
         >
           <BagIcon className="w-3.5 h-3.5 mb-0.5" />
-          <span className="ml-1">Add to bag</span>
+          <span className="mr-1">Add to bag</span>
         </ButtonPrimary>
         <ButtonSecondary
-          className="ml-1.5 bg-white hover:!bg-gray-100 hover:text-slate-900 transition-colors shadow-lg"
+          className="mr-1.5 bg-white hover:!bg-gray-100 hover:text-slate-900 transition-colors shadow-lg"
           fontSize="text-xs"
           sizeClass="py-2 px-4"
           onClick={() => setShowModalQuickView(true)}
         >
           <ArrowsPointingOutIcon className="w-3.5 h-3.5" />
-          <span className="ml-1">Quick view</span>
+          <span className="mr-1">Quick view</span>
         </ButtonSecondary>
       </div>
     );
@@ -223,7 +223,7 @@ const ProductCard: FC<ProductCardProps> = ({
     }
 
     return (
-      <div className="absolute bottom-0 inset-x-1 space-x-1.5 flex justify-center opacity-0 invisible group-hover:bottom-4 group-hover:opacity-100 group-hover:visible transition-all">
+      <div className="absolute bottom-0 inset-x-1 space-x-1.5 space-x-reverse flex justify-center opacity-0 invisible group-hover:bottom-4 group-hover:opacity-100 group-hover:visible transition-all">
         {sizes.map((size, index) => {
           return (
             <div
@@ -278,14 +278,14 @@ const ProductCard: FC<ProductCardProps> = ({
           </div>
 
           <div className="flex justify-between items-end ">
-            <Prices price={price} />
             <div className="flex items-center mb-0.5">
               <StarIcon className="w-5 h-5 pb-[1px] text-amber-400" />
-              <span className="text-sm ml-1 text-slate-500 dark:text-slate-400">
-                {(Math.random() * 1 + 4).toFixed(1)} (
-                {Math.floor(Math.random() * 70 + 20)} reviews)
+              <span className="text-sm mr-1 text-slate-500 dark:text-slate-400">
+                {(Math.random() * 1 + 4).toFixed(1)}
+                {/* ({Math.floor(Math.random() * 70 + 20)} نظر) */}
               </span>
             </div>
+            <Prices price={price} />
           </div>
         </div>
       </div>

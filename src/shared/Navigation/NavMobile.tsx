@@ -153,7 +153,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
         method="POST"
         className="flex-1 text-slate-900 dark:text-slate-200"
       >
-        <div className="bg-slate-50 dark:bg-slate-800 flex items-center space-x-1 py-2 px-4 rounded-xl h-full">
+        <div className="bg-slate-50 dark:bg-slate-800 flex items-center space-x-1 space-x-reverse py-2 px-4 rounded-xl h-full">
           {renderMagnifyingGlassIcon()}
           <input
             type="search"
@@ -192,7 +192,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <ul className="flex flex-col py-6 px-2 space-y-1">
         {data.map(_renderItem)}
       </ul>
-      <div className="flex items-center justify-between py-6 px-5 space-x-2">
+      <div className="flex items-center justify-between py-6 px-5 space-x-2 space-x-reverse">
         <ButtonPrimary href={"/"} className="!px-10">
           Buy this template
         </ButtonPrimary>

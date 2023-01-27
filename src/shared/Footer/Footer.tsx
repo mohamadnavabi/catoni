@@ -11,44 +11,39 @@ export interface WidgetFooterMenu {
 
 const widgetMenus: WidgetFooterMenu[] = [
   {
-    id: "5",
-    title: "Getting started",
-    menus: [
-      { href: "#", label: "Release Notes" },
-      { href: "#", label: "Upgrade Guide" },
-      { href: "#", label: "Browser Support" },
-      { href: "#", label: "Dark Mode" },
-    ],
-  },
-  {
     id: "1",
-    title: "Explore",
+    title: "دسترسی سریع",
     menus: [
-      { href: "#", label: "Prototyping" },
-      { href: "#", label: "Design systems" },
-      { href: "#", label: "Pricing" },
-      { href: "#", label: "Security" },
+      { href: "#", label: "تک سایز ها" },
+      { href: "#", label: "کتونی های مشکی" },
+      { href: "#", label: "کتونی های سفید" },
+      { href: "#", label: "کتونی های اقتصادی" },
     ],
   },
   {
     id: "2",
-    title: "Resources",
+    title: "راهنما",
     menus: [
-      { href: "#", label: "Best practices" },
-      { href: "#", label: "Support" },
-      { href: "#", label: "Developers" },
-      { href: "#", label: "Learn design" },
+      { href: "#", label: "راهنمای سایز" },
+      { href: "#", label: "آموزش خرید از کتونی" },
+      { href: "#", label: "پرسش های متداول" },
+      { href: "#", label: "نحوه بازگرداندن کتونی" },
     ],
   },
   {
     id: "4",
-    title: "Community",
+    title: "همراه کتونی",
     menus: [
-      { href: "#", label: "Discussion Forums" },
-      { href: "#", label: "Code of Conduct" },
-      { href: "#", label: "Contributing" },
-      { href: "#", label: "API Reference" },
+      { href: "#", label: "درباره ما" },
+      { href: "#", label: "تماس با ما" },
+      { href: "#", label: "ثبت شکایت" },
+      { href: "#", label: "استخدام در کتونی" },
     ],
+  },
+  {
+    id: "5",
+    title: "دانلود اپلیکیشن",
+    menus: [],
   },
 ];
 
@@ -86,7 +81,7 @@ const Footer: React.FC = () => {
             <Logo />
           </div>
           <div className="col-span-2 flex items-center md:col-span-3">
-            <SocialsList1 className="flex items-center space-x-2 lg:space-x-0 lg:flex-col lg:space-y-3 lg:items-start" />
+            <SocialsList1 className="flex items-center space-x-2 lg:space-x-0 space-x-reverse lg:flex-col lg:space-y-3 lg:items-start" />
           </div>
         </div>
         {widgetMenus.map(renderWidgetMenuItem)}

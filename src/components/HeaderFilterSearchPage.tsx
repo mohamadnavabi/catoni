@@ -14,31 +14,29 @@ const HeaderFilterSearchPage: FC<HeaderFilterSearchPageProps> = ({
   className = "mb-12",
 }) => {
   const [isOpen, setIsOpen] = React.useState(true);
-  const [tabActive, setTabActive] = React.useState("All items");
+  const [tabActive, setTabActive] = React.useState("همه");
 
   return (
     <div className={`flex flex-col relative ${className}`}>
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-6 lg:space-y-0 lg:space-x-2 ">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-6 lg:space-y-0 lg:space-x-2 lg:space-x-reverse">
         <Nav
-          className="sm:space-x-2"
+          className="sm:space-x-2 sm:space-x-reverse"
           containerClassName="relative flex w-full overflow-x-auto text-sm md:text-base hiddenScrollbar"
         >
-          {["All items", "Women", "Man", "Jewels", "Kids"].map(
-            (item, index) => (
-              <NavItem
-                key={index}
-                isActive={tabActive === item}
-                onClick={() => setTabActive(item)}
-              >
-                {item}
-              </NavItem>
-            )
-          )}
+          {["همه", "مردانه", "زنانه"].map((item, index) => (
+            <NavItem
+              key={index}
+              isActive={tabActive === item}
+              onClick={() => setTabActive(item)}
+            >
+              {item}
+            </NavItem>
+          ))}
         </Nav>
-        <span className="block flex-shrink-0 text-right">
+        <span className="block flex-shrink-0 text-left">
           <ButtonPrimary
-            className="w-auto !pr-16"
-            sizeClass="pl-4 py-2.5 sm:pl-6"
+            className="w-auto !pl-16"
+            sizeClass="pr-4 py-2.5 sm:pr-6"
             onClick={() => {
               setIsOpen(!isOpen);
             }}
@@ -72,8 +70,8 @@ const HeaderFilterSearchPage: FC<HeaderFilterSearchPageProps> = ({
               />
             </svg>
 
-            <span className="block truncate ml-2.5">Filter</span>
-            <span className="absolute top-1/2 -translate-y-1/2 right-5">
+            <span className="block truncate mr-2.5">Filter</span>
+            <span className="absolute top-1/2 -translate-y-1/2 left-5">
               <ChevronDownIcon
                 className={`w-4 h-4 sm:w-5 sm:h-5 ${
                   isOpen ? "rotate-180" : ""

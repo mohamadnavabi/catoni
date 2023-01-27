@@ -4,12 +4,12 @@ import { FC } from "react";
 
 const DEMO_DATA = [
   {
-    name: "Description",
+    name: "توضیحات",
     content:
       "Fashion is a form of self-expression and autonomy at a particular period and place and in a specific context, of clothing, footwear, lifestyle, accessories, makeup, hairstyle, and body posture.",
   },
   {
-    name: "Fabric + Care",
+    name: "اطلاعات",
     content: `<ul class="list-disc list-inside leading-7">
     <li>Made from a sheer Belgian power micromesh.</li>
     <li>
@@ -25,27 +25,27 @@ const DEMO_DATA = [
   },
 
   {
-    name: "How it Fits",
+    name: "کاربرد ها",
     content:
       "Use this as a guide. Preference is a huge factor — if you're near the top of a size range and/or prefer more coverage, you may want to size up.",
   },
-  {
-    name: "FAQ",
-    content: `
-    <ul class="list-disc list-inside leading-7">
-    <li>All full-priced, unworn items, with tags attached and in their original packaging are eligible for return or exchange within 30 days of placing your order.</li>
-    <li>
-    Please note, packs must be returned in full. We do not accept partial returns of packs.
-    </li>
-    <li>
-    Want to know our full returns policies? Here you go.
-    </li>
-    <li>
-    Want more info about shipping, materials or care instructions? Here!
-    </li>
-  </ul>
-    `,
-  },
+  // {
+  //   name: "FAQ",
+  //   content: `
+  //   <ul class="list-disc list-inside leading-7">
+  //   <li>All full-priced, unworn items, with tags attached and in their original packaging are eligible for return or exchange within 30 days of placing your order.</li>
+  //   <li>
+  //   Please note, packs must be returned in full. We do not accept partial returns of packs.
+  //   </li>
+  //   <li>
+  //   Want to know our full returns policies? Here you go.
+  //   </li>
+  //   <li>
+  //   Want more info about shipping, materials or care instructions? Here!
+  //   </li>
+  // </ul>
+  //   `,
+  // },
 ];
 
 interface Props {

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import NcImage from "shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
-import explore1Svg from "images/collections/explore1.svg";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import explore1Svg from "assets/images/collections/explore1.svg";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export interface CardCategory4Props {
   className?: string;
@@ -27,7 +27,7 @@ const CardCategory4: FC<CardCategory4Props> = ({
       data-nc-id="CardCategory4"
     >
       <div>
-        <div className="absolute bottom-0 right-0 max-w-[280px] opacity-80">
+        <div className="absolute bottom-0 left-0 max-w-[280px] opacity-80">
           <img src={bgSVG} alt="" />
         </div>
 
@@ -55,8 +55,8 @@ const CardCategory4: FC<CardCategory4Props> = ({
             to={"/page-collection"}
             className="flex items-center text-sm font-medium group-hover:text-primary-500 transition-colors"
           >
-            <span>See Collection</span>
-            <ArrowRightIcon className="w-4 h-4 ml-2.5" />
+            <span>مشاهده</span>
+            <ArrowLeftIcon className="w-4 h-4 mr-2.5" />
           </Link>
         </div>
       </div>

@@ -24,25 +24,24 @@ const SectionPromo2: FC<SectionPromo2Props> = ({ className = "lg:pt-10" }) => {
         <div className="lg:w-[45%] max-w-lg relative">
           <Logo className="w-28" />
           <h2 className="font-semibold text-3xl sm:text-4xl xl:text-5xl 2xl:text-6xl mt-6 sm:mt-10 !leading-[1.13] tracking-tight">
-            Special offer <br />
-            in kids products
+            کتونی های بچگانه <br />
+            بزودی...
           </h2>
           <span className="block mt-6 text-slate-500 dark:text-slate-400">
-            Fashion is a form of self-expression and autonomy at a particular
-            period and place.
+            کتونی های بچگانه بزودی در سایت موجود می شوند
           </span>
-          <div className="flex space-x-2 sm:space-x-5 mt-6 sm:mt-12">
+          <div className="flex space-x-2 sm:space-x-5 space-x-reverse mt-6 sm:mt-12">
             <ButtonPrimary
               href="/page-search"
               className="dark:bg-slate-200 dark:text-slate-900"
             >
-              Discover more
+              مشاهده
             </ButtonPrimary>
           </div>
         </div>
 
         <NcImage
-          containerClassName="relative block lg:absolute lg:left-0 lg:bottom-0 mt-10 lg:mt-0 max-w-xl lg:max-w-[calc(55%-40px)]"
+          containerClassName="relative block lg:absolute lg:right-0 lg:bottom-0 mt-10 lg:mt-0 max-w-xl lg:max-w-[calc(55%-40px)]"
           src={rightImgDemo}
         />
       </div>

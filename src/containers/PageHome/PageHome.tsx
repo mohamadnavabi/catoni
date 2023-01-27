@@ -9,7 +9,6 @@ import SectionSliderProductCard from "components/SectionSliderProductCard";
 import DiscoverMoreSlider from "components/DiscoverMoreSlider";
 import SectionGridMoreExplore from "components/SectionGridMoreExplore/SectionGridMoreExplore";
 import SectionPromo2 from "components/SectionPromo2";
-import SectionSliderCategories from "components/SectionSliderCategories/SectionSliderCategories";
 import SectionGridFeatureItems from "./SectionGridFeatureItems";
 import SectionPromo3 from "components/SectionPromo3";
 import SectionClientSay from "components/SectionClientSay/SectionClientSay";
@@ -17,6 +16,7 @@ import SectionMagazine5 from "containers/BlogPage/SectionMagazine5";
 import Heading from "components/Heading/Heading";
 import ButtonSecondary from "shared/Button/ButtonSecondary";
 import { PRODUCTS, SPORT_PRODUCTS } from "data/data";
+import SectionSliderBrands from "components/SectionSliderBrands/SectionSliderBrands";
 
 function PageHome() {
   return (
@@ -28,11 +28,11 @@ function PageHome() {
       {/* SECTION HERO */}
       <SectionHero2 />
 
-      <div className="mt-24 lg:mt-32">
+      <div className="mt-4 lg:mt-8">
         <DiscoverMoreSlider />
       </div>
 
-      <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
+      <div className="container relative space-y-14 my-14 lg:space-y-16 lg:my-16">
         {/* SECTION */}
         <SectionSliderProductCard
           data={[
@@ -44,54 +44,51 @@ function PageHome() {
           ]}
         />
 
-        <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">
+        {/* SECTION */}
+        {/* <SectionPromo1 /> */}
+
+        {/* SECTION */}
+        {/* <div className="relative py-24 lg:py-32">
+          <BackgroundSection />
+          <SectionGridMoreExplore />
+        </div> */}
+
+        <div className="py-14 lg:py-16 border-t border-b border-slate-200 dark:border-slate-700">
           <SectionHowItWork />
         </div>
 
-        {/* SECTION */}
-        <SectionPromo1 />
-
-        {/* SECTION */}
-        <div className="relative py-24 lg:py-32">
-          <BackgroundSection />
-          <SectionGridMoreExplore />
-        </div>
-
-        <SectionSliderProductCard
-          heading="Best Sellers"
-          subHeading="Best selling of the month"
-        />
+        <SectionSliderProductCard heading="پرفروش ها" />
 
         {/*  */}
-        <SectionPromo2 />
+        {/* <SectionPromo2 /> */}
 
         {/* SECTION 3 */}
         <SectionSliderLargeProduct cardStyle="style2" />
 
         {/*  */}
-        <SectionSliderCategories />
+        <div className="pb-16">
+          <SectionSliderBrands />
+        </div>
 
         {/* SECTION */}
         <SectionPromo3 />
 
         {/* SECTION */}
-        <SectionGridFeatureItems />
+        {/* <SectionGridFeatureItems /> */}
 
         <div className="relative py-24 lg:py-32">
           <BackgroundSection />
           <div>
-            <Heading rightDescText="From the Catoni blog">
-              The latest news
-            </Heading>
+            <Heading>آخرین مقالات و خبرها</Heading>
             <SectionMagazine5 />
             <div className="flex mt-16 justify-center">
-              <ButtonSecondary>Show all blog articles</ButtonSecondary>
+              <ButtonSecondary>نمایش تمام مقالات و خبرها</ButtonSecondary>
             </div>
           </div>
         </div>
 
         {/*  */}
-        <SectionClientSay />
+        {/* <SectionClientSay /> */}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ const TimeCountDown = () => {
 
   return (
     <div className="space-y-5">
-      <div className="text-neutral-500 dark:text-neutral-400 flex items-center space-x-2 ">
+      <div className="text-neutral-500 dark:text-neutral-400 flex items-center space-x-2 space-x-reverse">
         <svg
           width="24"
           height="24"
@@ -39,7 +39,7 @@ const TimeCountDown = () => {
         </svg>
         <span className="leading-none mt-1">Auction ending in:</span>
       </div>
-      <div className="flex space-x-5 sm:space-x-10">
+      <div className="flex space-x-5 sm:space-x-10 space-x-reverse">
         <div className="flex flex-col ">
           <span className="text-2xl sm:text-2xl font-semibold">
             {timeLeft.days}

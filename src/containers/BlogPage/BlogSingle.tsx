@@ -32,12 +32,12 @@ const BlogSingle = () => {
 
           <div className="w-full border-b border-neutral-100 dark:border-neutral-800"></div>
           <div className="flex flex-col items-center sm:flex-row sm:justify-between">
-            <div className="nc-PostMeta2 flex items-center flex-wrap text-neutral-700 text-left dark:text-neutral-200 text-sm leading-none flex-shrink-0">
+            <div className="nc-PostMeta2 flex items-center flex-wrap text-neutral-700 text-right dark:text-neutral-200 text-sm leading-none flex-shrink-0">
               <Avatar
                 containerClassName="flex-shrink-0"
                 sizeClass="w-8 h-8 sm:h-11 sm:w-11 "
               />
-              <div className="ml-3">
+              <div className="mr-3">
                 <div className="flex items-center">
                   <a className="block font-semibold" href="##">
                     Fones Mimi
@@ -54,7 +54,7 @@ const BlogSingle = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-3 sm:mt-1.5 sm:ml-3">
+            <div className="mt-3 sm:mt-1.5 sm:mr-3">
               <SocialsList />
             </div>
           </div>
@@ -170,7 +170,7 @@ const BlogSingle = () => {
 
   const renderTags = () => {
     return (
-      <div className="max-w-screen-md mx-auto flex flex-wrap space-x-2">
+      <div className="max-w-screen-md mx-auto flex flex-wrap space-x-2 space-x-reverse">
         <Tag />
         <Tag />
         <Tag />
@@ -184,9 +184,9 @@ const BlogSingle = () => {
       <div className="max-w-screen-md mx-auto ">
         <div className="nc-SingleAuthor flex">
           <Avatar sizeClass="w-11 h-11 md:w-24 md:h-24" />
-          <div className="flex flex-col ml-3 max-w-lg sm:ml-5 space-y-1">
+          <div className="flex flex-col mr-3 max-w-lg sm:mr-5 space-y-1">
             <span className="text-xs text-neutral-400 uppercase tracking-wider">
-              WRITEN BY
+              نویسنده
             </span>
             <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-200">
               <a href="##">Fones Mimi</a>
@@ -194,7 +194,7 @@ const BlogSingle = () => {
             <span className="text-sm text-neutral-500 sm:text-base dark:text-neutral-300">
               There’s no stopping the tech giant. Apple now opens its 100th
               store in China.There’s no stopping the tech giant.
-              <a className="text-primary-6000 font-medium ml-1" href="##">
+              <a className="text-primary-6000 font-medium mr-1" href="##">
                 Readmore
               </a>
             </span>
@@ -208,13 +208,13 @@ const BlogSingle = () => {
     return (
       <div className="max-w-screen-md mx-auto pt-5">
         <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
-          Responses (14)
+          کامنت ها (14)
         </h3>
         <form className="nc-SingleCommentForm mt-5">
           <Textarea />
-          <div className="mt-2 space-x-3">
-            <ButtonPrimary>Submit</ButtonPrimary>
-            <ButtonSecondary>Cancel</ButtonSecondary>
+          <div className="mt-2 space-x-3 space-x-reverse flex justify-end">
+            <ButtonPrimary>ارسال</ButtonPrimary>
+            <ButtonSecondary>انصراف</ButtonSecondary>
           </div>
         </form>
       </div>
@@ -227,7 +227,7 @@ const BlogSingle = () => {
         <ul className="nc-SingleCommentLists space-y-5">
           <li>
             <Comment />
-            <ul className="pl-4 mt-5 space-y-5 md:pl-11">
+            <ul className="pr-4 mt-5 space-y-5 md:pr-11">
               <li>
                 <Comment isSmall />
               </li>
@@ -235,7 +235,7 @@ const BlogSingle = () => {
           </li>
           <li>
             <Comment />
-            <ul className="pl-4 mt-5 space-y-5 md:pl-11">
+            <ul className="pr-4 mt-5 space-y-5 md:pr-11">
               <li>
                 <Comment isSmall />
               </li>
@@ -301,7 +301,7 @@ const BlogSingle = () => {
       </div>
       <div className="relative bg-neutral-100 dark:bg-neutral-800 py-16 lg:py-28 mt-16 lg:mt-24">
         <div className="container ">
-          <h2 className="text-3xl font-semibold">Related posts</h2>
+          <h2 className="text-3xl font-semibold">آخرین مقالات</h2>
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
             {/*  */}
             {[1, 1, 1, 1].filter((_, i) => i < 4).map(renderPostRelated)}

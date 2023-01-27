@@ -16,7 +16,7 @@ const AccountOrder = () => {
           />
         </div>
 
-        <div className="ml-4 flex flex-1 flex-col">
+        <div className="mr-4 flex flex-1 flex-col">
           <div>
             <div className="flex justify-between ">
               <div>
@@ -27,14 +27,14 @@ const AccountOrder = () => {
                   <span>{"XL"}</span>
                 </p>
               </div>
-              <Prices className="mt-0.5 ml-2" />
+              <Prices className="mt-0.5 mr-2" />
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
             <p className="text-gray-500 dark:text-slate-400 flex items-center">
-              <span className="hidden sm:inline-block">Qty</span>
+              <span className="hidden sm:inline-block">جفت</span>
               <span className="inline-block sm:hidden">x</span>
-              <span className="ml-2">1</span>
+              <span className="mr-2">1</span>
             </p>
 
             <div className="flex">

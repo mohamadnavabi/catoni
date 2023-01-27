@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 //
 import "./styles/index.scss";
 import "./index.css";
-import "./assets/fonts/line-awesome-1.3.0/css/line-awesome.css";
+import "assets/fonts/line-awesome-1.3.0/css/line-awesome.css";
 import "rc-slider/assets/index.css";
 
 //

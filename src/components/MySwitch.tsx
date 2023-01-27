@@ -25,7 +25,7 @@ const MySwitch: FC<MySwitchProps> = ({
 
   return (
     <div
-      className={`MySwitch flex fle justify-between items-center space-x-2 ${className}`}
+      className={`MySwitch flex fle justify-between items-center space-x-2 space-x-reverse ${className}`}
     >
       <div>
         <Label>{label}</Label>

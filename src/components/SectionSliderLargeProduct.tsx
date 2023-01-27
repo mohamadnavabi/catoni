@@ -44,6 +44,7 @@ const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
           perView: 1,
         },
       },
+      direction: "rtl",
     };
 
     let slider = new Glide(`.${UNIQUE_CLASS}`, OPTIONS);
@@ -60,7 +61,7 @@ const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
     <div className={`nc-SectionSliderLargeProduct ${className}`}>
       <div className={`${UNIQUE_CLASS} flow-root`}>
         <Heading isCenter={false} hasNextPrev>
-          Chosen by our experts
+          پیشنهادات ما به شما
         </Heading>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
@@ -106,7 +107,7 @@ const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
                         />
                       </svg>
                     </div>
-                    <span className="text-sm mt-1">Show me more</span>
+                    <span className="text-sm mt-1">بیشتر</span>
                   </div>
                 </div>
               </Link>

@@ -66,15 +66,15 @@ const ShippingAddress: FC<Props> = ({
             </svg>
           </span>
 
-          <div className="sm:ml-8">
+          <div className="sm:mr-8">
             <h3 className=" text-slate-700 dark:text-slate-300 flex ">
-              <span className="uppercase">SHIPPING ADDRESS</span>
+              <span className="uppercase">آدرس تحویل</span>
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="2.5"
                 stroke="currentColor"
-                className="w-5 h-5 ml-3 text-slate-900 dark:text-slate-100"
+                className="w-5 h-5 mr-3 text-slate-900 dark:text-slate-100"
               >
                 <path
                   strokeLinecap="round"
@@ -85,17 +85,18 @@ const ShippingAddress: FC<Props> = ({
             </h3>
             <div className="font-semibold mt-1 text-sm">
               <span className="">
-                St. Paul's Road, Norris, SD 57560, Dakota, USA
+                شمس آباد، خیابان هدایتی، خیابان حیدرحسینی، بن بست یکم، پلاک ۱،
+                واحد ۸
               </span>
             </div>
           </div>
           <ButtonSecondary
             sizeClass="py-2 px-4 "
             fontSize="text-sm font-medium"
-            className="bg-slate-50 dark:bg-slate-800 mt-5 sm:mt-0 sm:ml-auto !rounded-lg"
+            className="bg-slate-50 dark:bg-slate-800 mt-5 sm:mt-0 sm:mr-auto !rounded-lg"
             onClick={onOpenActive}
           >
-            Change
+            ویرایش
           </ButtonSecondary>
         </div>
         <div
@@ -106,77 +107,58 @@ const ShippingAddress: FC<Props> = ({
           {/* ============ */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-3">
             <div>
-              <Label className="text-sm">First name</Label>
-              <Input className="mt-1.5" defaultValue="Cole" />
+              <Label className="text-sm">نام</Label>
+              <Input className="mt-1.5" defaultValue="آیسان" />
             </div>
             <div>
-              <Label className="text-sm">Last name</Label>
-              <Input className="mt-1.5" defaultValue="Enrico " />
+              <Label className="text-sm">نام خانوادگی</Label>
+              <Input className="mt-1.5" defaultValue="خیابانی" />
             </div>
           </div>
 
           {/* ============ */}
-          <div className="sm:flex space-y-4 sm:space-y-0 sm:space-x-3">
+          <div className="sm:flex space-y-4 sm:space-y-0 sm:space-x-3 sm:space-x-reverse">
             <div className="flex-1">
-              <Label className="text-sm">Address</Label>
+              <Label className="text-sm">آدرس پستی</Label>
               <Input
                 className="mt-1.5"
                 placeholder=""
-                defaultValue={"123, Dream Avenue, USA"}
+                defaultValue={
+                  "شمس آباد، خیابان هدایتی، خیابان حیدرحسینی، بن بست یکم، پلاک ۱، واحد ۸"
+                }
                 type={"text"}
               />
             </div>
-            <div className="sm:w-1/3">
-              <Label className="text-sm">Apt, Suite *</Label>
-              <Input className="mt-1.5" defaultValue="55U - DD5 " />
-            </div>
-          </div>
-
-          {/* ============ */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-3">
             <div>
-              <Label className="text-sm">City</Label>
-              <Input className="mt-1.5" defaultValue="Norris" />
-            </div>
-            <div>
-              <Label className="text-sm">Country</Label>
-              <Select className="mt-1.5" defaultValue="United States ">
-                <option value="United States">United States</option>
-                <option value="United States">Canada</option>
-                <option value="United States">Mexico</option>
-                <option value="United States">Israel</option>
-                <option value="United States">France</option>
-                <option value="United States">England</option>
-                <option value="United States">Laos</option>
-                <option value="United States">China</option>
-              </Select>
-            </div>
-          </div>
-
-          {/* ============ */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-3">
-            <div>
-              <Label className="text-sm">State/Province</Label>
-              <Input className="mt-1.5" defaultValue="Texas" />
-            </div>
-            <div>
-              <Label className="text-sm">Postal code</Label>
+              <Label className="text-sm">کد پستی</Label>
               <Input className="mt-1.5" defaultValue="2500 " />
             </div>
           </div>
 
           {/* ============ */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-3">
+            <div>
+              <Label className="text-sm">شهر</Label>
+              <Input className="mt-1.5" defaultValue="تهران" />
+            </div>
+            <div>
+              <Label className="text-sm">شهرستان</Label>
+              <Input className="mt-1.5" defaultValue="رباط کریم" />
+            </div>
+          </div>
+
+          {/* ============ */}
           <div>
-            <Label className="text-sm">Address type</Label>
+            <Label className="text-sm">نوع آدرس</Label>
             <div className="mt-1.5 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
               <Radio
-                label={`<span class="text-sm font-medium">Home <span class="font-light">(All Day Delivery)</span></span>`}
+                label={`<span class="text-sm font-medium">خانه <span class="font-light">(در تمام ساعت)</span></span>`}
                 id="Address-type-home"
                 name="Address-type"
                 defaultChecked
               />
               <Radio
-                label={`<span class="text-sm font-medium">Office <span class="font-light">(Delivery <span class="font-medium">9 AM - 5 PM</span>)</span> </span>`}
+                label={`<span class="text-sm font-medium">محل کار <span class="font-light">(9 الی ۱۷)</span> </span>`}
                 id="Address-type-office"
                 name="Address-type"
               />
@@ -189,13 +171,13 @@ const ShippingAddress: FC<Props> = ({
               className="sm:!px-7 shadow-none"
               onClick={onCloseActive}
             >
-              Save and next to Payment
+              ثبت نهایی
             </ButtonPrimary>
             <ButtonSecondary
-              className="mt-3 sm:mt-0 sm:ml-3"
+              className="mt-3 sm:mt-0 sm:mr-3"
               onClick={onCloseActive}
             >
-              Cancel
+              انصراف
             </ButtonSecondary>
           </div>
         </div>

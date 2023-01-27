@@ -11,26 +11,26 @@ import Glide from "@glidejs/glide";
 
 export const CATS_DISCOVER: CardCategory3Props[] = [
   {
-    name: "Explore new arrivals",
-    desc: "Shop the latest <br /> from top brands",
+    name: "ست بپوشید",
+    desc: "از بین کتونی های<br />دخترانه و پسرانه",
     featuredImage: img1,
     color: "bg-yellow-50",
   },
   {
-    name: "Digital gift cards",
-    desc: "Give the gift <br /> of choice",
+    name: "ورزشی ها",
+    desc: "با کیفیت های <br /> مناسب ورزش",
     featuredImage: img2,
     color: "bg-red-50",
   },
   {
-    name: "Sale collection",
-    desc: "Up to <br /> 80% off retail",
+    name: "روزمره ها",
+    desc: "با کیفیت های <br /> مناسب استفاده روزمره",
     featuredImage: img3,
     color: "bg-blue-50",
   },
   {
-    name: "Sale collection",
-    desc: "Up to <br /> 80% off retail",
+    name: "تک سایز ها",
+    desc: "تک سایز ها <br /> با تخفیف بالا",
     featuredImage: img4,
     color: "bg-green-50",
   },
@@ -68,6 +68,7 @@ const DiscoverMoreSlider = () => {
           perView: 1,
         },
       },
+      direction: "rtl",
     };
 
     let slider = new Glide(`.${UNIQUE_CLASS}`, OPTIONS);
@@ -82,10 +83,10 @@ const DiscoverMoreSlider = () => {
       <Heading
         className="mb-12 lg:mb-14 text-neutral-900 dark:text-neutral-50 nc-p-r-container "
         desc=""
-        rightDescText="Good things are waiting for you"
+        rightDescText=""
         hasNextPrev
       >
-        Discover more
+        پیشنهادات ویژه
       </Heading>
       <div className="" data-glide-el="track">
         <ul className="glide__slides">

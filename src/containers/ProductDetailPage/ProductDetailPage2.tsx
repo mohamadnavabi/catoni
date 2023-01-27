@@ -43,7 +43,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     detail24JPG,
     detail24JPG,
   ];
-  const PRICE = 108;
+  const PRICE = 1899000;
 
   const [variantActive, setVariantActive] = React.useState(0);
   const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
@@ -71,8 +71,8 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
       <div>
         <label htmlFor="">
           <span className="text-sm font-medium">
-            Color:
-            <span className="ml-1 font-semibold">
+            رنگ:
+            <span className="mr-1 font-semibold">
               {variants[variantActive].name}
             </span>
           </span>
@@ -113,7 +113,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
           variantActive={variantActive}
         />
       ),
-      { position: "top-right", id: "nc-product-notify", duration: 3000 }
+      { position: "top-left", id: "nc-product-notify", duration: 3000 }
     );
   };
 
@@ -126,8 +126,8 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         <div className="flex justify-between font-medium text-sm">
           <label htmlFor="">
             <span className="">
-              Size:
-              <span className="ml-1 font-semibold">{sizeSelected}</span>
+              اندازه:
+              <span className="mr-1 font-semibold">{sizeSelected}</span>
             </span>
           </label>
           <a
@@ -136,7 +136,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             href="##"
             className="text-primary-6000 hover:text-primary-500"
           >
-            See sizing chart
+            راهنمای سایزبندی
           </a>
         </div>
         <div className="grid grid-cols-4 gap-2 mt-3">
@@ -178,35 +178,35 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     }
     const CLASSES =
       "text-sm flex items-center text-slate-700 text-slate-900 dark:text-slate-300";
-    if (status === "New in") {
+    if (status === "جدید") {
       return (
         <div className={CLASSES}>
           <SparklesIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "50% Discount") {
+    if (status === "50% تخفیف") {
       return (
         <div className={CLASSES}>
           <IconDiscount className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "Sold Out") {
+    if (status === "تمام شد") {
       return (
         <div className={CLASSES}>
           <NoSymbolIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "limited edition") {
+    if (status === "تعداد محدود") {
       return (
         <div className={CLASSES}>
           <ClockIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
@@ -220,10 +220,8 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
           {/* PRICE */}
           <div className="">
             {/* ---------- 1 HEADING ----------  */}
-            <div className="flex items-center justify-between space-x-5">
-              <div className="flex text-2xl font-semibold">
-                ${PRICE.toFixed(2)}
-              </div>
+            <div className="flex items-center justify-between space-x-5 space-x-reverse">
+              <div className="flex text-2xl font-semibold">{PRICE} تومان</div>
 
               <a
                 href="#reviews"
@@ -232,11 +230,11 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                 <div className="">
                   <StarIcon className="w-5 h-5 pb-[1px] text-orange-400" />
                 </div>
-                <span className="ml-1.5 flex">
+                <span className="mr-1.5 flex">
                   <span>4.9 </span>
                   <span className="mx-1.5">·</span>
                   <span className="text-slate-700 dark:text-slate-400 underline">
-                    142 reviews
+                    142 نظر
                   </span>
                 </span>
               </a>
@@ -249,7 +247,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             </div>
           </div>
           {/*  ---------- 4  QTY AND ADD TO CART BUTTON */}
-          <div className="flex space-x-3.5">
+          <div className="flex space-x-3.5 space-x-reverse">
             <div className="flex items-center justify-center bg-slate-100/70 dark:bg-slate-800/70 px-2 py-3 sm:p-3.5 rounded-full">
               <NcInputNumber
                 defaultValue={qualitySelected}
@@ -261,7 +259,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
               onClick={notifyAddTocart}
             >
               <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
-              <span className="ml-3">Add to cart</span>
+              <span className="mr-3">افزودن به سبد</span>
             </ButtonPrimary>
           </div>
 
@@ -270,22 +268,22 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             <div className="space-y-2.5">
               <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span className="flex">
-                  <span>{`$${PRICE.toFixed(2)}  `}</span>
+                  <span>{`${PRICE}  `}</span>
                   <span className="mx-2">x</span>
                   <span>{`${qualitySelected} `}</span>
                 </span>
 
-                <span>{`$${(PRICE * qualitySelected).toFixed(2)}`}</span>
+                <span>{`${PRICE * qualitySelected} تومان`}</span>
               </div>
               <div className="flex justify-between text-slate-600 dark:text-slate-300">
-                <span>Tax estimate</span>
-                <span>$0</span>
+                <span>هزینه ارسال</span>
+                <span>0</span>
               </div>
             </div>
             <div className="border-b border-slate-200 dark:border-slate-700"></div>
             <div className="flex justify-between font-semibold">
-              <span>Total</span>
-              <span>{`$${(PRICE * qualitySelected).toFixed(2)}`}</span>
+              <span>جمع</span>
+              <span>{`${PRICE * qualitySelected} تومان`}</span>
             </div>
           </div>
         </div>
@@ -297,9 +295,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     return (
       <div className="listingSection__wrap !space-y-6">
         <div>
-          <h2 className="text-2xl md:text-3xl font-semibold">
-            Heavy Weight Hoodie
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-semibold">هودی سایز بزرگ</h2>
           <div className="flex items-center mt-4 sm:mt-5">
             <a
               href="#reviews"
@@ -308,18 +304,18 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
               <div className="">
                 <StarIcon className="w-5 h-5 pb-[1px] text-slate-800 dark:text-slate-200" />
               </div>
-              <span className="ml-1.5">
+              <span className="mr-1.5">
                 <span>4.9</span>
                 <span className="mx-1.5">·</span>
                 <span className="text-slate-700 dark:text-slate-400 underline">
-                  142 reviews
+                  142 نظر
                 </span>
               </span>
             </a>
             <span className="hidden sm:block mx-2.5">·</span>
             {renderStatus()}
 
-            <div className="ml-auto">
+            <div className="mr-auto">
               <LikeSaveBtns />
             </div>
           </div>
@@ -338,7 +334,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   const renderSection2 = () => {
     return (
       <div className="listingSection__wrap !border-b-0 !pb-0">
-        <h2 className="text-2xl font-semibold">Product details</h2>
+        <h2 className="text-2xl font-semibold">بررسی محصول</h2>
         {/* <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div> */}
         <div className="prose prose-sm sm:prose dark:prose-invert sm:max-w-4xl">
           <p>
@@ -374,7 +370,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         {/* HEADING */}
         <h2 className="text-2xl font-semibold flex items-center">
           <StarIcon className="w-7 h-7 mb-0.5" />
-          <span className="ml-1.5"> 4,87 · 142 Reviews</span>
+          <span className="mr-1.5"> 4,87 · 142 نظر</span>
         </h2>
 
         {/* comment */}
@@ -414,7 +410,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             onClick={() => setIsOpenModalViewAllReviews(true)}
             className="mt-10 border border-slate-300 dark:border-slate-700 "
           >
-            Show me all 142 reviews
+            نمایش تمام نظرات
           </ButtonSecondary>
         </div>
       </div>
@@ -479,7 +475,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
               ))}
             </div>
             <div
-              className="absolute hidden md:flex md:items-center md:justify-center left-3 bottom-3 px-4 py-2 rounded-xl bg-white text-slate-500 cursor-pointer hover:bg-slate-200 z-10"
+              className="absolute hidden md:flex md:items-center md:justify-center right-3 bottom-3 px-4 py-2 rounded-xl bg-white text-slate-500 cursor-pointer hover:bg-slate-200 z-10"
               onClick={() => handleOpenModal(0)}
             >
               <svg
@@ -496,7 +492,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                   d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
                 />
               </svg>
-              <span className="ml-2 text-neutral-800 text-sm font-medium">
+              <span className="mr-2 text-neutral-800 text-sm font-medium">
                 Show all photos
               </span>
             </div>
@@ -515,7 +511,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
       {/* MAIn */}
       <main className="container relative z-10 mt-9 sm:mt-11 flex ">
         {/* CONTENT */}
-        <div className="w-full lg:w-3/5 xl:w-2/3 space-y-10 lg:pr-14 lg:space-y-14">
+        <div className="w-full lg:w-3/5 xl:w-2/3 space-y-10 lg:pl-14 lg:space-y-14">
           {renderSection1()}
           {renderSection2()}
         </div>
@@ -537,7 +533,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         <hr className="border-slate-200 dark:border-slate-700" />
 
         <SectionSliderProductCard
-          heading="Customers also purchased"
+          heading="محصولات مرتبط"
           subHeading=""
           headingFontClassName="text-2xl font-semibold"
           headingClassName="mb-10 text-neutral-900 dark:text-neutral-50"

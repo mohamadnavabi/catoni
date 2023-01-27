@@ -21,35 +21,35 @@ const ProductStatus: FC<Props> = ({
       return null;
     }
     const CLASSES = `nc-shadow-lg rounded-full flex items-center justify-center ${className}`;
-    if (status === "New in") {
+    if (status === "جدید") {
       return (
         <div className={CLASSES}>
           <SparklesIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "50% Discount") {
+    if (status === "50% تخفیف") {
       return (
         <div className={CLASSES}>
           <IconDiscount className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "Sold Out") {
+    if (status === "تمام شد") {
       return (
         <div className={CLASSES}>
           <NoSymbolIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "limited edition") {
+    if (status === "تعداد محدود") {
       return (
         <div className={CLASSES}>
           <ClockIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }

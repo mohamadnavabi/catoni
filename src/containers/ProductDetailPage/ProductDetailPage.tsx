@@ -63,8 +63,8 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
       <div>
         <label htmlFor="">
           <span className="text-sm font-medium">
-            Color:
-            <span className="ml-1 font-semibold">
+            رنگ:
+            <span className="mr-1 font-semibold">
               {variants[variantActive].name}
             </span>
           </span>
@@ -103,8 +103,8 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
         <div className="flex justify-between font-medium text-sm">
           <label htmlFor="">
             <span className="">
-              Size:
-              <span className="ml-1 font-semibold">{sizeSelected}</span>
+              اندازه:
+              <span className="mr-1 font-semibold">{sizeSelected}</span>
             </span>
           </label>
           <a
@@ -113,7 +113,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
             href="##"
             className="text-primary-6000 hover:text-primary-500"
           >
-            See sizing chart
+            راهنمای سایز
           </a>
         </div>
         <div className="grid grid-cols-5 sm:grid-cols-7 gap-2 mt-3">
@@ -155,35 +155,35 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     }
     const CLASSES =
       "absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 text-slate-900 dark:text-slate-300";
-    if (status === "New in") {
+    if (status === "جدید") {
       return (
         <div className={CLASSES}>
           <SparklesIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "50% Discount") {
+    if (status === "50% تخفیف") {
       return (
         <div className={CLASSES}>
           <IconDiscount className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "Sold Out") {
+    if (status === "تمام شد") {
       return (
         <div className={CLASSES}>
           <NoSymbolIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
-    if (status === "limited edition") {
+    if (status === "تعداد محدود") {
       return (
         <div className={CLASSES}>
           <ClockIcon className="w-3.5 h-3.5" />
-          <span className="ml-1 leading-none">{status}</span>
+          <span className="mr-1 leading-none">{status}</span>
         </div>
       );
     }
@@ -199,7 +199,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
             Heavy Weight Shoes
           </h2>
 
-          <div className="flex items-center mt-5 space-x-4 sm:space-x-5">
+          <div className="flex items-center mt-5 space-x-4 space-x-reverse sm:space-x-5 sm:space-x-reverse">
             {/* <div className="flex text-xl font-semibold">$112.00</div> */}
             <Prices
               contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
@@ -218,14 +218,14 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
                   <span>4.9</span>
                   <span className="block mx-2">·</span>
                   <span className="text-slate-600 dark:text-slate-400 underline">
-                    142 reviews
+                    142 نظر
                   </span>
                 </div>
               </a>
               <span className="hidden sm:block mx-2.5">·</span>
               <div className="hidden sm:flex items-center text-sm">
                 <SparklesIcon className="w-3.5 h-3.5" />
-                <span className="ml-1 leading-none">{status}</span>
+                <span className="mr-1 leading-none">{status}</span>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
         <div className="">{renderSizeList()}</div>
 
         {/*  ---------- 4  QTY AND ADD TO CART BUTTON */}
-        <div className="flex space-x-3.5">
+        <div className="flex space-x-3.5 space-x-reverse">
           <div className="flex items-center justify-center bg-slate-100/70 dark:bg-slate-800/70 px-2 py-3 sm:p-3.5 rounded-full">
             <NcInputNumber
               defaultValue={qualitySelected}
@@ -248,7 +248,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
             onClick={notifyAddTocart}
           >
             <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
-            <span className="ml-3">Add to cart</span>
+            <span className="mr-3">افزودن به سبد</span>
           </ButtonPrimary>
         </div>
 
@@ -270,7 +270,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
   const renderDetailSection = () => {
     return (
       <div className="">
-        <h2 className="text-2xl font-semibold">Product Details</h2>
+        <h2 className="text-2xl font-semibold">اطلاعات محصول</h2>
         <div className="prose prose-sm sm:prose dark:prose-invert sm:max-w-4xl mt-7">
           <p>
             The patented eighteen-inch hardwood Arrowhead deck --- finely
@@ -303,7 +303,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
         {/* HEADING */}
         <h2 className="text-2xl font-semibold flex items-center">
           <StarIcon className="w-7 h-7 mb-0.5" />
-          <span className="ml-1.5"> 4,87 · 142 Reviews</span>
+          <span className="ml-1.5"> 4,87 · 142 نظر</span>
         </h2>
 
         {/* comment */}
@@ -343,7 +343,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
             onClick={() => setIsOpenModalViewAllReviews(true)}
             className="mt-10 border border-slate-300 dark:border-slate-700 "
           >
-            Show me all 142 reviews
+            نمایش تمام نظرات
           </ButtonSecondary>
         </div>
       </div>
@@ -389,7 +389,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
           </div>
 
           {/* SIDEBAR */}
-          <div className="w-full lg:w-[45%] pt-10 lg:pt-0 lg:pl-7 xl:pl-9 2xl:pl-10">
+          <div className="w-full lg:w-[45%] pt-10 lg:pt-0 lg:pr-7 xl:pr-9 2xl:pr-10">
             {renderSectionContent()}
           </div>
         </div>
@@ -410,7 +410,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
 
           {/* OTHER SECTION */}
           <SectionSliderProductCard
-            heading="Customers also purchased"
+            heading="محصولات مشابه"
             subHeading=""
             headingFontClassName="text-2xl font-semibold"
             headingClassName="mb-10 text-neutral-900 dark:text-neutral-50"
