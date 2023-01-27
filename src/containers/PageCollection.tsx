@@ -19,7 +19,7 @@ const PageCollection: FC<PageCollectionProps> = ({ className = "" }) => {
       data-nc-id="PageCollection"
     >
       <Helmet>
-        <title>Collection || Ciseco Ecommerce Template</title>
+        <title>Collection || Catoni Ecommerce Template</title>
       </Helmet>
 
       <div className="container py-16 lg:pb-28 lg:pt-20 space-y-16 sm:space-y-20 lg:space-y-28">

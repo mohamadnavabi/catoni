@@ -63,7 +63,7 @@ export const pages: Page[] = [
 
 const Routes = () => {
   return (
-    <BrowserRouter basename="/ciseco">
+    <BrowserRouter basename="/catoni">
       <ScrollToTop />
       <SiteHeader />
       <Switch>

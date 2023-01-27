@@ -17,7 +17,7 @@ function PageHome2() {
   return (
     <div className="nc-PageHome2 relative overflow-hidden">
       <Helmet>
-        <title>Ciseco || Home 2 Ecommerce Template</title>
+        <title>Catoni || Home 2 Ecommerce Template</title>
       </Helmet>
 
       <div className="container px-4">

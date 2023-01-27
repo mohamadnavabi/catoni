@@ -282,7 +282,7 @@ const BlogSingle = () => {
   return (
     <div className="nc-PageSingle pt-8 lg:pt-16 ">
       <Helmet>
-        <title>Single Blog || Ciseco Ecommerce React Template</title>
+        <title>Single Blog || Catoni Ecommerce React Template</title>
       </Helmet>
       {renderHeader()}
       <NcImage

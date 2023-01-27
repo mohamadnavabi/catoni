@@ -22,7 +22,7 @@ function PageHome() {
   return (
     <div className="nc-PageHome relative overflow-hidden">
       <Helmet>
-        <title>Ciseco || Ecommerce Template</title>
+        <title>فروشگاه اینترنتی کفش و کتونی</title>
       </Helmet>
 
       {/* SECTION HERO */}
@@ -80,7 +80,7 @@ function PageHome() {
         <div className="relative py-24 lg:py-32">
           <BackgroundSection />
           <div>
-            <Heading rightDescText="From the Ciseco blog">
+            <Heading rightDescText="From the Catoni blog">
               The latest news
             </Heading>
             <SectionMagazine5 />

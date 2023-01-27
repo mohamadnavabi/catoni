@@ -183,7 +183,7 @@ const CartPage = () => {
   return (
     <div className="nc-CartPage">
       <Helmet>
-        <title>Shopping Cart || Ciseco Ecommerce Template</title>
+        <title>Shopping Cart || Catoni Ecommerce Template</title>
       </Helmet>
 
       <main className="container py-16 lg:pb-28 lg:pt-20 ">
