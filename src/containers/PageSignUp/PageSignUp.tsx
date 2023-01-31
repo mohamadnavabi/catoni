@@ -33,64 +33,46 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   return (
     <div className={`nc-PageSignUp  ${className}`} data-nc-id="PageSignUp">
       <Helmet>
-        <title>Sign up || Ciscryp React Template</title>
+        <title>ثبت نام | فروشگاه اینترنتی کفش و کتونی</title>
       </Helmet>
       <div className="container mb-24 lg:mb-32">
         <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
-          Signup
+          ثبت نام
         </h2>
         <div className="max-w-md mx-auto space-y-6 ">
-          <div className="grid gap-3">
-            {loginSocials.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className=" flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
-              >
-                <img
-                  className="flex-shrink-0"
-                  src={item.icon}
-                  alt={item.name}
-                />
-                <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
-                  {item.name}
-                </h3>
-              </a>
-            ))}
-          </div>
           {/* OR */}
-          <div className="relative text-center">
+          {/* <div className="relative text-center">
             <span className="relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900">
               OR
             </span>
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
-          </div>
+          </div> */}
           {/* FORM */}
           <form className="grid grid-cols-1 gap-6" action="#" method="post">
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
-                Email address
+                شماره موبایل
               </span>
               <Input
-                type="email"
-                placeholder="example@example.com"
-                className="mt-1"
+                type="number"
+                placeholder="09xxxxxxxxx"
+                className="mt-1 text-left"
               />
             </label>
-            <label className="block">
+            {/* <label className="block">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
               </span>
               <Input type="password" className="mt-1" />
-            </label>
-            <ButtonPrimary type="submit">Continue</ButtonPrimary>
+            </label> */}
+            <ButtonPrimary type="submit">ادامه</ButtonPrimary>
           </form>
 
           {/* ==== */}
           <span className="block text-center text-neutral-700 dark:text-neutral-300">
-            Already have an account? {` `}
+            قبلا ثبت نام کرده اید؟ {` `}
             <Link className="text-green-600" to="/login">
-              Sign in
+              ورود
             </Link>
           </span>
         </div>

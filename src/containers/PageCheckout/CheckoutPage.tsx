@@ -219,7 +219,7 @@ const CheckoutPage = () => {
   return (
     <div className="nc-CheckoutPage">
       <Helmet>
-        <title>Checkout || فروشگاه اینترنتی کفش و کتونی</title>
+        <title>ثبت نهایی سفارش || فروشگاه اینترنتی کفش و کتونی</title>
       </Helmet>
 
       <main className="container py-16 lg:pb-28 lg:pt-20 ">

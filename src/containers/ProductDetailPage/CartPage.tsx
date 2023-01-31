@@ -183,7 +183,7 @@ const CartPage = () => {
   return (
     <div className="nc-CartPage">
       <Helmet>
-        <title>سبد خرید || فروشگاه اینترنتی کفش و کتونی</title>
+        <title>سبد خرید | فروشگاه اینترنتی کفش و کتونی</title>
       </Helmet>
 
       <main className="container py-16 lg:pb-28 lg:pt-20 ">
