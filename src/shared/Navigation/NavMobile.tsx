@@ -4,7 +4,7 @@ import Logo from "shared/Logo/Logo";
 import { Disclosure } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
 import { NavItemType } from "./NavigationItem";
-import { NAVIGATION_DEMO_2 } from "data/navigation";
+import { NAVIGATION_DEMO } from "data/navigation";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import SocialsList from "shared/SocialsList/SocialsList";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
@@ -16,7 +16,7 @@ export interface NavMobileProps {
 }
 
 const NavMobile: React.FC<NavMobileProps> = ({
-  data = NAVIGATION_DEMO_2,
+  data = NAVIGATION_DEMO,
   onClickClose,
 }) => {
   const _renderMenuChild = (
@@ -169,33 +169,25 @@ const NavMobile: React.FC<NavMobileProps> = ({
   return (
     <div className="overflow-y-auto w-full h-screen py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 divide-y-2 divide-neutral-100 dark:divide-neutral-800">
       <div className="py-6 px-5">
-        <Logo />
-        <div className="flex flex-col mt-5 text-slate-600 dark:text-slate-300 text-sm">
-          <span>
-            Discover the most outstanding articles on all topics of life. Write
-            your stories and share them
-          </span>
-
-          <div className="flex justify-between items-center mt-4">
-            <SocialsList itemClass="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full text-xl" />
+        <div className="flex flex-col text-slate-600 dark:text-slate-300 text-sm">
+          <div className="flex justify-between items-center">
+            <span className="p-1">
+              <ButtonClose onClick={onClickClose} />
+            </span>
+            <Logo />
             <span className="block">
               <SwitchDarkMode className="bg-neutral-100 dark:bg-neutral-800" />
             </span>
           </div>
         </div>
-        <span className="absolute right-2 top-2 p-1">
-          <ButtonClose onClick={onClickClose} />
-        </span>
 
         <div className="mt-5">{renderSearchForm()}</div>
       </div>
       <ul className="flex flex-col py-6 px-2 space-y-1">
         {data.map(_renderItem)}
       </ul>
-      <div className="flex items-center justify-between py-6 px-5 space-x-2 space-x-reverse">
-        <ButtonPrimary href={"/"} className="!px-10">
-          Buy this template
-        </ButtonPrimary>
+      <div className="flex items-center justify-center py-6 px-5 space-x-2 space-x-reverse">
+        <SocialsList itemClass="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full text-xl" />
       </div>
     </div>
   );
