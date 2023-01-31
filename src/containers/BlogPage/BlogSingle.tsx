@@ -17,7 +17,7 @@ const BlogSingle = () => {
     return (
       <header className="container rounded-xl">
         <div className="max-w-screen-md mx-auto space-y-5">
-          <Badge href="##" color="purple" name="Traveler" />
+          <Badge href="##" color="purple" name="پیاده روی" />
           <h1
             className=" text-neutral-900 font-semibold text-3xl md:text-4xl md:!leading-[120%] lg:text-4xl dark:text-neutral-100 max-w-4xl "
             title="Quiet ingenuity: 120,000 lunches and counting"
@@ -54,9 +54,7 @@ const BlogSingle = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-3 sm:mt-1.5 sm:mr-3">
-              <SocialsList />
-            </div>
+            <SocialsList />
           </div>
         </div>
       </header>
@@ -195,7 +193,7 @@ const BlogSingle = () => {
               There’s no stopping the tech giant. Apple now opens its 100th
               store in China.There’s no stopping the tech giant.
               <a className="text-primary-6000 font-medium mr-1" href="##">
-                Readmore
+                بیشتر
               </a>
             </span>
           </div>
@@ -261,7 +259,7 @@ const BlogSingle = () => {
           <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black"></div>
         </div>
         <div className="flex flex-col justify-end items-start text-xs text-neutral-300 space-y-2.5 p-4">
-          <Badge name="Categories" />
+          <Badge name="معرفی محصول" />
           <h2 className="block text-lg font-semibold text-white ">
             <span className="line-clamp-2">{_getTitleRd()}</span>
           </h2>
@@ -282,7 +280,7 @@ const BlogSingle = () => {
   return (
     <div className="nc-PageSingle pt-8 lg:pt-16 ">
       <Helmet>
-        <title>Single Blog || Catoni Ecommerce React Template</title>
+        <title>عنوان مقاله || فروشگاه اینترنتی کفش و کتونی</title>
       </Helmet>
       {renderHeader()}
       <NcImage

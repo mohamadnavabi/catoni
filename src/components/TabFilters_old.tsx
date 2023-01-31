@@ -85,7 +85,7 @@ const TabFilters = () => {
   // OK
   const renderXClear = () => {
     return (
-      <span className="flex-shrink-0 w-4 h-4 rounded-full bg-primary-500 text-white flex items-center justify-center mr-3 cursor-pointer">
+      <span className="flex-shrink-0 w-4 h-4 rounded-full bg-primary-500 text-white flex items-center justify-center ml-3 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-3 w-3"
@@ -170,9 +170,9 @@ const TabFilters = () => {
                 />
               </svg>
 
-              <span className="mr-2">Categories</span>
+              <span className="ml-2">دسته بندی</span>
               {!categoriesState.length ? (
-                <ChevronDownIcon className="w-4 h-4 mr-3" />
+                <ChevronDownIcon className="w-4 h-4 ml-3" />
               ) : (
                 <span onClick={() => setCategoriesState([])}>
                   {renderXClear()}
@@ -188,17 +188,17 @@ const TabFilters = () => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-40 w-screen max-w-sm px-4 mt-3 right-0 sm:px-0 lg:max-w-md">
+              <Popover.Panel className="absolute z-40 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 lg:max-w-md">
                 <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700">
                   <div className="relative flex flex-col px-5 py-6 space-y-5">
                     <Checkbox
-                      name="All Categories"
-                      label="All Categories"
+                      name="تمام دسته بندی ها"
+                      label="تمام دسته بندی ها"
                       defaultChecked={categoriesState.includes(
-                        "All Categories"
+                        "تمام دسته بندی ها"
                       )}
                       onChange={(checked) =>
-                        handleChangeCategories(checked, "All Categories")
+                        handleChangeCategories(checked, "تمام دسته بندی ها")
                       }
                     />
                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
@@ -299,7 +299,7 @@ const TabFilters = () => {
                 />
               </svg>
 
-              <span className="mr-2">
+              <span className="ml-2">
                 {sortOrderStates
                   ? DATA_sortOrderRadios.filter(
                       (i) => i.id === sortOrderStates
@@ -307,7 +307,7 @@ const TabFilters = () => {
                   : "مرتب سازی"}
               </span>
               {!sortOrderStates.length ? (
-                <ChevronDownIcon className="w-4 h-4 mr-3" />
+                <ChevronDownIcon className="w-4 h-4 ml-3" />
               ) : (
                 <span onClick={() => setSortOrderStates("")}>
                   {renderXClear()}
@@ -323,7 +323,7 @@ const TabFilters = () => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-40 w-screen max-w-sm px-4 mt-3 right-0 sm:px-0 lg:max-w-md">
+              <Popover.Panel className="absolute z-40 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 lg:max-w-md">
                 <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700">
                   <div className="relative flex flex-col px-5 py-6 space-y-5">
                     {DATA_sortOrderRadios.map((item) => (
@@ -426,9 +426,9 @@ const TabFilters = () => {
                 />
               </svg>
 
-              <span className="mr-2">Colors</span>
+              <span className="ml-2">Colors</span>
               {!colorsState.length ? (
-                <ChevronDownIcon className="w-4 h-4 mr-3" />
+                <ChevronDownIcon className="w-4 h-4 ml-3" />
               ) : (
                 <span onClick={() => setColorsState([])}>{renderXClear()}</span>
               )}
@@ -442,7 +442,7 @@ const TabFilters = () => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-40 w-screen max-w-sm px-4 mt-3 right-0 sm:px-0 lg:max-w-md">
+              <Popover.Panel className="absolute z-40 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 lg:max-w-md">
                 <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700">
                   <div className="relative flex flex-col px-5 py-6 space-y-5">
                     {DATA_colors.map((item) => (
@@ -522,7 +522,7 @@ const TabFilters = () => {
                 />
               </svg>
 
-              <span className="mr-2 min-w-[90px]">{`${rangePrices[0]}$ - ${rangePrices[1]}$`}</span>
+              <span className="ml-2 min-w-[90px]">{`${rangePrices[0]}$ - ${rangePrices[1]}$`}</span>
               {rangePrices[0] === PRICE_RANGE[0] &&
               rangePrices[1] === PRICE_RANGE[1] ? null : (
                 <span onClick={() => setRangePrices(PRICE_RANGE)}>
@@ -539,7 +539,7 @@ const TabFilters = () => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-40 w-screen max-w-sm px-4 mt-3 right-0 sm:px-0 ">
+              <Popover.Panel className="absolute z-40 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 ">
                 <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700">
                   <div className="relative flex flex-col px-5 py-6 space-y-8">
                     <div className="space-y-5">
@@ -566,7 +566,7 @@ const TabFilters = () => {
                           حداقل قیمت
                         </label>
                         <div className="mt-1 relative rounded-md">
-                          <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
+                          <span className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
                             تومان
                           </span>
                           <input
@@ -574,7 +574,7 @@ const TabFilters = () => {
                             name="minPrice"
                             disabled
                             id="minPrice"
-                            className="block w-32 pr-10 pl-4 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full bg-transparent"
+                            className="block w-32 pl-10 pr-4 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full bg-transparent"
                             value={rangePrices[0]}
                           />
                         </div>
@@ -587,7 +587,7 @@ const TabFilters = () => {
                           Max price
                         </label>
                         <div className="mt-1 relative rounded-md">
-                          <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
+                          <span className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
                             $
                           </span>
                           <input
@@ -595,7 +595,7 @@ const TabFilters = () => {
                             disabled
                             name="maxPrice"
                             id="maxPrice"
-                            className="block w-32 pr-10 pl-4 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full bg-transparent"
+                            className="block w-32 pl-10 pr-4 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full bg-transparent"
                             value={rangePrices[1]}
                           />
                         </div>
@@ -675,7 +675,7 @@ const TabFilters = () => {
           />
         </svg>
 
-        <span className="line-clamp-1 mr-2">On sale</span>
+        <span className="line-clamp-1 ml-2">On sale</span>
         {isOnSale && renderXClear()}
       </div>
     );
@@ -783,7 +783,7 @@ const TabFilters = () => {
             />
           </svg>
 
-          <span className="mr-2">Products filters (3)</span>
+          <span className="ml-2">Products filters (3)</span>
           {renderXClear()}
         </div>
 
@@ -822,7 +822,7 @@ const TabFilters = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <div className="inline-flex flex-col w-full text-right align-middle transition-all transform bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 dark:text-neutral-100 h-full">
+                <div className="inline-flex flex-col w-full text-left align-middle transition-all transform bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 dark:text-neutral-100 h-full">
                   <div className="relative flex-shrink-0 px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 text-center">
                     <Dialog.Title
                       as="h3"
@@ -830,7 +830,7 @@ const TabFilters = () => {
                     >
                       Products filters
                     </Dialog.Title>
-                    <span className="absolute right-3 top-3">
+                    <span className="absolute left-3 top-3">
                       <ButtonClose onClick={closeModalMoreFilter} />
                     </span>
                   </div>
@@ -840,7 +840,7 @@ const TabFilters = () => {
                       {/* --------- */}
                       {/* ---- */}
                       <div className="py-7">
-                        <h3 className="text-xl font-medium">Categories</h3>
+                        <h3 className="text-xl font-medium">دسته بندی</h3>
                         <div className="mt-6 relative ">
                           {renderMoreFilterItem(DATA_categories)}
                         </div>
@@ -883,7 +883,7 @@ const TabFilters = () => {
                                   حداقل قیمت
                                 </label>
                                 <div className="mt-1 relative rounded-md">
-                                  <div className="absolute inset-y-0 right-0 pl-3 flex items-center pointer-events-none">
+                                  <div className="absolute inset-y-0 left-0 pr-3 flex items-center pointer-events-none">
                                     <span className="text-neutral-500 sm:text-sm">
                                       تومان
                                     </span>
@@ -893,7 +893,7 @@ const TabFilters = () => {
                                     name="minPrice"
                                     disabled
                                     id="minPrice"
-                                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
+                                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-7 pl-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
                                     value={rangePrices[0]}
                                   />
                                 </div>
@@ -901,12 +901,12 @@ const TabFilters = () => {
                               <div>
                                 <label
                                   htmlFor="maxPrice"
-                                  className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                                  className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 text-left"
                                 >
                                   حداکثر قیمت
                                 </label>
                                 <div className="mt-1 relative rounded-md">
-                                  <div className="absolute inset-y-0 right-0 pl-3 flex items-center pointer-events-none">
+                                  <div className="absolute inset-y-0 left-0 pr-3 flex items-center pointer-events-none">
                                     <span className="text-neutral-500 sm:text-sm">
                                       تومان
                                     </span>
@@ -916,7 +916,7 @@ const TabFilters = () => {
                                     disabled
                                     name="maxPrice"
                                     id="maxPrice"
-                                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
+                                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-7 pl-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
                                     value={rangePrices[1]}
                                   />
                                 </div>

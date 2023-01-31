@@ -87,7 +87,7 @@ const SidebarFilters = () => {
   const renderTabsCategories = () => {
     return (
       <div className="relative flex flex-col pb-8 space-y-4">
-        <h3 className="font-semibold mb-2.5">Categories</h3>
+        <h3 className="font-semibold mb-2.5">دسته بندی</h3>
         {DATA_categories.map((item) => (
           <div key={item.name} className="">
             <Checkbox
@@ -174,7 +174,7 @@ const SidebarFilters = () => {
               حداقل قیمت
             </label>
             <div className="mt-1 relative rounded-md">
-              <span className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
+              <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
                 تومان
               </span>
               <input
@@ -190,12 +190,12 @@ const SidebarFilters = () => {
           <div>
             <label
               htmlFor="maxPrice"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 text-left"
             >
               حداکثر قیمت
             </label>
             <div className="mt-1 relative rounded-md">
-              <span className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
+              <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
                 تومان
               </span>
               <input
@@ -242,8 +242,8 @@ const SidebarFilters = () => {
       {renderTabsPriceRage()}
       <div className="py-8 pr-2">
         <MySwitch
-          label="On sale!"
-          desc="Products currently on sale"
+          label="فروش ویژه"
+          desc="فقط کتونی های فروش ویژه"
           enabled={isOnSale}
           onChange={setIsIsOnSale}
         />

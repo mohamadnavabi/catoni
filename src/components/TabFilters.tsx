@@ -187,7 +187,7 @@ const TabFilters = () => {
                 />
               </svg>
 
-              <span className="mr-2">Categories</span>
+              <span className="mr-2">دسته بندی</span>
               {!categoriesState.length ? (
                 <ChevronDownIcon className="w-4 h-4 mr-3" />
               ) : (
@@ -209,13 +209,13 @@ const TabFilters = () => {
                 <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700">
                   <div className="relative flex flex-col px-5 py-6 space-y-5">
                     <Checkbox
-                      name="All Categories"
-                      label="All Categories"
+                      name="تمام دسته بندی ها"
+                      label="تمام دسته بندی ها"
                       defaultChecked={categoriesState.includes(
-                        "All Categories"
+                        "تمام دسته بندی ها"
                       )}
                       onChange={(checked) =>
-                        handleChangeCategories(checked, "All Categories")
+                        handleChangeCategories(checked, "تمام دسته بندی ها")
                       }
                     />
                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
@@ -709,7 +709,7 @@ const TabFilters = () => {
                       <div>
                         <label
                           htmlFor="maxPrice"
-                          className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                          className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 text-left"
                         >
                           حداکثر قیمت
                         </label>
@@ -967,7 +967,7 @@ const TabFilters = () => {
                       {/* --------- */}
                       {/* ---- */}
                       <div className="py-7">
-                        <h3 className="text-xl font-medium">Categories</h3>
+                        <h3 className="text-xl font-medium">دسته بندی</h3>
                         <div className="mt-6 relative ">
                           {renderMoreFilterItem(DATA_categories)}
                         </div>
@@ -1036,7 +1036,7 @@ const TabFilters = () => {
                               <div>
                                 <label
                                   htmlFor="maxPrice"
-                                  className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                                  className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 text-left"
                                 >
                                   حداکثر قیمت
                                 </label>
@@ -1084,11 +1084,11 @@ const TabFilters = () => {
                       {/* --------- */}
                       {/* ---- */}
                       <div className="py-7">
-                        <h3 className="text-xl font-medium">On sale!</h3>
+                        <h3 className="text-xl font-medium">فروش ویژه</h3>
                         <div className="mt-6 relative ">
                           <MySwitch
-                            label="On sale!"
-                            desc="Products currently on sale"
+                            label="فروش ویژه"
+                            desc=""
                             enabled={isOnSale}
                             onChange={setIsIsOnSale}
                           />

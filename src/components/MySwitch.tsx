@@ -47,7 +47,7 @@ const MySwitch: FC<MySwitchProps> = ({
         <span className="sr-only">{label}</span>
         <span
           aria-hidden="true"
-          className={`${enabledState ? "translate-x-9" : "translate-x-0"}
+          className={`${enabledState ? "translate-x-0" : "-translate-x-9"}
             pointer-events-none inline-block h-7 w-7 rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200`}
         />
       </Switch>
