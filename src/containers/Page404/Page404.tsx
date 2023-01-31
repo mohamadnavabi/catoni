@@ -14,10 +14,10 @@ const Page404: React.FC = () => (
       <header className="text-center max-w-2xl mx-auto space-y-2">
         <NcImage src={I404Png} />
         <span className="block text-sm text-neutral-800 sm:text-base dark:text-neutral-200 tracking-wider font-medium">
-          THE PAGE YOU WERE LOOKING FOR DOESN'T EXIST.{" "}
+          صفحه ای که به دنبالش هستید وجود ندارد!{" "}
         </span>
         <div className="pt-8">
-          <ButtonPrimary href="/">Return Home Page</ButtonPrimary>
+          <ButtonPrimary href="/">برگشت به خانه</ButtonPrimary>
         </div>
       </header>
     </div>

@@ -24,7 +24,7 @@ const SectionPromo3: FC<SectionPromo3Props> = ({ className = "lg:pt-10" }) => {
         </div>
 
         <div className="lg:w-[50%] max-w-lg relative">
-          <h2 className="font-semibold text-4xl md:text-5xl">
+          <h2 className="font-semibold text-3xl md:text-5xl">
             آفر های ویژه کتونی رو از دست نده
           </h2>
           <span className="block mt-5 text-neutral-500 dark:text-neutral-400">

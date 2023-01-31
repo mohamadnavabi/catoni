@@ -31,14 +31,14 @@ const Heading: React.FC<HeadingProps> = ({
   className = "mb-8 lg:mb-12 text-neutral-900 dark:text-neutral-50",
   isCenter = false,
   hasNextPrev = false,
-  fontClass = "text-2xl md:text-3xl font-semibold",
+  fontClass = "text-2xl md:text-2xl font-semibold",
   rightDescText,
   rightPopoverOptions = solutions,
   ...args
 }) => {
   return (
     <div
-      className={`nc-Section-Heading relative flex flex-col sm:flex-row sm:items-end justify-between ${className}`}
+      className={`nc-Section-Heading relative flex flex-row sm:items-end justify-between items-center ${className}`}
     >
       <div
         className={
@@ -68,7 +68,7 @@ const Heading: React.FC<HeadingProps> = ({
         )}
       </div>
       {hasNextPrev && !isCenter && (
-        <div className="mt-4 flex justify-end sm:ml-2 sm:mt-0 flex-shrink-0">
+        <div className="flex justify-end sm:ml-2 sm:mt-0 flex-shrink-0">
           <NextPrev onClickNext={() => {}} onClickPrev={() => {}} />
         </div>
       )}

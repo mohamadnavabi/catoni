@@ -81,7 +81,7 @@ const DiscoverMoreSlider = () => {
   return (
     <div className={`nc-DiscoverMoreSlider nc-p-l-container ${UNIQUE_CLASS} `}>
       <Heading
-        className="mb-12 lg:mb-14 text-neutral-900 dark:text-neutral-50 nc-p-r-container "
+        className="mb-4 lg:mb-8 text-neutral-900 dark:text-neutral-50 nc-p-r-container "
         desc=""
         rightDescText=""
         hasNextPrev

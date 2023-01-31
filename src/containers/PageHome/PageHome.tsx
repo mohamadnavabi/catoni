@@ -26,11 +26,11 @@ function PageHome() {
       </Helmet>
 
       {/* SECTION HERO */}
-      <SectionHero2 />
-
-      <div className="mt-4 lg:mt-8">
-        <DiscoverMoreSlider />
+      <div className="mb-8 lg:mb-12">
+        <SectionHero2 />
       </div>
+
+      <DiscoverMoreSlider />
 
       <div className="container relative space-y-14 my-14 lg:space-y-16 lg:my-16">
         {/* SECTION */}
