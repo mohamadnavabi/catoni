@@ -1,4 +1,7 @@
-const avatarColors = [
+const BASE_URL = "http://127.0.0.1:8000";
+const API_URL = BASE_URL + "/api";
+
+const AVATAR_COLORS = [
   "#ffdd00",
   "#fbb034",
   "#ff4c4c",
@@ -27,4 +30,4 @@ const avatarColors = [
   "#E208A7",
 ];
 
-export { avatarColors };
+export { BASE_URL, API_URL, AVATAR_COLORS };

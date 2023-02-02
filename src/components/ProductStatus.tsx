@@ -8,7 +8,7 @@ import React, { FC } from "react";
 import IconDiscount from "./IconDiscount";
 
 interface Props {
-  status: Product["status"];
+  status: any;
   className?: string;
 }
 
@@ -16,6 +16,7 @@ const ProductStatus: FC<Props> = ({
   status,
   className = "absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300",
 }) => {
+  return null;
   const renderStatus = () => {
     if (!status) {
       return null;

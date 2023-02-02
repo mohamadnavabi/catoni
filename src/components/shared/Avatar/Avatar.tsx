@@ -1,4 +1,4 @@
-import { avatarColors } from "contains/contants";
+import { AVATAR_COLORS } from "contains/contants";
 import React, { FC } from "react";
 
 import { avatarImgs } from "contains/fakeData";
@@ -27,9 +27,9 @@ const Avatar: FC<AvatarProps> = ({
   const name = userName || "John Doe";
   const _setBgColor = (name: string) => {
     const backgroundIndex = Math.floor(
-      name.charCodeAt(0) % avatarColors.length
+      name.charCodeAt(0) % AVATAR_COLORS.length
     );
-    return avatarColors[backgroundIndex];
+    return AVATAR_COLORS[backgroundIndex];
   };
 
   return (

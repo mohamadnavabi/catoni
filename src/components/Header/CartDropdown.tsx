@@ -8,13 +8,18 @@ import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 
 export default function CartDropdown() {
   const renderProduct = (item: Product, index: number, close: () => void) => {
-    const { name, price, image } = item;
+    const { title, price, media } = item;
+    const image =
+      media && media.length
+        ? media[0].path + JSON.parse(media[0].files)[2]
+        : "";
+
     return (
       <div key={index} className="flex py-5 last:pb-0">
         <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
           <img
             src={image}
-            alt={name}
+            alt={title}
             className="h-full w-full object-contain object-center"
           />
           <Link
@@ -30,7 +35,7 @@ export default function CartDropdown() {
               <div>
                 <h3 className="text-base font-medium ">
                   <Link onClick={close} to={"/product-detail"}>
-                    {name}
+                    {title}
                   </Link>
                 </h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">

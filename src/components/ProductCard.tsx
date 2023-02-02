@@ -4,7 +4,7 @@ import NcImage from "components/shared/NcImage/NcImage";
 import LikeButton from "./LikeButton";
 import Prices from "./Prices";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
-import { Product, PRODUCTS } from "data/data";
+import { Product } from "data/data";
 import { StarIcon } from "@heroicons/react/24/solid";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
@@ -13,28 +13,21 @@ import toast from "react-hot-toast";
 import { Transition } from "@headlessui/react";
 import ModalQuickView from "./ModalQuickView";
 import ProductStatus from "./ProductStatus";
+import { BASE_URL } from "contains/contants";
 
 export interface ProductCardProps {
   className?: string;
-  data?: Product;
+  data: Product;
   isLiked?: boolean;
 }
 
 const ProductCard: FC<ProductCardProps> = ({
   className = "",
-  data = PRODUCTS[0],
+  data,
   isLiked,
 }) => {
-  const {
-    name,
-    price,
-    description,
-    sizes,
-    variants,
-    variantType,
-    status,
-    image,
-  } = data;
+  const { title, subtitle, price, variants, media, average_rating } = data;
+
   const [variantActive, setVariantActive] = React.useState(0);
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
 
@@ -71,7 +64,7 @@ const ProductCard: FC<ProductCardProps> = ({
         <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
           <img
             src={image}
-            alt={name}
+            alt={title}
             className="h-full w-full object-cover object-center"
           />
         </div>
@@ -80,10 +73,12 @@ const ProductCard: FC<ProductCardProps> = ({
           <div>
             <div className="flex justify-between ">
               <div>
-                <h3 className="text-base font-medium ">{name}</h3>
+                <h3 className="text-base font-medium ">{title}</h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>
-                    {variants ? variants[variantActive].name : `Natural`}
+                    {variants
+                      ? variants[variantActive].attribute_item.name
+                      : `Natural`}
                   </span>
                   <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4"></span>
                   <span>{size || "XL"}</span>
@@ -139,57 +134,60 @@ const ProductCard: FC<ProductCardProps> = ({
   };
 
   const renderVariants = () => {
-    if (!variants || !variants.length || !variantType) {
-      return null;
-    }
+    console.log(variants);
+    return null;
 
-    if (variantType === "color") {
-      return (
-        <div className="flex space-x-1 space-x-reverse">
-          {variants.map((variant, index) => (
-            <div
-              key={index}
-              onClick={() => setVariantActive(index)}
-              className={`relative w-6 h-6 rounded-full overflow-hidden z-10 border cursor-pointer ${
-                variantActive === index
-                  ? getBorderClass(variant.color)
-                  : "border-transparent"
-              }`}
-              title={variant.name}
-            >
-              <div
-                className={`absolute inset-0.5 rounded-full z-0 ${variant.color}`}
-              ></div>
-            </div>
-          ))}
-        </div>
-      );
-    }
+    // if (!variants || !variants.length || !variantType) {
+    //   return null;
+    // }
 
-    return (
-      <div className="flex ">
-        {variants.map((variant, index) => (
-          <div
-            key={index}
-            onClick={() => setVariantActive(index)}
-            className={`relative w-11 h-6 rounded-full overflow-hidden z-10 border cursor-pointer ${
-              variantActive === index
-                ? "border-black dark:border-slate-300"
-                : "border-transparent"
-            }`}
-            title={variant.name}
-          >
-            <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
-              <img
-                src={variant.thumbnail}
-                alt="variant"
-                className="absolute w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    );
+    // if (variantType === "color") {
+    //   return (
+    //     <div className="flex space-x-1 space-x-reverse">
+    //       {variants.map((variant, index) => (
+    //         <div
+    //           key={index}
+    //           onClick={() => setVariantActive(index)}
+    //           className={`relative w-6 h-6 rounded-full overflow-hidden z-10 border cursor-pointer ${
+    //             variantActive === index
+    //               ? getBorderClass(variant.color)
+    //               : "border-transparent"
+    //           }`}
+    //           title={variant.name}
+    //         >
+    //           <div
+    //             className={`absolute inset-0.5 rounded-full z-0 ${variant.color}`}
+    //           ></div>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   );
+    // }
+
+    // return (
+    //   <div className="flex ">
+    //     {variants.map((variant, index) => (
+    //       <div
+    //         key={index}
+    //         onClick={() => setVariantActive(index)}
+    //         className={`relative w-11 h-6 rounded-full overflow-hidden z-10 border cursor-pointer ${
+    //           variantActive === index
+    //             ? "border-black dark:border-slate-300"
+    //             : "border-transparent"
+    //         }`}
+    //         title={variant.name}
+    //       >
+    //         <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
+    //           <img
+    //             src={variant.thumbnail}
+    //             alt="variant"
+    //             className="absolute w-full h-full object-cover"
+    //           />
+    //         </div>
+    //       </div>
+    //     ))}
+    //   </div>
+    // );
   };
 
   const renderGroupButtons = () => {
@@ -202,7 +200,7 @@ const ProductCard: FC<ProductCardProps> = ({
           onClick={() => notifyAddTocart({ size: "XL" })}
         >
           <BagIcon className="w-3.5 h-3.5 mb-0.5" />
-          <span className="mr-1">Add to bag</span>
+          <span className="mr-1">افزودن به سبد</span>
         </ButtonPrimary>
         <ButtonSecondary
           className="mr-1.5 bg-white hover:!bg-gray-100 hover:text-slate-900 transition-colors shadow-lg"
@@ -211,33 +209,40 @@ const ProductCard: FC<ProductCardProps> = ({
           onClick={() => setShowModalQuickView(true)}
         >
           <ArrowsPointingOutIcon className="w-3.5 h-3.5" />
-          <span className="mr-1">Quick view</span>
+          <span className="mr-1">نمایش سریع</span>
         </ButtonSecondary>
       </div>
     );
   };
 
   const renderSizeList = () => {
-    if (!sizes || !sizes.length) {
-      return null;
-    }
+    return null;
 
-    return (
-      <div className="absolute bottom-0 inset-x-1 space-x-1.5 space-x-reverse flex justify-center opacity-0 invisible group-hover:bottom-4 group-hover:opacity-100 group-hover:visible transition-all">
-        {sizes.map((size, index) => {
-          return (
-            <div
-              key={index}
-              className="nc-shadow-lg w-10 h-10 rounded-xl bg-white hover:bg-slate-900 hover:text-white transition-colors cursor-pointer flex items-center justify-center uppercase font-semibold tracking-tight text-sm text-slate-900"
-              onClick={() => notifyAddTocart({ size })}
-            >
-              {size}
-            </div>
-          );
-        })}
-      </div>
-    );
+    // if (!sizes || !sizes.length) {
+    //   return null;
+    // }
+
+    // return (
+    //   <div className="absolute bottom-0 inset-x-1 space-x-1.5 space-x-reverse flex justify-center opacity-0 invisible group-hover:bottom-4 group-hover:opacity-100 group-hover:visible transition-all">
+    //     {sizes.map((size, index) => {
+    //       return (
+    //         <div
+    //           key={index}
+    //           className="nc-shadow-lg w-10 h-10 rounded-xl bg-white hover:bg-slate-900 hover:text-white transition-colors cursor-pointer flex items-center justify-center uppercase font-semibold tracking-tight text-sm text-slate-900"
+    //           onClick={() => notifyAddTocart({ size })}
+    //         >
+    //           {size}
+    //         </div>
+    //       );
+    //     })}
+    //   </div>
+    // );
   };
+
+  const image =
+    media && media.length
+      ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[2]
+      : "";
 
   return (
     <>
@@ -256,11 +261,12 @@ const ProductCard: FC<ProductCardProps> = ({
             />
           </Link>
 
-          <ProductStatus status={status} />
+          <ProductStatus status={"status"} />
 
           <LikeButton liked={isLiked} className="absolute top-3 right-3 z-10" />
 
-          {sizes ? renderSizeList() : renderGroupButtons()}
+          {/* {sizes ? renderSizeList() : renderGroupButtons()} */}
+          {false ? renderSizeList() : renderGroupButtons()}
         </div>
 
         <div className="space-y-4 px-2.5 pt-5 pb-2.5">
@@ -270,10 +276,10 @@ const ProductCard: FC<ProductCardProps> = ({
             <h2
               className={`nc-ProductCard__title text-base font-semibold transition-colors`}
             >
-              {name}
+              {title}
             </h2>
             <p className={`text-sm text-slate-500 dark:text-slate-400 mt-1 `}>
-              {description}
+              {subtitle}
             </p>
           </div>
 
@@ -281,7 +287,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div className="flex items-center mb-0.5">
               <StarIcon className="w-5 h-5 pb-[1px] text-amber-400" />
               <span className="text-sm mr-1 text-slate-500 dark:text-slate-400">
-                {(Math.random() * 1 + 4).toFixed(1)}
+                {average_rating}
                 {/* ({Math.floor(Math.random() * 70 + 20)} نظر) */}
               </span>
             </div>

@@ -11,18 +11,25 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
-import rootReducers from "./rootReducers";
 
-const isDev = process.env.NODE_ENV === "development";
+// Reducers
+import { ProductReducer } from "./slices";
+import mediaRunningReducer from "./mediaRunning/mediaRunning";
+
+// const isDev = process.env.NODE_ENV === "development";
+const isDev = false;
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: [],
+  whitelist: ["cart"],
 };
 
-const rootReducer = combineReducers(rootReducers);
+const rootReducer = combineReducers({
+  mediaRunning: mediaRunningReducer,
+  product: ProductReducer,
+});
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middlewareLogger: any = !!isDev ? logger : [];
 

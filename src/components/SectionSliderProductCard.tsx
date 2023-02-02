@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useId, useRef } from "react";
+import React, { FC, useEffect, useId, useMemo, useRef } from "react";
 import Heading from "components/Heading/Heading";
 import Glide from "@glidejs/glide";
 import ProductCard from "./ProductCard";
@@ -21,7 +21,7 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
   headingClassName,
   heading,
   subHeading = "",
-  data = PRODUCTS.filter((_, i) => i < 8 && i > 2),
+  data,
 }) => {
   const sliderRef = useRef(null);
   const id = useId();
@@ -68,6 +68,50 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
     };
   }, [sliderRef, UNIQUE_CLASS]);
 
+  const renderItems = useMemo(() => {
+    if (data?.length)
+      return (
+        <div className="glide__track" data-glide-el="track">
+          <ul className="glide__slides">
+            {data.map((item, index) => (
+              <li key={index} className={`glide__slide ${itemClassName}`}>
+                <ProductCard data={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    else
+      return (
+        <div className="animate-pulse glide__track" data-glide-el="track">
+          <ul className="glide__slides">
+            {new Array(5).fill(undefined).map((_, index) => (
+              <li key={index} className={`glide__slide`}>
+                <div
+                  className="bg-slate-100 dark:bg-slate-100 rounded-3xl"
+                  style={{ width: 296, height: 323 }}
+                />
+                <div
+                  className="bg-slate-100 dark:bg-slate-100 rounded-3xl mt-3"
+                  style={{ width: 296, height: 25 }}
+                />
+                <div className="flex justify-between items-end  mt-3">
+                  <div
+                    className="bg-slate-100 dark:bg-slate-100 rounded-3xl"
+                    style={{ width: 75, height: 25 }}
+                  />
+                  <div
+                    className="bg-slate-100 dark:bg-slate-100 rounded-3xl"
+                    style={{ width: 75, height: 25 }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+  }, [data]);
+
   return (
     <div className={`nc-SectionSliderProductCard ${className}`}>
       <div className={`${UNIQUE_CLASS} flow-root`} ref={sliderRef}>
@@ -79,15 +123,7 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
         >
           {heading || `جدیدترین ها`}
         </Heading>
-        <div className="glide__track" data-glide-el="track">
-          <ul className="glide__slides">
-            {data.map((item, index) => (
-              <li key={index} className={`glide__slide ${itemClassName}`}>
-                <ProductCard data={item} />
-              </li>
-            ))}
-          </ul>
-        </div>
+        {renderItems}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SectionHowItWork from "components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "components/SectionPromo1";
@@ -17,8 +17,21 @@ import Heading from "components/Heading/Heading";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import { PRODUCTS, SPORT_PRODUCTS } from "data/data";
 import SectionSliderBrands from "components/SectionSliderBrands/SectionSliderBrands";
+import { useDispatch } from "react-redux";
+import { getBestSaleProducts, getLastProducts } from "store/slices/product";
+import { useAppSelector } from "store/hooks";
 
 function PageHome() {
+  const dispatch = useDispatch();
+  const { lastProducts, bestSaleProducts } = useAppSelector(
+    (state) => state.product
+  );
+
+  useEffect(() => {
+    dispatch(getLastProducts());
+    dispatch(getBestSaleProducts());
+  }, []);
+
   return (
     <div className="nc-PageHome relative overflow-hidden">
       <Helmet>
@@ -34,15 +47,7 @@ function PageHome() {
 
       <div className="container relative space-y-14 my-14 lg:space-y-16 lg:my-16">
         {/* SECTION */}
-        <SectionSliderProductCard
-          data={[
-            PRODUCTS[4],
-            SPORT_PRODUCTS[5],
-            PRODUCTS[7],
-            SPORT_PRODUCTS[1],
-            PRODUCTS[6],
-          ]}
-        />
+        <SectionSliderProductCard data={lastProducts} />
 
         {/* SECTION */}
         {/* <SectionPromo1 /> */}

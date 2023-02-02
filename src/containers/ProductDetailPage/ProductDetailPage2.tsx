@@ -33,7 +33,6 @@ export interface ProductDetailPage2Props {
 const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   className = "",
 }) => {
-  const { sizes, variants, status, allOfSizes } = PRODUCTS[0];
   const LIST_IMAGES_DEMO: string[] = [
     detail21JPG,
     detail22JPG,
@@ -46,7 +45,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   const PRICE = 1899000;
 
   const [variantActive, setVariantActive] = React.useState(0);
-  const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
+  const [sizeSelected, setSizeSelected] = React.useState("");
   const [qualitySelected, setQualitySelected] = React.useState(1);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -63,43 +62,45 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
 
   //
   const renderVariants = () => {
-    if (!variants || !variants.length) {
-      return null;
-    }
+    return null;
 
-    return (
-      <div>
-        <label htmlFor="">
-          <span className="text-sm font-medium">
-            رنگ:
-            <span className="mr-1 font-semibold">
-              {variants[variantActive].name}
-            </span>
-          </span>
-        </label>
-        <div className="flex mt-3">
-          {variants.map((variant, index) => (
-            <div
-              key={index}
-              onClick={() => setVariantActive(index)}
-              className={`relative flex-1 max-w-[75px] h-10 sm:h-11 rounded-full border-2 cursor-pointer ${
-                variantActive === index
-                  ? "border-primary-6000 dark:border-primary-500"
-                  : "border-transparent"
-              }`}
-            >
-              <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
-                <img
-                  src={variant.thumbnail}
-                  alt=""
-                  className="absolute w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+    // if (!variants || !variants.length) {
+    //   return null;
+    // }
+
+    // return (
+    //   <div>
+    //     <label htmlFor="">
+    //       <span className="text-sm font-medium">
+    //         رنگ:
+    //         <span className="mr-1 font-semibold">
+    //           {variants[variantActive].name}
+    //         </span>
+    //       </span>
+    //     </label>
+    //     <div className="flex mt-3">
+    //       {variants.map((variant, index) => (
+    //         <div
+    //           key={index}
+    //           onClick={() => setVariantActive(index)}
+    //           className={`relative flex-1 max-w-[75px] h-10 sm:h-11 rounded-full border-2 cursor-pointer ${
+    //             variantActive === index
+    //               ? "border-primary-6000 dark:border-primary-500"
+    //               : "border-transparent"
+    //           }`}
+    //         >
+    //           <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
+    //             <img
+    //               src={variant.thumbnail}
+    //               alt=""
+    //               className="absolute w-full h-full object-cover"
+    //             />
+    //           </div>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    // );
   };
 
   const notifyAddTocart = () => {
@@ -118,99 +119,104 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   };
 
   const renderSizeList = () => {
-    if (!allOfSizes || !sizes || !sizes.length) {
-      return null;
-    }
-    return (
-      <div>
-        <div className="flex justify-between font-medium text-sm">
-          <label htmlFor="">
-            <span className="">
-              اندازه:
-              <span className="mr-1 font-semibold">{sizeSelected}</span>
-            </span>
-          </label>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="##"
-            className="text-primary-6000 hover:text-primary-500"
-          >
-            راهنمای سایزبندی
-          </a>
-        </div>
-        <div className="grid grid-cols-4 gap-2 mt-3">
-          {allOfSizes.map((size, index) => {
-            const isActive = size === sizeSelected;
-            const sizeOutStock = !sizes.includes(size);
-            return (
-              <div
-                key={index}
-                className={`relative h-10 sm:h-11 rounded-2xl border flex items-center justify-center 
-                text-sm sm:text-base uppercase font-semibold select-none overflow-hidden z-0 ${
-                  sizeOutStock
-                    ? "text-opacity-20 dark:text-opacity-20 cursor-not-allowed"
-                    : "cursor-pointer"
-                } ${
-                  isActive
-                    ? "bg-primary-6000 border-primary-6000 text-white hover:bg-primary-6000"
-                    : "border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200 hover:bg-neutral-50 dark:hover:bg-neutral-700"
-                }`}
-                onClick={() => {
-                  if (sizeOutStock) {
-                    return;
-                  }
-                  setSizeSelected(size);
-                }}
-              >
-                {size}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
+    return null;
+
+    // if (!allOfSizes || !sizes || !sizes.length) {
+    //   return null;
+    // }
+
+    // return (
+    //   <div>
+    //     <div className="flex justify-between font-medium text-sm">
+    //       <label htmlFor="">
+    //         <span className="">
+    //           اندازه:
+    //           <span className="mr-1 font-semibold">{sizeSelected}</span>
+    //         </span>
+    //       </label>
+    //       <a
+    //         target="_blank"
+    //         rel="noopener noreferrer"
+    //         href="##"
+    //         className="text-primary-6000 hover:text-primary-500"
+    //       >
+    //         راهنمای سایزبندی
+    //       </a>
+    //     </div>
+    //     <div className="grid grid-cols-4 gap-2 mt-3">
+    //       {/* {allOfSizes.map((size, index) => {
+    //         const isActive = size === sizeSelected;
+    //         const sizeOutStock = !sizes.includes(size);
+    //         return (
+    //           <div
+    //             key={index}
+    //             className={`relative h-10 sm:h-11 rounded-2xl border flex items-center justify-center
+    //             text-sm sm:text-base uppercase font-semibold select-none overflow-hidden z-0 ${
+    //               sizeOutStock
+    //                 ? "text-opacity-20 dark:text-opacity-20 cursor-not-allowed"
+    //                 : "cursor-pointer"
+    //             } ${
+    //               isActive
+    //                 ? "bg-primary-6000 border-primary-6000 text-white hover:bg-primary-6000"
+    //                 : "border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200 hover:bg-neutral-50 dark:hover:bg-neutral-700"
+    //             }`}
+    //             onClick={() => {
+    //               if (sizeOutStock) {
+    //                 return;
+    //               }
+    //               setSizeSelected(size);
+    //             }}
+    //           >
+    //             {size}
+    //           </div>
+    //         );
+    //       })} */}
+    //     </div>
+    //   </div>
+    // );
   };
 
   const renderStatus = () => {
-    if (!status) {
-      return null;
-    }
-    const CLASSES =
-      "text-sm flex items-center text-slate-700 text-slate-900 dark:text-slate-300";
-    if (status === "جدید") {
-      return (
-        <div className={CLASSES}>
-          <SparklesIcon className="w-3.5 h-3.5" />
-          <span className="mr-1 leading-none">{status}</span>
-        </div>
-      );
-    }
-    if (status === "50% تخفیف") {
-      return (
-        <div className={CLASSES}>
-          <IconDiscount className="w-3.5 h-3.5" />
-          <span className="mr-1 leading-none">{status}</span>
-        </div>
-      );
-    }
-    if (status === "تمام شد") {
-      return (
-        <div className={CLASSES}>
-          <NoSymbolIcon className="w-3.5 h-3.5" />
-          <span className="mr-1 leading-none">{status}</span>
-        </div>
-      );
-    }
-    if (status === "تعداد محدود") {
-      return (
-        <div className={CLASSES}>
-          <ClockIcon className="w-3.5 h-3.5" />
-          <span className="mr-1 leading-none">{status}</span>
-        </div>
-      );
-    }
     return null;
+
+    // if (!status) {
+    //   return null;
+    // }
+    // const CLASSES =
+    //   "text-sm flex items-center text-slate-700 text-slate-900 dark:text-slate-300";
+    // if (status === "جدید") {
+    //   return (
+    //     <div className={CLASSES}>
+    //       <SparklesIcon className="w-3.5 h-3.5" />
+    //       <span className="mr-1 leading-none">{status}</span>
+    //     </div>
+    //   );
+    // }
+    // if (status === "50% تخفیف") {
+    //   return (
+    //     <div className={CLASSES}>
+    //       <IconDiscount className="w-3.5 h-3.5" />
+    //       <span className="mr-1 leading-none">{status}</span>
+    //     </div>
+    //   );
+    // }
+    // if (status === "تمام شد") {
+    //   return (
+    //     <div className={CLASSES}>
+    //       <NoSymbolIcon className="w-3.5 h-3.5" />
+    //       <span className="mr-1 leading-none">{status}</span>
+    //     </div>
+    //   );
+    // }
+    // if (status === "تعداد محدود") {
+    //   return (
+    //     <div className={CLASSES}>
+    //       <ClockIcon className="w-3.5 h-3.5" />
+    //       <span className="mr-1 leading-none">{status}</span>
+    //     </div>
+    //   );
+    // }
+    // return null;
   };
 
   const renderSectionSidebar = () => {
