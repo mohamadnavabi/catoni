@@ -43,7 +43,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
           variantActive={variantActive}
         />
       ),
-      { position: "top-right", id: "nc-product-notify", duration: 3000 }
+      { position: "top-left", id: "nc-product-notify", duration: 3000 }
     );
   };
 
@@ -55,9 +55,9 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
     return (
       <div>
         <label htmlFor="">
-          <span className="text-sm font-medium">
-            Color:
-            <span className="ml-1 font-semibold">
+          <span className="flex text-right text-sm font-medium">
+            رنگ:
+            <span className="mr-1 font-semibold">
               {variants[variantActive].name}
             </span>
           </span>
@@ -96,8 +96,8 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
         <div className="flex justify-between font-medium text-sm">
           <label htmlFor="">
             <span className="">
-              Size:
-              <span className="ml-1 font-semibold">{sizeSelected}</span>
+              اندازه:
+              <span className="mr-1 font-semibold">{sizeSelected}</span>
             </span>
           </label>
           <a
@@ -106,7 +106,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
             href="##"
             className="text-primary-6000 hover:text-primary-500"
           >
-            See sizing chart
+            راهنمای اندازه
           </a>
         </div>
         <div className="grid grid-cols-5 sm:grid-cols-7 gap-2 mt-2.5">
@@ -147,7 +147,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
       return null;
     }
     const CLASSES =
-      "absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 text-slate-900 dark:text-slate-300";
+      "absolute top-3 right-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 text-slate-900 dark:text-slate-300";
     if (status === "جدید") {
       return (
         <div className={CLASSES}>
@@ -188,7 +188,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
       <div className="space-y-8">
         {/* ---------- 1 HEADING ----------  */}
         <div>
-          <h2 className="text-2xl font-semibold hover:text-primary-6000 transition-colors">
+          <h2 className="text-2xl font-semibold hover:text-primary-6000 transition-colors text-right">
             <Link to="/product-detail">Heavy Weight Shoes</Link>
           </h2>
 
@@ -207,11 +207,11 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
                 className="flex items-center text-sm font-medium"
               >
                 <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
-                <div className="ml-1.5 flex">
+                <div className="mr-1.5 flex">
                   <span>4.9</span>
                   <span className="block mx-2">·</span>
                   <span className="text-slate-600 dark:text-slate-400 underline">
-                    142 reviews
+                    142 نظر
                   </span>
                 </div>
               </Link>
@@ -241,7 +241,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
             onClick={notifyAddTocart}
           >
             <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
-            <span className="ml-3">افزودن به سبد</span>
+            <span className="mr-3">افزودن به سبد</span>
           </ButtonPrimary>
         </div>
 
@@ -297,7 +297,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
             {/* STATUS */}
             {renderStatus()}
             {/* META FAVORITES */}
-            <LikeButton className="absolute right-3 top-3 " />
+            <LikeButton className="absolute left-3 top-3 " />
           </div>
           <div className="hidden lg:grid grid-cols-2 gap-3 mt-3 sm:gap-6 sm:mt-6 xl:gap-5 xl:mt-5">
             {[LIST_IMAGES_DEMO[1], LIST_IMAGES_DEMO[2]].map((item, index) => {
@@ -315,7 +315,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
         </div>
 
         {/* SIDEBAR */}
-        <div className="w-full lg:w-[50%] pt-6 lg:pt-0 lg:pl-7 xl:pl-8">
+        <div className="w-full lg:w-[50%] pt-6 lg:pt-0 lg:pr-7 xl:pr-8">
           {renderSectionContent()}
         </div>
       </div>

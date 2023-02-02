@@ -234,12 +234,12 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/#",
-    name: "مردانه",
+    name: "زنـانـه",
   },
   {
     id: ncNanoId(),
     href: "/#",
-    name: "زنـانـه",
+    name: "مردانه",
   },
 ];
 

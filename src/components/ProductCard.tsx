@@ -202,7 +202,7 @@ const ProductCard: FC<ProductCardProps> = ({
           onClick={() => notifyAddTocart({ size: "XL" })}
         >
           <BagIcon className="w-3.5 h-3.5 mb-0.5" />
-          <span className="mr-1">Add to bag</span>
+          <span className="mr-1">افزودن به سبد</span>
         </ButtonPrimary>
         <ButtonSecondary
           className="mr-1.5 bg-white hover:!bg-gray-100 hover:text-slate-900 transition-colors shadow-lg"
@@ -211,7 +211,7 @@ const ProductCard: FC<ProductCardProps> = ({
           onClick={() => setShowModalQuickView(true)}
         >
           <ArrowsPointingOutIcon className="w-3.5 h-3.5" />
-          <span className="mr-1">Quick view</span>
+          <span className="mr-1">نمایش سریع</span>
         </ButtonSecondary>
       </div>
     );
