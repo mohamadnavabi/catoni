@@ -1,8 +1,8 @@
-import { useAppSelector } from "app/hooks";
-import { selectCurrentMediaRunning } from "app/mediaRunning/mediaRunning";
 import React, { FC, useEffect, useState } from "react";
 import { useTimeoutFn } from "react-use";
 import isSafariBrowser from "utils/isSafariBrowser";
+import { selectCurrentMediaRunning } from "store/mediaRunning/mediaRunning";
+import { useAppSelector } from "store/hooks";
 
 interface AudioForNftProps {
   src?: string;

@@ -1,6 +1,6 @@
-import Heading from "shared/Heading/Heading";
-import NcImage from "shared/NcImage/NcImage";
-import NcPlayIcon from "shared/NcPlayIcon/NcPlayIcon";
+import Heading from "components/shared/Heading/Heading";
+import NcImage from "components/shared/NcImage/NcImage";
+import NcPlayIcon from "components/shared/NcPlayIcon/NcPlayIcon";
 import React, { FC, useState } from "react";
 import isSafariBrowser from "utils/isSafariBrowser";
 

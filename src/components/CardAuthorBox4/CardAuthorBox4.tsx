@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import Avatar from "shared/Avatar/Avatar";
-import NcImage from "shared/NcImage/NcImage";
+import Avatar from "components/shared/Avatar/Avatar";
+import NcImage from "components/shared/NcImage/NcImage";
 import { nftsAbstracts, personNames } from "contains/fakeData";
 import VerifyIcon from "components/VerifyIcon";
 import FollowButton from "components/FollowButton";
-import Badge from "shared/Badge/Badge";
+import Badge from "components/shared/Badge/Badge";
 
 export interface CardAuthorBox4Props {
   className?: string;

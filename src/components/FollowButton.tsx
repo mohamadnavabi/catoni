@@ -1,6 +1,8 @@
 import React, { FC } from "react";
-import ButtonPrimary, { ButtonPrimaryProps } from "shared/Button/ButtonPrimary";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
+import ButtonPrimary, {
+  ButtonPrimaryProps,
+} from "components/shared/Button/ButtonPrimary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 
 export interface FollowButtonProps extends ButtonPrimaryProps {
   isFollowing?: boolean;

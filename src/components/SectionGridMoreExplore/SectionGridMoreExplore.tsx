@@ -3,7 +3,7 @@ import CardCategory4 from "components/CardCategories/CardCategory4";
 import Heading from "components/Heading/Heading";
 import NavItem2 from "components/NavItem2";
 import React, { FC } from "react";
-import Nav from "shared/Nav/Nav";
+import Nav from "components/shared/Nav/Nav";
 import explore1Svg from "assets/images/collections/explore1.svg";
 import explore2Svg from "assets/images/collections/explore2.svg";
 import explore3Svg from "assets/images/collections/explore3.svg";

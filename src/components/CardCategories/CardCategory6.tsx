@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
 import explore1Svg from "assets/images/collections/explore1.svg";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";

@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from "react";
-import NextPrev from "shared/NextPrev/NextPrev";
+import NextPrev from "components/shared/NextPrev/NextPrev";
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   fontClass?: string;

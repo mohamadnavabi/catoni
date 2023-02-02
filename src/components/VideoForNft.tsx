@@ -1,6 +1,6 @@
-import { useAppSelector } from "app/hooks";
-import { selectCurrentMediaRunning } from "app/mediaRunning/mediaRunning";
 import React, { FC } from "react";
+import { useAppSelector } from "store/hooks";
+import { selectCurrentMediaRunning } from "store/mediaRunning/mediaRunning";
 
 interface VideoForNftProps {
   src?: string;

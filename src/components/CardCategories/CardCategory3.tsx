@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import { CATS_DISCOVER } from "components/DiscoverMoreSlider";
 
 export interface CardCategory3Props {

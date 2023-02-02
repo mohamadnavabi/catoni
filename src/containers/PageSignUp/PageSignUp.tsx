@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import facebookSvg from "images/Facebook.svg";
-import twitterSvg from "images/Twitter.svg";
-import googleSvg from "images/Google.svg";
+import facebookSvg from "assets/images/temp/Facebook.svg";
+import twitterSvg from "assets/images/temp/Twitter.svg";
+import googleSvg from "assets/images/temp/Google.svg";
 import { Helmet } from "react-helmet";
-import Input from "shared/Input/Input";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
+import Input from "components/shared/Input/Input";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import { Link } from "react-router-dom";
 
 export interface PageSignUpProps {

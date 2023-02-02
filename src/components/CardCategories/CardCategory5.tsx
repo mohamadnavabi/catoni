@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
-import images1 from "images/nfts/cat1.webp";
+import images1 from "assets/images/temp/nfts/cat1.webp";
 
 export interface CardCategory5Props {
   className?: string;

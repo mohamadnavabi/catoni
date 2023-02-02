@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import Pagination from "shared/Pagination/Pagination";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
+import Pagination from "components/shared/Pagination/Pagination";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import SectionSliderCollections from "components/SectionSliderLargeProduct";
 import SectionPromo1 from "components/SectionPromo1";
 import ProductCard from "components/ProductCard";

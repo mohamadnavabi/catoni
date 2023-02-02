@@ -14,7 +14,7 @@ import SectionPromo3 from "components/SectionPromo3";
 import SectionClientSay from "components/SectionClientSay/SectionClientSay";
 import SectionMagazine5 from "containers/BlogPage/SectionMagazine5";
 import Heading from "components/Heading/Heading";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import { PRODUCTS, SPORT_PRODUCTS } from "data/data";
 import SectionSliderBrands from "components/SectionSliderBrands/SectionSliderBrands";
 

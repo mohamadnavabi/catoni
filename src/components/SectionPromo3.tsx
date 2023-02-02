@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import NcImage from "shared/NcImage/NcImage";
-import rightImgDemo from "images/promo3.png";
-import backgroundLineSvg from "images/BackgroundLine.svg";
-import Badge from "shared/Badge/Badge";
-import Input from "shared/Input/Input";
-import ButtonCircle from "shared/Button/ButtonCircle";
+import NcImage from "components/shared/NcImage/NcImage";
+import rightImgDemo from "assets/images/temp/promo3.png";
+import backgroundLineSvg from "assets/images/temp/BackgroundLine.svg";
+import Badge from "components/shared/Badge/Badge";
+import Input from "components/shared/Input/Input";
+import ButtonCircle from "components/shared/Button/ButtonCircle";
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/solid";
 
 export interface SectionPromo3Props {

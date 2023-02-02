@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import rightImg from "images/our-features.png";
-import NcImage from "shared/NcImage/NcImage";
-import Badge from "shared/Badge/Badge";
+import rightImg from "assets/images/temp/our-features.png";
+import NcImage from "components/shared/NcImage/NcImage";
+import Badge from "components/shared/Badge/Badge";
 
 export interface SectionOurFeaturesProps {
   className?: string;

@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Avatar from "shared/Avatar/Avatar";
-import Badge from "shared/Badge/Badge";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
-import Comment from "shared/Comment/Comment";
-import NcImage from "shared/NcImage/NcImage";
-import SocialsList from "shared/SocialsList/SocialsList";
-import Textarea from "shared/Textarea/Textarea";
+import Avatar from "components/shared/Avatar/Avatar";
+import Badge from "components/shared/Badge/Badge";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
+import Comment from "components/shared/Comment/Comment";
+import NcImage from "components/shared/NcImage/NcImage";
+import SocialsList from "components/shared/SocialsList/SocialsList";
+import Textarea from "components/shared/Textarea/Textarea";
 import { Helmet } from "react-helmet";
 import { _getImgRd, _getPersonNameRd, _getTitleRd } from "contains/fakeData";
-import Tag from "shared/Tag/Tag";
+import Tag from "components/shared/Tag/Tag";
 
 const BlogSingle = () => {
   const renderHeader = () => {

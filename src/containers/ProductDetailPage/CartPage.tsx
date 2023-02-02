@@ -4,7 +4,7 @@ import Prices from "components/Prices";
 import { Product, PRODUCTS } from "data/data";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 
 const CartPage = () => {
   const renderStatusSoldout = () => {

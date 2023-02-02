@@ -1,9 +1,9 @@
 import Label from "components/Label/Label";
 import React, { FC, useState } from "react";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
-import Input from "shared/Input/Input";
-import Radio from "shared/Radio/Radio";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
+import Input from "components/shared/Input/Input";
+import Radio from "components/shared/Radio/Radio";
 
 interface Props {
   isActive: boolean;

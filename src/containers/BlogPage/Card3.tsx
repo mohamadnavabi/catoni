@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
-import Badge from "shared/Badge/Badge";
+import Badge from "components/shared/Badge/Badge";
 import { _getImgRd, _getTagNameRd, _getTitleRd } from "contains/fakeData";
 import PostCardMeta from "components/PostCardMeta/PostCardMeta";
 

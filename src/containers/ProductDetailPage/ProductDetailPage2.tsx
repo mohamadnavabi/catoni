@@ -4,16 +4,16 @@ import {
   ClockIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
-import NcImage from "shared/NcImage/NcImage";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
+import NcImage from "components/shared/NcImage/NcImage";
 import LikeSaveBtns from "./LikeSaveBtns";
 import ModalPhotos from "./ModalPhotos";
 import ReviewItem from "components/ReviewItem";
-import detail21JPG from "images/products/detail3-1.webp";
-import detail22JPG from "images/products/detail3-2.webp";
-import detail23JPG from "images/products/detail3-3.webp";
-import detail24JPG from "images/products/detail3-4.webp";
+import detail21JPG from "assets/images/temp/products/detail3-1.webp";
+import detail22JPG from "assets/images/temp/products/detail3-2.webp";
+import detail23JPG from "assets/images/temp/products/detail3-3.webp";
+import detail24JPG from "assets/images/temp/products/detail3-4.webp";
 import { PRODUCTS } from "data/data";
 import IconDiscount from "components/IconDiscount";
 import NcInputNumber from "components/NcInputNumber";

@@ -1,12 +1,12 @@
 import React from "react";
-import Logo from "shared/Logo/Logo";
+import Logo from "components/shared/Logo/Logo";
 import { Disclosure } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
 import { NavItemType } from "./NavigationItem";
 import { NAVIGATION_DEMO } from "data/navigation";
-import SocialsList from "shared/SocialsList/SocialsList";
+import SocialsList from "components/shared/SocialsList/SocialsList";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
+import SwitchDarkMode from "components/shared/SwitchDarkMode/SwitchDarkMode";
 
 export interface NavMobileProps {
   data?: NavItemType[];

@@ -1,9 +1,9 @@
 import Label from "components/Label/Label";
 import React, { FC } from "react";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import Input from "shared/Input/Input";
-import Select from "shared/Select/Select";
-import Textarea from "shared/Textarea/Textarea";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import Input from "components/shared/Input/Input";
+import Select from "components/shared/Select/Select";
+import Textarea from "components/shared/Textarea/Textarea";
 import CommonLayout from "./CommonLayout";
 import { Helmet } from "react-helmet";
 import { avatarImgs } from "contains/fakeData";

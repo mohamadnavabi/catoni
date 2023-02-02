@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
 
 export interface CardCategory2Props {

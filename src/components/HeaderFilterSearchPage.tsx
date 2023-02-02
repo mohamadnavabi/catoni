@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import Nav from "shared/Nav/Nav";
-import NavItem from "shared/NavItem/NavItem";
+import Nav from "components/shared/Nav/Nav";
+import NavItem from "components/shared/NavItem/NavItem";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import TabFilters from "components/TabFilters";
 import { Transition } from "@headlessui/react";
 

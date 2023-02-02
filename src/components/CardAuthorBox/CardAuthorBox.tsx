@@ -3,8 +3,8 @@ import VerifyIcon from "components/VerifyIcon";
 import { _getPersonNameRd } from "contains/fakeData";
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import Avatar from "shared/Avatar/Avatar";
-import Badge from "shared/Badge/Badge";
+import Avatar from "components/shared/Avatar/Avatar";
+import Badge from "components/shared/Badge/Badge";
 
 export interface CardAuthorBoxProps {
   className?: string;

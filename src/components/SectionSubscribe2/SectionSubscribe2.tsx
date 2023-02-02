@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import ButtonCircle from "shared/Button/ButtonCircle";
-import rightImg from "images/promo3.png";
-import NcImage from "shared/NcImage/NcImage";
-import Badge from "shared/Badge/Badge";
-import Input from "shared/Input/Input";
+import ButtonCircle from "components/shared/Button/ButtonCircle";
+import rightImg from "assets/images/temp/promo3.png";
+import NcImage from "components/shared/NcImage/NcImage";
+import Badge from "components/shared/Badge/Badge";
+import Input from "components/shared/Input/Input";
 import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 
 export interface SectionSubscribe2Props {

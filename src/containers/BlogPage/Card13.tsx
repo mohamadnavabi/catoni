@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
 import { _getImgRd, _getTitleRd } from "contains/fakeData";
 import PostCardMeta from "components/PostCardMeta/PostCardMeta";

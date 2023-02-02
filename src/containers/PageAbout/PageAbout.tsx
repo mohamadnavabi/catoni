@@ -1,4 +1,4 @@
-import rightImg from "images/hero-right1.png";
+import rightImg from "assets/images/temp/hero-right1.png";
 import React, { FC } from "react";
 import SectionFounder from "./SectionFounder";
 import SectionStatistic from "./SectionStatistic";

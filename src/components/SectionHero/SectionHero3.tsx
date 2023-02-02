@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import backgroundLineSvg from "images/Moon.svg";
-import imageRightPng2 from "images/hero-2-right-1.png";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import backgroundLineSvg from "assets/images/temp/Moon.svg";
+import imageRightPng2 from "assets/images/temp/hero-2-right-1.png";
 
 export interface SectionHero3Props {
   className?: string;

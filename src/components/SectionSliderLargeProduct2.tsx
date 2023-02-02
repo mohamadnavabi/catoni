@@ -4,24 +4,24 @@ import Glide from "@glidejs/glide";
 import CollectionCard from "./CollectionCard";
 import CollectionCard2 from "./CollectionCard2";
 import { Link } from "react-router-dom";
-import Nav from "shared/Nav/Nav";
+import Nav from "components/shared/Nav/Nav";
 import NavItem2 from "./NavItem2";
-import Next from "shared/NextPrev/Next";
-import Prev from "shared/NextPrev/Prev";
-import full1Img from "images/products/full1.png";
-import full11Img from "images/products/full1-1.png";
-import full12Img from "images/products/full1-2.png";
-import full13Img from "images/products/full1-3.png";
+import Next from "components/shared/NextPrev/Next";
+import Prev from "components/shared/NextPrev/Prev";
+import full1Img from "assets/images/temp/products/full1.png";
+import full11Img from "assets/images/temp/products/full1-1.png";
+import full12Img from "assets/images/temp/products/full1-2.png";
+import full13Img from "assets/images/temp/products/full1-3.png";
 //
-import full2Img from "images/products/full2.png";
-import full21Img from "images/products/full2-1.png";
-import full22Img from "images/products/full2-2.png";
-import full23Img from "images/products/full2-3.png";
+import full2Img from "assets/images/temp/products/full2.png";
+import full21Img from "assets/images/temp/products/full2-1.png";
+import full22Img from "assets/images/temp/products/full2-2.png";
+import full23Img from "assets/images/temp/products/full2-3.png";
 //
-import full3Img from "images/products/full3.png";
-import full31Img from "images/products/full3-1.png";
-import full32Img from "images/products/full3-2.png";
-import full33Img from "images/products/full3-3.png";
+import full3Img from "assets/images/temp/products/full3.png";
+import full31Img from "assets/images/temp/products/full3-1.png";
+import full32Img from "assets/images/temp/products/full3-2.png";
+import full33Img from "assets/images/temp/products/full3-3.png";
 
 export interface SectionSliderLargeProduct2Props {
   className?: string;

@@ -2,7 +2,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import { productImgs } from "contains/fakeData";
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 import Prices from "./Prices";
 
 export interface CollectionCard2Props {

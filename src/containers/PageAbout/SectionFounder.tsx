@@ -1,6 +1,6 @@
 import Heading from "components/Heading/Heading";
 import React from "react";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 
 export interface People {
   id: string;

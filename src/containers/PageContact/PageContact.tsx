@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import SocialsList from "shared/SocialsList/SocialsList";
+import SocialsList from "components/shared/SocialsList/SocialsList";
 import Label from "components/Label/Label";
-import Input from "shared/Input/Input";
-import Textarea from "shared/Textarea/Textarea";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
+import Input from "components/shared/Input/Input";
+import Textarea from "components/shared/Textarea/Textarea";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import BackgroundSection from "components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "components/SectionPromo1";
 

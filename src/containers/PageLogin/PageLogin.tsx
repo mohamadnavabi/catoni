@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import Input from "shared/Input/Input";
+import Input from "components/shared/Input/Input";
 import { Link } from "react-router-dom";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 
 export interface PageLoginProps {
   className?: string;

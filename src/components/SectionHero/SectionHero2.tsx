@@ -1,12 +1,12 @@
 import React, { FC, useState } from "react";
-import imagerightPng from "images/hero-right.png";
-import imagerightPng2 from "images/hero-right-2.png";
-import imagerightPng3 from "images/hero-right-3.png";
+import imagerightPng from "assets/images/temp/hero-right.png";
+import imagerightPng2 from "assets/images/temp/hero-right-2.png";
+import imagerightPng3 from "assets/images/temp/hero-right-3.png";
 
-import backgroundLineSvg from "images/Moon.svg";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import Next from "shared/NextPrev/Next";
-import Prev from "shared/NextPrev/Prev";
+import backgroundLineSvg from "assets/images/temp/Moon.svg";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import Next from "components/shared/NextPrev/Next";
+import Prev from "components/shared/NextPrev/Prev";
 import useInterval from "react-use/lib/useInterval";
 import useBoolean from "react-use/lib/useBoolean";
 

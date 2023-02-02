@@ -1,6 +1,6 @@
 import ProductCard from "components/ProductCard";
 import { PRODUCTS } from "data/data";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import CommonLayout from "./CommonLayout";
 
 const AccountSavelists = () => {

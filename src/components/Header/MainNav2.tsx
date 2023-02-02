@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
-import Logo from "shared/Logo/Logo";
-import MenuBar from "shared/MenuBar/MenuBar";
+import Logo from "components/shared/Logo/Logo";
+import MenuBar from "components/shared/MenuBar/MenuBar";
 import LangDropdown from "./LangDropdown";
 import AvatarDropdown from "./AvatarDropdown";
 import TemplatesDropdown from "./TemplatesDropdown";

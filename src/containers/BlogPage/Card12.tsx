@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
-import SocialsShare from "shared/SocialsShare/SocialsShare";
+import SocialsShare from "components/shared/SocialsShare/SocialsShare";
 import { imgHigtQualitys, _getTitleRd } from "contains/fakeData";
 import PostCardMeta from "components/PostCardMeta/PostCardMeta";
 

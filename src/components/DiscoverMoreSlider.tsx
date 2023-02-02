@@ -1,9 +1,9 @@
 import React, { useEffect, useId } from "react";
 import Heading from "./Heading/Heading";
-import img1 from "images/collections/1.png";
-import img2 from "images/collections/5.png";
-import img3 from "images/collections/4.png";
-import img4 from "images/collections/3.png";
+import img1 from "assets/images/temp/collections/1.png";
+import img2 from "assets/images/temp/collections/5.png";
+import img3 from "assets/images/temp/collections/4.png";
+import img4 from "assets/images/temp/collections/3.png";
 import CardCategory3, {
   CardCategory3Props,
 } from "./CardCategories/CardCategory3";

@@ -3,8 +3,8 @@ import Prices from "components/Prices";
 import { Product, PRODUCTS } from "data/data";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 
 export default function CartDropdown() {
   const renderProduct = (item: Product, index: number, close: () => void) => {

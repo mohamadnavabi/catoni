@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
-import Logo from "shared/Logo/Logo";
-import MenuBar from "shared/MenuBar/MenuBar";
+import Logo from "components/shared/Logo/Logo";
+import MenuBar from "components/shared/MenuBar/MenuBar";
 import AvatarDropdown from "./AvatarDropdown";
-import Navigation from "shared/Navigation/Navigation";
+import Navigation from "components/shared/Navigation/Navigation";
 import CartDropdown from "./CartDropdown";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 

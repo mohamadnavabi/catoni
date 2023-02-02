@@ -1,4 +1,4 @@
-import { NavItemType } from "shared/Navigation/NavigationItem";
+import { NavItemType } from "components/shared/Navigation/NavigationItem";
 import ncNanoId from "utils/ncNanoId";
 
 const MEGAMENU_DEMO: NavItemType[] = [

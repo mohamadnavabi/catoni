@@ -1,4 +1,4 @@
-import { SocialType } from "shared/SocialsShare/SocialsShare";
+import { SocialType } from "components/shared/SocialsShare/SocialsShare";
 import React, { FC } from "react";
 import instagram from "assets/images/socials/instagram.svg";
 import telegram from "assets/images/socials/telegram.svg";

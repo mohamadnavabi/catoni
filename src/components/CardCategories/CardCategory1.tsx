@@ -1,7 +1,7 @@
 import { _getImgRd, _getTagNameRd } from "contains/fakeData";
 import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
-import NcImage from "shared/NcImage/NcImage";
+import NcImage from "components/shared/NcImage/NcImage";
 
 export interface CardCategory1Props {
   className?: string;

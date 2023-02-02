@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import Pagination from "shared/Pagination/Pagination";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
+import Pagination from "components/shared/Pagination/Pagination";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import SectionSliderCollections from "components/SectionSliderLargeProduct";
 import SectionPromo1 from "components/SectionPromo1";
 import HeaderFilterSearchPage from "components/HeaderFilterSearchPage";
-import Input from "shared/Input/Input";
-import ButtonCircle from "shared/Button/ButtonCircle";
+import Input from "components/shared/Input/Input";
+import ButtonCircle from "components/shared/Button/ButtonCircle";
 import ProductCard from "components/ProductCard";
 import { PRODUCTS } from "data/data";
 

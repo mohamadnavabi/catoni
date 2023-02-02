@@ -2,10 +2,10 @@ import React, { FC, useEffect, useId } from "react";
 import Heading from "components/Heading/Heading";
 import Glide from "@glidejs/glide";
 import CardCategory2 from "components/CardCategories/CardCategory2";
-import department1Png from "images/collections/department1.png";
-import department2Png from "images/collections/department2.png";
-import department3Png from "images/collections/department3.png";
-import department4Png from "images/collections/department4.png";
+import department1Png from "assets/images/temp/collections/department1.png";
+import department2Png from "assets/images/temp/collections/department2.png";
+import department3Png from "assets/images/temp/collections/department3.png";
+import department4Png from "assets/images/temp/collections/department4.png";
 import { Link } from "react-router-dom";
 
 export interface CardBrandData {

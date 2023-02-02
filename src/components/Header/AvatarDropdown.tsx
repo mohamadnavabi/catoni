@@ -2,8 +2,8 @@ import { Popover, Transition } from "@headlessui/react";
 import { avatarImgs } from "contains/fakeData";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import Avatar from "shared/Avatar/Avatar";
-import SwitchDarkMode2 from "shared/SwitchDarkMode/SwitchDarkMode2";
+import Avatar from "components/shared/Avatar/Avatar";
+import SwitchDarkMode2 from "components/shared/SwitchDarkMode/SwitchDarkMode2";
 
 export default function AvatarDropdown() {
   return (

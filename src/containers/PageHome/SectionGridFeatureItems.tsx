@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import HeaderFilterSection from "components/HeaderFilterSection";
 import ProductCard from "components/ProductCard";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import { Product, PRODUCTS } from "data/data";
 
 //

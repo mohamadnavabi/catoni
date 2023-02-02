@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { MEGAMENU_TEMPLATES } from "data/navigation";
 import CardCategory3 from "components/CardCategories/CardCategory3";
 import { NavLink } from "react-router-dom";
-import { NavItemType } from "shared/Navigation/NavigationItem";
+import { NavItemType } from "components/shared/Navigation/NavigationItem";
 
 export default function TemplatesDropdown() {
   const renderMegaMenuNavlink = (item: NavItemType) => {

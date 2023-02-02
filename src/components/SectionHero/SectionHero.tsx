@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from "react";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
-import rightImg from "images/about-hero-right.png";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
+import rightImg from "assets/images/temp/about-hero-right.png";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export interface SectionHeroProps {

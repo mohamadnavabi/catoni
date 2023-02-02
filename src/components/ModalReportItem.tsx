@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import Textarea from "shared/Textarea/Textarea";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
-import NcModal from "shared/NcModal/NcModal";
+import Textarea from "components/shared/Textarea/Textarea";
+import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import ButtonSecondary from "components/shared/Button/ButtonSecondary";
+import NcModal from "components/shared/NcModal/NcModal";
 
 export interface ProblemPlan {
   name: string;
