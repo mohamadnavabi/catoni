@@ -1,14 +1,52 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Input from "components/shared/Input/Input";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
+import { Formik } from "formik";
+import { validateMobile } from "utils/validation";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { login } from "store/slices";
+
+type FormValues = {
+  username: string;
+  password: string;
+};
 
 export interface PageLoginProps {
   className?: string;
 }
 
 const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
+  const { loading, user, deviceInfo } = useAppSelector((state) => state.auth);
+
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (user.token !== "") window.location.href = "/";
+  }, [user]);
+
+  const onSubmitForm = ({ username, password }: FormValues) => {
+    dispatch(login({ mobile: username, password, device_info: deviceInfo }));
+  };
+
+  const initialValues: FormValues = { username: "", password: "" };
+
+  const loginValidate = ({ username, password }: FormValues) => {
+    const errors: any = {};
+
+    if (username === "") {
+      errors.username = "شماره موبایل لازم است";
+    } else if (!validateMobile(username)) {
+      errors.username = "فرمت شماره موبایل اشتباه است";
+    } else if (password === "") {
+      errors.password = "کلمه عبور لازم است";
+    }
+
+    return errors;
+  };
+
   return (
     <div className={`nc-PageLogin ${className}`} data-nc-id="PageLogin">
       <Helmet>
@@ -19,29 +57,69 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
           ورود
         </h2>
         <div className="max-w-md mx-auto space-y-6">
-          {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" action="#" method="post">
-            <label className="block">
-              <span className="text-neutral-800 dark:text-neutral-200">
-                ایمیل یا شماره موبایل
-              </span>
-              <Input
-                type="text"
-                placeholder="09xxxxxxxxx"
-                className="mt-1 text-left"
-              />
-            </label>
-            <label className="block">
-              <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
-                کلمه عبور
-                <Link to="/forgot-pass" className="text-sm text-green-600">
-                  فراموشی کلمه عبور
-                </Link>
-              </span>
-              <Input type="password" className="mt-1 text-left" />
-            </label>
-            <ButtonPrimary type="submit">ورود</ButtonPrimary>
-          </form>
+          <Formik
+            initialValues={initialValues}
+            validate={loginValidate}
+            onSubmit={onSubmitForm}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => (
+              <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
+                <label className="block">
+                  <span className="text-neutral-800 dark:text-neutral-200">
+                    شماره موبایل
+                  </span>
+                  <Input
+                    name="username"
+                    type="text"
+                    placeholder="09xxxxxxxxx"
+                    className="mt-1 text-left"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.username}
+                  />
+                  <span className="text-red-500 text-xs">
+                    {errors.username && touched.username && errors.username}
+                  </span>
+                </label>
+                <label className="block">
+                  <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
+                    کلمه عبور
+                    <Link to="/forgot-pass" className="text-sm text-green-600">
+                      فراموشی کلمه عبور
+                    </Link>
+                  </span>
+                  <Input
+                    name="password"
+                    type="password"
+                    className="mt-1 text-left"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                  <span className="text-red-500 text-xs">
+                    {errors.password && touched.password && errors.password}
+                  </span>
+                </label>
+                <ButtonPrimary
+                  type="submit"
+                  disabled={
+                    (touched.username && !!errors.username) ||
+                    (touched.password && !!errors.password)
+                  }
+                  loading={loading}
+                >
+                  ورود
+                </ButtonPrimary>
+              </form>
+            )}
+          </Formik>
 
           {/* ==== */}
           <span className="block text-center text-neutral-700 dark:text-neutral-300">

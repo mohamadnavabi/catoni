@@ -1,35 +1,68 @@
-import React, { FC } from "react";
-import facebookSvg from "assets/images/temp/Facebook.svg";
-import twitterSvg from "assets/images/temp/Twitter.svg";
-import googleSvg from "assets/images/temp/Google.svg";
+import React, { FC, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Input from "components/shared/Input/Input";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { Formik } from "formik";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { generateOTP } from "store/slices/auth";
+import { getDeviceIp } from "utils/device";
+import { validateMobile } from "utils/validation";
+import toast from "react-hot-toast";
+
+type FormValues = {
+  username: string;
+};
 
 export interface PageSignUpProps {
   className?: string;
 }
 
-const loginSocials = [
-  {
-    name: "Continue with Facebook",
-    href: "#",
-    icon: facebookSvg,
-  },
-  {
-    name: "Continue with Twitter",
-    href: "#",
-    icon: twitterSvg,
-  },
-  {
-    name: "Continue with Google",
-    href: "#",
-    icon: googleSvg,
-  },
-];
-
 const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
+  const [ip, setIp] = useState("");
+
+  const { loading, deviceInfo, otpResult } = useAppSelector(
+    (state) => state.auth
+  );
+
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    (async () => {
+      const ip = await getDeviceIp();
+      setIp(ip);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (otpResult.otp_count > 0) {
+      if (otpResult.user_exist) {
+        toast.error("شما قبلا عضو شده‌اید لطفا وارد شوید.");
+      } else {
+        history.push("verify-otp");
+      }
+    }
+  }, [otpResult]);
+
+  const onSubmitForm = async ({ username }: FormValues) => {
+    dispatch(generateOTP({ ip, device_info: deviceInfo, mobile: username }));
+  };
+
+  const initialValues: FormValues = { username: "" };
+
+  const registerValidate = ({ username }: FormValues) => {
+    const errors: any = {};
+
+    if (username === "") {
+      errors.username = "شماره موبایل لازم است";
+    } else if (!validateMobile(username)) {
+      errors.username = "فرمت شماره موبایل اشتباه است";
+    }
+
+    return errors;
+  };
+
   return (
     <div className={`nc-PageSignUp  ${className}`} data-nc-id="PageSignUp">
       <Helmet>
@@ -47,26 +80,47 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
             </span>
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
           </div> */}
-          {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" action="#" method="post">
-            <label className="block">
-              <span className="text-neutral-800 dark:text-neutral-200">
-                شماره موبایل
-              </span>
-              <Input
-                type="number"
-                placeholder="09xxxxxxxxx"
-                className="mt-1 text-left"
-              />
-            </label>
-            {/* <label className="block">
-              <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
-                Password
-              </span>
-              <Input type="password" className="mt-1" />
-            </label> */}
-            <ButtonPrimary type="submit">ادامه</ButtonPrimary>
-          </form>
+          <Formik
+            initialValues={initialValues}
+            validate={registerValidate}
+            onSubmit={onSubmitForm}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => (
+              <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
+                <label className="block">
+                  <span className="text-neutral-800 dark:text-neutral-200">
+                    شماره موبایل
+                  </span>
+                  <Input
+                    name="username"
+                    type="text"
+                    placeholder="09xxxxxxxxx"
+                    className="mt-1 text-left"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.username}
+                  />
+                  <span className="text-red-500 text-xs">
+                    {errors.username && touched.username && errors.username}
+                  </span>
+                </label>
+                <ButtonPrimary
+                  type="submit"
+                  disabled={touched.username && !!errors.username}
+                  loading={loading}
+                >
+                  ادامه
+                </ButtonPrimary>
+              </form>
+            )}
+          </Formik>
 
           {/* ==== */}
           <span className="block text-center text-neutral-700 dark:text-neutral-300">

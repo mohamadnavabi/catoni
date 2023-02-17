@@ -1,17 +1,23 @@
+import React, { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import Prices from "components/Prices";
-import { Product, PRODUCTS } from "data/data";
-import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { CartItem, removeFromCart } from "store/slices";
+import { BASE_URL } from "contains/contants";
 
 export default function CartDropdown() {
-  const renderProduct = (item: Product, index: number, close: () => void) => {
-    const { title, price, media } = item;
+  const { items, total } = useAppSelector((state) => state.cart);
+
+  const dispatch = useAppDispatch();
+
+  const renderProduct = (item: CartItem, index: number, close: () => void) => {
+    const { title, price, media, variants, quantity } = item;
     const image =
       media && media.length
-        ? media[0].path + JSON.parse(media[0].files)[2]
+        ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[3]
         : "";
 
     return (
@@ -38,22 +44,36 @@ export default function CartDropdown() {
                     {title}
                   </Link>
                 </h3>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                  <span>{`طبیعی`}</span>
-                  <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4"></span>
-                  <span>{"XL"}</span>
-                </p>
+                {variants.length > 0 && (
+                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    {React.Children.toArray(
+                      variants[0].attribute_items.map((attibuteItem, index) =>
+                        index > 0 ? (
+                          <>
+                            <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4"></span>
+                            <span>{`${attibuteItem.attribute.name}: ${attibuteItem.name} `}</span>
+                          </>
+                        ) : (
+                          <span>{`${attibuteItem.attribute.name}: ${attibuteItem.name} `}</span>
+                        )
+                      )
+                    )}
+                  </p>
+                )}
               </div>
               <Prices price={price} className="mt-0.5" />
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <p className="text-gray-500 dark:text-slate-400">{`جفت`} 1</p>
+            <p className="text-gray-500 dark:text-slate-400">{`${quantity} ${
+              item.count_unit ?? "جفت"
+            }`}</p>
 
             <div className="flex">
               <button
                 type="button"
                 className="font-medium text-primary-6000 dark:text-primary-500 "
+                onClick={() => dispatch(removeFromCart(item))}
               >
                 حذف
               </button>
@@ -73,8 +93,11 @@ export default function CartDropdown() {
                 ${open ? "" : "text-opacity-90"}
                  group w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative`}
           >
+            {/* Badge */}
             <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute top-1.5 left-1.5 rounded-full text-[10px] leading-none text-white font-medium z-10">
-              <span className="mt-[1px]">3</span>
+              <span className="mt-[1px]">
+                {items.reduce((prev, current) => prev + current.quantity, 0)}
+              </span>
             </div>
             <svg
               className="w-6 h-6"
@@ -128,27 +151,38 @@ export default function CartDropdown() {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="hidden md:block absolute z-10 w-screen max-w-xs sm:max-w-md px-4 mt-3.5 -left-28 sm:left-0 sm:px-0">
+            <Popover.Panel className="hidden md:block absolute z-10 w-screen max-w-s sm:max-w-lg px-4 mt-3.5 -left-28 sm:left-0 sm:px-0">
               <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10">
                 <div className="relative bg-white dark:bg-neutral-800">
                   <div className="max-h-[60vh] p-5 overflow-y-auto hiddenScrollbar">
                     <h3 className="text-xl font-semibold">سبد خرید</h3>
                     <div className="divide-y divide-slate-100 dark:divide-slate-700">
-                      {[PRODUCTS[0], PRODUCTS[1], PRODUCTS[2]].map(
-                        (item, index) => renderProduct(item, index, close)
+                      {items.length ? (
+                        items.map((item, index) =>
+                          renderProduct(item, index, close)
+                        )
+                      ) : (
+                        <div className="flex-col items-center justify-center mt-3">
+                          <span className="text-center block text-black">
+                            سبد خرید شما خالی است!
+                          </span>
+                          <span className="text-center block text-gray-500 text-sm mt-3">
+                            جهت ادامه خرید محصولی به سبد اضافه کنید
+                          </span>
+                        </div>
                       )}
                     </div>
                   </div>
                   <div className="bg-neutral-50 dark:bg-slate-900 p-5">
-                    <p className="flex justify-between font-semibold text-slate-900 dark:text-slate-100">
+                    <div className="flex justify-between font-semibold text-slate-900 dark:text-slate-100">
                       <span>
                         <span>جمع سبد</span>
                         {/* <span className="block text-sm text-slate-500 dark:text-slate-400 font-normal">
                           Shipping and taxes calculated at checkout.
                         </span> */}
                       </span>
-                      <span className="">2,000,000 ریال</span>
-                    </p>
+                      <Prices contentClass="" priceClass="" price={total} />
+                    </div>
                     <div className="flex space-x-2 space-x-reverse mt-5">
                       <ButtonSecondary
                         href="/cart"

@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import NcImage from "components/shared/NcImage/NcImage";
 import LikeButton from "./LikeButton";
 import Prices from "./Prices";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
-import { Product } from "data/data";
+import { Attribute, AttributeItems, Product, ProductVariant } from "data/data";
 import { StarIcon } from "@heroicons/react/24/solid";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
@@ -14,6 +14,9 @@ import { Transition } from "@headlessui/react";
 import ModalQuickView from "./ModalQuickView";
 import ProductStatus from "./ProductStatus";
 import { BASE_URL } from "contains/contants";
+import { getVariantByItems, getVariantByTypes } from "utils/apiWorker";
+import { useAppDispatch } from "store/hooks";
+import { addToCart } from "store/slices";
 
 export interface ProductCardProps {
   className?: string;
@@ -26,20 +29,35 @@ const ProductCard: FC<ProductCardProps> = ({
   data,
   isLiked,
 }) => {
-  const { title, subtitle, price, variants, media, average_rating } = data;
+  const { title, subtitle, price, variants, media, rating_average } = data;
 
-  const [variantActive, setVariantActive] = React.useState(0);
+  const colors = getVariantByTypes(variants, "color");
+
+  const [activeColor, setActiveColor] = React.useState<AttributeItems | null>(
+    colors[0] ?? null
+  );
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
 
+  const dispatch = useAppDispatch();
   const history = useHistory();
 
-  const notifyAddTocart = ({ size }: { size?: string }) => {
+  // useEffect(() => {
+  //   // dispatch(getCurrentProduct())
+  // }, [])
+
+  const notifyAddTocart = (attributeItem: AttributeItems) => {
+    const variant = activeColor
+      ? getVariantByItems(variants, [attributeItem, activeColor])
+      : getVariantByItems(variants, [attributeItem]);
+
+    dispatch(addToCart({ ...data, variants: variant, quantity: 1 }));
+
     toast.custom(
       (t) => (
         <Transition
           appear
           show={t.visible}
-          className="p-4 max-w-md w-full bg-white dark:bg-slate-800 shadow-lg rounded-2xl pointer-events-auto ring-1 ring-black/5 dark:ring-white/10 text-slate-900 dark:text-slate-200"
+          className="p-4 max-w-lg w-full bg-white dark:bg-slate-800 shadow-lg rounded-2xl pointer-events-auto ring-1 ring-black/5 dark:ring-white/10 text-slate-900 dark:text-slate-200"
           enter="transition-all duration-150"
           enterFrom="opacity-0 translate-x-20"
           enterTo="opacity-100 translate-x-0"
@@ -48,17 +66,17 @@ const ProductCard: FC<ProductCardProps> = ({
           leaveTo="opacity-0 translate-x-20"
         >
           <p className="block text-base font-semibold leading-none">
-            Added to cart!
+            به سبد شما اضافه شد
           </p>
           <div className="border-t border-slate-200 dark:border-slate-700 my-4" />
-          {renderProductCartOnNotify({ size })}
+          {renderProductCartOnNotify(attributeItem)}
         </Transition>
       ),
-      { position: "top-right", id: "nc-product-notify", duration: 3000 }
+      { position: "bottom-right", id: "nc-product-notify", duration: 3000 }
     );
   };
 
-  const renderProductCartOnNotify = ({ size }: { size?: string }) => {
+  const renderProductCartOnNotify = (attributeItem: AttributeItems) => {
     return (
       <div className="flex ">
         <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
@@ -75,20 +93,22 @@ const ProductCard: FC<ProductCardProps> = ({
               <div>
                 <h3 className="text-base font-medium ">{title}</h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                  <span>
-                    {variants
-                      ? variants[variantActive].attribute_item.name
-                      : `Natural`}
-                  </span>
-                  <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4"></span>
-                  <span>{size || "XL"}</span>
+                  {activeColor && (
+                    <>
+                      <span>{`${activeColor.attribute.name}: ${activeColor.name} `}</span>
+                      <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4 flex-1"></span>
+                    </>
+                  )}
+                  <span>{` ${attributeItem.attribute.name}: ${attributeItem.name}`}</span>
                 </p>
               </div>
               <Prices price={price} className="mt-0.5" />
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <p className="text-gray-500 dark:text-slate-400">جفت 1</p>
+            <p className="text-gray-500 dark:text-slate-400">{`1 ${
+              data.count_unit ?? "جفت"
+            }`}</p>
 
             <div className="flex">
               <button
@@ -99,7 +119,7 @@ const ProductCard: FC<ProductCardProps> = ({
                   history.push("cart");
                 }}
               >
-                View cart
+                مشاهده سبد خرید
               </button>
             </div>
           </div>
@@ -108,86 +128,42 @@ const ProductCard: FC<ProductCardProps> = ({
     );
   };
 
-  const getBorderClass = (Bgclass = "") => {
-    if (Bgclass.includes("red")) {
-      return "border-red-500";
+  const renderColors = () => {
+    if (!colors || !colors.length) {
+      return null;
     }
-    if (Bgclass.includes("violet")) {
-      return "border-violet-500";
-    }
-    if (Bgclass.includes("orange")) {
-      return "border-orange-500";
-    }
-    if (Bgclass.includes("green")) {
-      return "border-green-500";
-    }
-    if (Bgclass.includes("blue")) {
-      return "border-blue-500";
-    }
-    if (Bgclass.includes("sky")) {
-      return "border-sky-500";
-    }
-    if (Bgclass.includes("yellow")) {
-      return "border-yellow-500";
-    }
-    return "border-transparent";
-  };
 
-  const renderVariants = () => {
-    console.log(variants);
-    return null;
-
-    // if (!variants || !variants.length || !variantType) {
-    //   return null;
-    // }
-
-    // if (variantType === "color") {
-    //   return (
-    //     <div className="flex space-x-1 space-x-reverse">
-    //       {variants.map((variant, index) => (
-    //         <div
-    //           key={index}
-    //           onClick={() => setVariantActive(index)}
-    //           className={`relative w-6 h-6 rounded-full overflow-hidden z-10 border cursor-pointer ${
-    //             variantActive === index
-    //               ? getBorderClass(variant.color)
-    //               : "border-transparent"
-    //           }`}
-    //           title={variant.name}
-    //         >
-    //           <div
-    //             className={`absolute inset-0.5 rounded-full z-0 ${variant.color}`}
-    //           ></div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   );
-    // }
-
-    // return (
-    //   <div className="flex ">
-    //     {variants.map((variant, index) => (
-    //       <div
-    //         key={index}
-    //         onClick={() => setVariantActive(index)}
-    //         className={`relative w-11 h-6 rounded-full overflow-hidden z-10 border cursor-pointer ${
-    //           variantActive === index
-    //             ? "border-black dark:border-slate-300"
-    //             : "border-transparent"
-    //         }`}
-    //         title={variant.name}
-    //       >
-    //         <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
-    //           <img
-    //             src={variant.thumbnail}
-    //             alt="variant"
-    //             className="absolute w-full h-full object-cover"
-    //           />
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    // );
+    if (colors) {
+      return (
+        <div className="flex space-x-1 space-x-reverse">
+          {colors.map((variant, index) => (
+            <div
+              key={index}
+              onClick={() => setActiveColor(variant)}
+              className={`relative w-6 h-6 rounded-full overflow-hidden z-10 border cursor-pointer`}
+              title={variant.name}
+              style={{
+                borderColor:
+                  activeColor && activeColor.id === variant.id
+                    ? variant.value === "#ffffff"
+                      ? "#e0e0e0"
+                      : variant.value
+                    : "transparent",
+              }}
+            >
+              <div
+                className={`absolute inset-0.5 rounded-full z-0 border`}
+                style={{
+                  backgroundColor: variant.value,
+                  borderColor:
+                    variant.value === "#ffffff" ? "#e0e0e0" : "transparent",
+                }}
+              ></div>
+            </div>
+          ))}
+        </div>
+      );
+    }
   };
 
   const renderGroupButtons = () => {
@@ -197,7 +173,7 @@ const ProductCard: FC<ProductCardProps> = ({
           className="shadow-lg"
           fontSize="text-xs"
           sizeClass="py-2 px-4"
-          onClick={() => notifyAddTocart({ size: "XL" })}
+          // onClick={() => notifyAddTocart({ size: "XL" })}
         >
           <BagIcon className="w-3.5 h-3.5 mb-0.5" />
           <span className="mr-1">افزودن به سبد</span>
@@ -216,27 +192,27 @@ const ProductCard: FC<ProductCardProps> = ({
   };
 
   const renderSizeList = () => {
-    return null;
+    const sizes = getVariantByTypes(variants, "select");
 
-    // if (!sizes || !sizes.length) {
-    //   return null;
-    // }
+    if (!sizes || !sizes.length) {
+      return null;
+    }
 
-    // return (
-    //   <div className="absolute bottom-0 inset-x-1 space-x-1.5 space-x-reverse flex justify-center opacity-0 invisible group-hover:bottom-4 group-hover:opacity-100 group-hover:visible transition-all">
-    //     {sizes.map((size, index) => {
-    //       return (
-    //         <div
-    //           key={index}
-    //           className="nc-shadow-lg w-10 h-10 rounded-xl bg-white hover:bg-slate-900 hover:text-white transition-colors cursor-pointer flex items-center justify-center uppercase font-semibold tracking-tight text-sm text-slate-900"
-    //           onClick={() => notifyAddTocart({ size })}
-    //         >
-    //           {size}
-    //         </div>
-    //       );
-    //     })}
-    //   </div>
-    // );
+    return (
+      <div className="absolute bottom-0 inset-x-1 space-x-1.5 space-x-reverse flex justify-center opacity-0 invisible group-hover:bottom-4 group-hover:opacity-100 group-hover:visible transition-all">
+        {sizes.map((size, index) => {
+          return (
+            <div
+              key={index}
+              className="nc-shadow-lg w-10 h-10 rounded-xl bg-white hover:bg-slate-900 hover:text-white transition-colors cursor-pointer flex items-center justify-center uppercase font-semibold tracking-tight text-sm text-slate-900"
+              onClick={() => notifyAddTocart(size)}
+            >
+              {size.name}
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   const image =
@@ -250,10 +226,19 @@ const ProductCard: FC<ProductCardProps> = ({
         className={`nc-ProductCard relative flex flex-col bg-transparent ${className}`}
         data-nc-id="ProductCard"
       >
-        <Link to={"/product-detail"} className="absolute inset-0"></Link>
+        <Link
+          to={{ pathname: `/product-detail/${data.slug}`, state: { ...data } }}
+          className="absolute inset-0"
+        ></Link>
 
         <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
-          <Link to={"/product-detail"} className="block">
+          <Link
+            to={{
+              pathname: `/product-detail/${data.slug}`,
+              state: { ...data },
+            }}
+            className="block"
+          >
             <NcImage
               containerClassName="flex aspect-w-11 aspect-h-12 w-full h-0"
               src={image}
@@ -265,12 +250,11 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <LikeButton liked={isLiked} className="absolute top-3 right-3 z-10" />
 
-          {/* {sizes ? renderSizeList() : renderGroupButtons()} */}
-          {false ? renderSizeList() : renderGroupButtons()}
+          {variants.length ? renderSizeList() : renderGroupButtons()}
         </div>
 
         <div className="space-y-4 px-2.5 pt-5 pb-2.5">
-          {renderVariants()}
+          {renderColors()}
 
           <div>
             <h2
@@ -287,7 +271,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div className="flex items-center mb-0.5">
               <StarIcon className="w-5 h-5 pb-[1px] text-amber-400" />
               <span className="text-sm mr-1 text-slate-500 dark:text-slate-400">
-                {average_rating}
+                {rating_average}
                 {/* ({Math.floor(Math.random() * 70 + 20)} نظر) */}
               </span>
             </div>

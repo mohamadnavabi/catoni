@@ -1,11 +1,52 @@
+import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { avatarImgs } from "contains/fakeData";
-import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "components/shared/Avatar/Avatar";
-import SwitchDarkMode2 from "components/shared/SwitchDarkMode/SwitchDarkMode2";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { logout } from "store/slices";
 
 export default function AvatarDropdown() {
+  const { user } = useAppSelector((state) => state.auth);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  if (user.token === "") {
+    return (
+      <Link
+        to={"/login"}
+        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
+        onClick={() => {}}
+      >
+        <svg
+          className=" w-6 h-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </Link>
+    );
+  }
+
   return (
     <div className="AvatarDropdown ">
       <Popover className="relative">
@@ -238,11 +279,13 @@ export default function AvatarDropdown() {
                       </div>
                     </Link>
 
-                    {/* ------------------ 2 --------------------- */}
                     <Link
                       to={"/#"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      onClick={() => close()}
+                      onClick={() => {
+                        close();
+                        handleLogout();
+                      }}
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                         <svg

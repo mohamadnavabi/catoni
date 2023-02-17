@@ -1,4 +1,8 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { BASE_URL } from "contains/contants";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
+import secureLocalStorage from "react-secure-storage";
 
 declare module "axios" {
   interface AxiosResponse<T = any> extends Promise<T> {}
@@ -12,19 +16,78 @@ export abstract class HttpClient {
       baseURL,
     });
 
-    this._initializeResponseInterceptor();
+    this.initializeRequestInterceptor();
+    this.initializeResponseInterceptor();
   }
 
-  private _initializeResponseInterceptor = () => {
+  private initializeRequestInterceptor = () => {
+    this.instance.interceptors.request.use(this.handleRequest, null);
+  };
+
+  private handleRequest = (config: AxiosRequestConfig): any => {
+    const token = secureLocalStorage.getItem("token");
+    if (token) {
+      config.headers = {
+        Authorization: `Bearer ${token}`,
+      };
+    }
+
+    if (
+      (config.method === "post" ||
+        config.method === "put" ||
+        config.method === "delete") &&
+      !Cookies.get("XSRF-TOKEN")
+    ) {
+      return this.setCSRFToken().then((response) => {
+        return config;
+      });
+    }
+
+    return config;
+  };
+
+  private initializeResponseInterceptor = () => {
     this.instance.interceptors.response.use(
-      this._handleResponse,
-      this._handleError
+      this.handleResponse,
+      this.handleError
     );
   };
 
-  private _handleResponse = ({ data }: AxiosResponse) => data;
+  private handleResponse = (result: AxiosResponse) => result.data;
 
-  protected _handleError = (error: any) => Promise.reject(error);
+  private handleError = (error: any) => {
+    toast.error(error.response.data.message);
+    return Promise.reject(error.response.data);
+  };
+
+  private setCSRFToken = () => {
+    return this.instance.get(`${BASE_URL}/sanctum/csrf-cookie`);
+  };
+
+  // public post(url: string, params?: any, headers?: any) {
+  //   axios.defaults.withCredentials = true;
+  //   axios
+  //     .get(`http://127.0.0.1:8000/api/sanctum/csrf-cookie`, {
+  //       headers: { "Access-Control-Allow-Origin": "*" },
+  //     })
+  //     .then((response) => {
+  //       return this.instance.post(
+  //         url,
+  //         params ? params : null,
+  //         headers
+  //           ? {
+  //               ...headers,
+  //               xsrfHeaderName: "XSRF-TOKEN",
+  //               withCredentials: true,
+  //             }
+  //           : {
+  //               xsrfHeaderName: "XSRF-TOKEN",
+  //               withCredentials: true,
+  //             }
+  //       );
+  //     })
+  //     .catch((error) => error);
+  // }
 }
 
 // import axios, { AxiosInstance } from "axios";

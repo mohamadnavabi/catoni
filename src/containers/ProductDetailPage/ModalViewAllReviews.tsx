@@ -57,7 +57,7 @@ const ModalViewAllReviews: FC<ModalViewAllReviewsProps> = ({
                     className="text-lg font-medium leading-6 text-gray-900"
                     id="headlessui-dialog-title-70"
                   >
-                    View all reviews
+                    نظرات کاربران
                   </h3>
                   <span className="absolute left-3 top-3">
                     <ButtonClose onClick={onCloseModalViewAllReviews} />

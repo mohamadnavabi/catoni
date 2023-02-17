@@ -29,6 +29,7 @@ export interface LocationStates {
   "/contact"?: {};
   "/login"?: {};
   "/signup"?: {};
+  "/verify-otp"?: {};
   "/forgot-pass"?: {};
   "/page404"?: {};
   "/subscription"?: {};

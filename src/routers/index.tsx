@@ -9,6 +9,7 @@ import AccountPage from "containers/AccountPage/AccountPage";
 import PageContact from "containers/PageContact/PageContact";
 import PageAbout from "containers/PageAbout/PageAbout";
 import PageSignUp from "containers/PageSignUp/PageSignUp";
+import PageSignUpVerify from "containers/PageSignUpVerify/PageSignUpVerify";
 import PageLogin from "containers/PageLogin/PageLogin";
 import PageSubcription from "containers/PageSubcription/PageSubcription";
 import BlogPage from "containers/BlogPage/BlogPage";
@@ -57,6 +58,7 @@ export const pages: Page[] = [
   { path: "/contact", component: PageContact },
   { path: "/about", component: PageAbout },
   { path: "/signup", component: PageSignUp },
+  { path: "/verify-otp", component: PageSignUpVerify },
   { path: "/login", component: PageLogin },
   { path: "/subscription", component: PageSubcription },
 ];

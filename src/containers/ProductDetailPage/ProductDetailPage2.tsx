@@ -104,18 +104,18 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   };
 
   const notifyAddTocart = () => {
-    toast.custom(
-      (t) => (
-        <NotifyAddTocart
-          productImage={LIST_IMAGES_DEMO[0]}
-          qualitySelected={qualitySelected}
-          show={t.visible}
-          sizeSelected={sizeSelected}
-          variantActive={variantActive}
-        />
-      ),
-      { position: "top-left", id: "nc-product-notify", duration: 3000 }
-    );
+    // toast.custom(
+    //   (t) => (
+    //     <NotifyAddTocart
+    //       productImage={LIST_IMAGES_DEMO[0]}
+    //       qualitySelected={qualitySelected}
+    //       show={t.visible}
+    //       sizeSelected={sizeSelected}
+    //       variantActive={variantActive}
+    //     />
+    //   ),
+    //   { position: "top-left", id: "nc-product-notify", duration: 3000 }
+    // );
   };
 
   const renderSizeList = () => {

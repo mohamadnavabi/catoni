@@ -13,7 +13,7 @@ import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
 
 // Reducers
-import { ProductReducer } from "./slices";
+import { ProductReducer, CartReducer, AuthReducer } from "./slices";
 import mediaRunningReducer from "./mediaRunning/mediaRunning";
 
 // const isDev = process.env.NODE_ENV === "development";
@@ -23,12 +23,14 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["cart"],
+  whitelist: ["cart", "auth"],
 };
 
 const rootReducer = combineReducers({
   mediaRunning: mediaRunningReducer,
   product: ProductReducer,
+  cart: CartReducer,
+  auth: AuthReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middlewareLogger: any = !!isDev ? logger : [];

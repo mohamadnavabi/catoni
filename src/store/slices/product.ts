@@ -21,6 +21,7 @@ export const productSlice = createSlice({
     builder.addCase(
       getProducts.fulfilled,
       (state, action: PayloadAction<ProductState["products"]>) => {
+        console.log(action.payload);
         state.products = action.payload;
       }
     );
@@ -36,32 +37,32 @@ export const productSlice = createSlice({
 export const getLastProducts: any = createAsyncThunk(
   "products/getLastProducts",
   async () => {
-    const res = await Product.all(5, "created_at", "desc");
-    return res.data;
+    const result = await Product.all(5, "created_at", "desc");
+    return result.data;
   }
 );
 
 export const getBestSaleProducts: any = createAsyncThunk(
   "products/getBestSaleProducts",
   async () => {
-    const res = await Product.all(5, "sale_count", "desc");
-    return res.data;
+    const result = await Product.all(5, "sale_count", "desc");
+    return result.data;
   }
 );
 
 export const getProducts: any = createAsyncThunk(
   "products/getProducts",
   async () => {
-    const res = await Product.all(20);
-    return res.data;
+    const result = await Product.all(20);
+    return result;
   }
 );
 
 export const findProductBySlug: any = createAsyncThunk(
   "products/findProductBySlug",
   async ({ slug }: { slug: string }) => {
-    const res = await Product.findBySlug(slug);
-    return res.data;
+    const result = await Product.findBySlug(slug);
+    return result;
   }
 );
 

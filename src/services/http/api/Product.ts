@@ -6,16 +6,14 @@ class Product extends HttpClient {
     super(`${API_URL}/products`);
   }
 
-  async all(perPage = 5, orderBy = "id", orderByDirection = "desc") {
-    const response = await this.instance.get("/", {
+  all(perPage = 5, orderBy = "id", orderByDirection = "desc") {
+    return this.instance.get("/", {
       params: {
         perPage,
         orderBy,
         orderByDirection,
       },
     });
-    // console.log("response", response);
-    return response;
   }
 
   get(id: number) {
