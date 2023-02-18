@@ -10,7 +10,7 @@ interface Props {
   product: Product;
 }
 
-const NotifyAddTocart: FC<Props> = ({
+const NotifyAddToCart: FC<Props> = ({
   show,
   productImage,
   qualitySelected,
@@ -93,4 +93,4 @@ const NotifyAddTocart: FC<Props> = ({
   );
 };
 
-export default NotifyAddTocart;
+export default NotifyAddToCart;

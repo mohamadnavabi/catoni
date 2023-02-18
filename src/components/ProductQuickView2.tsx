@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 import detail1JPG from "assets/images/temp/products/detail1.jpg";
 import detail2JPG from "assets/images/temp/products/detail2.jpg";
 import detail3JPG from "assets/images/temp/products/detail3.jpg";
-import NotifyAddTocart from "./NotifyAddTocart";
+import notifyAddToCart from "./NotifyAddToCart";
 import { Link } from "react-router-dom";
 
 export interface ProductQuickView2Props {
@@ -30,10 +30,10 @@ const ProductQuickView2: FC<ProductQuickView2Props> = ({ className = "" }) => {
   const [sizeSelected, setSizeSelected] = React.useState("");
   const [qualitySelected, setQualitySelected] = React.useState(1);
 
-  const notifyAddTocart = () => {
+  const notifyAddToCart = () => {
     // toast.custom(
     //   (t) => (
-    //     <NotifyAddTocart
+    //     <notifyAddToCart
     //       productImage={LIST_IMAGES_DEMO[0]}
     //       qualitySelected={qualitySelected}
     //       show={t.visible}
@@ -242,7 +242,7 @@ const ProductQuickView2: FC<ProductQuickView2Props> = ({ className = "" }) => {
           </div>
           <ButtonPrimary
             className="flex-1 flex-shrink-0"
-            onClick={notifyAddTocart}
+            onClick={notifyAddToCart}
           >
             <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
             <span className="ml-3">افزودن به سبد</span>

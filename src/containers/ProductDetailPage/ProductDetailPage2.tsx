@@ -24,7 +24,7 @@ import toast from "react-hot-toast";
 import { StarIcon } from "@heroicons/react/24/solid";
 import SectionSliderProductCard from "components/SectionSliderProductCard";
 import ModalViewAllReviews from "./ModalViewAllReviews";
-import NotifyAddTocart from "components/NotifyAddTocart";
+import NotifyAddTocart from "components/NotifyAddToCart";
 
 export interface ProductDetailPage2Props {
   className?: string;
@@ -103,10 +103,10 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     // );
   };
 
-  const notifyAddTocart = () => {
+  const addToCart = () => {
     // toast.custom(
     //   (t) => (
-    //     <NotifyAddTocart
+    //     <NotifyAddToCart
     //       productImage={LIST_IMAGES_DEMO[0]}
     //       qualitySelected={qualitySelected}
     //       show={t.visible}
@@ -260,10 +260,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                 onChange={setQualitySelected}
               />
             </div>
-            <ButtonPrimary
-              className="flex-1 flex-shrink-0"
-              onClick={notifyAddTocart}
-            >
+            <ButtonPrimary className="flex-1 flex-shrink-0" onClick={addToCart}>
               <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
               <span className="mr-3">افزودن به سبد</span>
             </ButtonPrimary>

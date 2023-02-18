@@ -5,7 +5,7 @@ import AccordionInfo from "./AccordionInfo";
 import { StarIcon } from "@heroicons/react/24/solid";
 import BagIcon from "components/BagIcon";
 import NcInputNumber from "components/NcInputNumber";
-import { AttributeItems, Product, PRODUCTS } from "data/data";
+import { AttributeItems, Product } from "data/data";
 import {
   NoSymbolIcon,
   ClockIcon,
@@ -15,22 +15,21 @@ import IconDiscount from "components/IconDiscount";
 import Prices from "components/Prices";
 import toast from "react-hot-toast";
 import SectionSliderProductCard from "components/SectionSliderProductCard";
-import detail1JPG from "assets/images/temp/products/detail1.jpg";
-import detail2JPG from "assets/images/temp/products/detail2.jpg";
-import detail3JPG from "assets/images/temp/products/detail3.jpg";
 import Policy from "./Policy";
 import ReviewItem from "components/ReviewItem";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import SectionPromo2 from "components/SectionPromo2";
 import ModalViewAllReviews from "./ModalViewAllReviews";
-import NotifyAddTocart from "components/NotifyAddTocart";
+import NotifyAddToCart from "components/NotifyAddToCart";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from "contains/contants";
 import {
   getProductStatus,
   getVariantByTypes,
-  getVariantByItems,
+  getProductByVariantItems,
 } from "utils/apiWorker";
+import { useAppDispatch } from "store/hooks";
+import { addToCart } from "store/slices";
 
 export interface ProductDetailPageProps {
   className?: string;
@@ -64,16 +63,16 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({
   const [isOpenModalViewAllReviews, setIsOpenModalViewAllReviews] =
     useState(false);
 
-  const notifyAddTocart = () => {
-    const product = state;
-    product.variants = getVariantByItems(state.variants, [
-      activeColor,
-      activeSize,
-    ]);
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    const product = getProductByVariantItems(state, [activeColor, activeSize]);
+
+    dispatch(addToCart({ ...product, quantity: qualitySelected }));
 
     toast.custom(
       (t) => (
-        <NotifyAddTocart
+        <NotifyAddToCart
           productImage={thumbnails[0]}
           qualitySelected={qualitySelected}
           show={t.visible}
@@ -278,7 +277,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({
           </div>
           <ButtonPrimary
             className="flex-1 flex-shrink-0"
-            onClick={notifyAddTocart}
+            onClick={handleAddToCart}
           >
             <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
             <span className="mr-3">افزودن به سبد</span>

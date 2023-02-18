@@ -4,19 +4,19 @@ import NcImage from "components/shared/NcImage/NcImage";
 import LikeButton from "./LikeButton";
 import Prices from "./Prices";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
-import { Attribute, AttributeItems, Product, ProductVariant } from "data/data";
+import { AttributeItems, Product } from "data/data";
 import { StarIcon } from "@heroicons/react/24/solid";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import BagIcon from "./BagIcon";
 import toast from "react-hot-toast";
-import { Transition } from "@headlessui/react";
 import ModalQuickView from "./ModalQuickView";
 import ProductStatus from "./ProductStatus";
 import { BASE_URL } from "contains/contants";
-import { getVariantByItems, getVariantByTypes } from "utils/apiWorker";
+import { getProductByVariantItems, getVariantByTypes } from "utils/apiWorker";
 import { useAppDispatch } from "store/hooks";
 import { addToCart } from "store/slices";
+import NotifyAddToCart from "./NotifyAddToCart";
 
 export interface ProductCardProps {
   className?: string;
@@ -32,6 +32,10 @@ const ProductCard: FC<ProductCardProps> = ({
   const { title, subtitle, price, variants, media, rating_average } = data;
 
   const colors = getVariantByTypes(variants, "color");
+  const image =
+    media && media.length
+      ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[2]
+      : "";
 
   const [activeColor, setActiveColor] = React.useState<AttributeItems | null>(
     colors[0] ?? null
@@ -45,86 +49,24 @@ const ProductCard: FC<ProductCardProps> = ({
   //   // dispatch(getCurrentProduct())
   // }, [])
 
-  const notifyAddTocart = (attributeItem: AttributeItems) => {
-    const variant = activeColor
-      ? getVariantByItems(variants, [attributeItem, activeColor])
-      : getVariantByItems(variants, [attributeItem]);
+  const handleAddToCart = (attributeItem: AttributeItems) => {
+    const product = getProductByVariantItems(
+      data,
+      activeColor ? [attributeItem, activeColor] : [attributeItem]
+    );
 
-    dispatch(addToCart({ ...data, variants: variant, quantity: 1 }));
+    dispatch(addToCart({ ...product, quantity: 1 }));
 
     toast.custom(
       (t) => (
-        <Transition
-          appear
+        <NotifyAddToCart
+          productImage={image}
+          qualitySelected={1}
           show={t.visible}
-          className="p-4 max-w-lg w-full bg-white dark:bg-slate-800 shadow-lg rounded-2xl pointer-events-auto ring-1 ring-black/5 dark:ring-white/10 text-slate-900 dark:text-slate-200"
-          enter="transition-all duration-150"
-          enterFrom="opacity-0 translate-x-20"
-          enterTo="opacity-100 translate-x-0"
-          leave="transition-all duration-150"
-          leaveFrom="opacity-100 translate-x-0"
-          leaveTo="opacity-0 translate-x-20"
-        >
-          <p className="block text-base font-semibold leading-none">
-            به سبد شما اضافه شد
-          </p>
-          <div className="border-t border-slate-200 dark:border-slate-700 my-4" />
-          {renderProductCartOnNotify(attributeItem)}
-        </Transition>
+          product={product}
+        />
       ),
       { position: "bottom-right", id: "nc-product-notify", duration: 3000 }
-    );
-  };
-
-  const renderProductCartOnNotify = (attributeItem: AttributeItems) => {
-    return (
-      <div className="flex ">
-        <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
-          <img
-            src={image}
-            alt={title}
-            className="h-full w-full object-cover object-center"
-          />
-        </div>
-
-        <div className="mr-4 flex flex-1 flex-col">
-          <div>
-            <div className="flex justify-between ">
-              <div>
-                <h3 className="text-base font-medium ">{title}</h3>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                  {activeColor && (
-                    <>
-                      <span>{`${activeColor.attribute.name}: ${activeColor.name} `}</span>
-                      <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4 flex-1"></span>
-                    </>
-                  )}
-                  <span>{` ${attributeItem.attribute.name}: ${attributeItem.name}`}</span>
-                </p>
-              </div>
-              <Prices price={price} className="mt-0.5" />
-            </div>
-          </div>
-          <div className="flex flex-1 items-end justify-between text-sm">
-            <p className="text-gray-500 dark:text-slate-400">{`1 ${
-              data.count_unit ?? "جفت"
-            }`}</p>
-
-            <div className="flex">
-              <button
-                type="button"
-                className="font-medium text-primary-6000 dark:text-primary-500 "
-                onClick={(e) => {
-                  e.preventDefault();
-                  history.push("cart");
-                }}
-              >
-                مشاهده سبد خرید
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     );
   };
 
@@ -173,7 +115,7 @@ const ProductCard: FC<ProductCardProps> = ({
           className="shadow-lg"
           fontSize="text-xs"
           sizeClass="py-2 px-4"
-          // onClick={() => notifyAddTocart({ size: "XL" })}
+          // onClick={() => handleAddToCart()}
         >
           <BagIcon className="w-3.5 h-3.5 mb-0.5" />
           <span className="mr-1">افزودن به سبد</span>
@@ -205,7 +147,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div
               key={index}
               className="nc-shadow-lg w-10 h-10 rounded-xl bg-white hover:bg-slate-900 hover:text-white transition-colors cursor-pointer flex items-center justify-center uppercase font-semibold tracking-tight text-sm text-slate-900"
-              onClick={() => notifyAddTocart(size)}
+              onClick={() => handleAddToCart(size)}
             >
               {size.name}
             </div>
@@ -214,11 +156,6 @@ const ProductCard: FC<ProductCardProps> = ({
       </div>
     );
   };
-
-  const image =
-    media && media.length
-      ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[2]
-      : "";
 
   return (
     <>

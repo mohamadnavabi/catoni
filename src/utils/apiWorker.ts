@@ -27,23 +27,26 @@ const getVariantByTypes = (
   return colorItems;
 };
 
-const getVariantByItems = (
-  variants: ProductVariant[],
+const getProductByVariantItems = (
+  product: Product,
   selected: AttributeItems[]
-): ProductVariant[] | [] => {
-  if (!variants.length || !selected.length) return [];
+): Product => {
+  if (!product.variants.length || !selected.length) return product;
 
-  return selected.length === 1
-    ? variants.filter(
-        (variant) => variant.attribute_items[0].id === selected[0].id
-      )
-    : variants.filter(
-        (variant) =>
-          (variant.attribute_items[0].id === selected[0].id &&
-            variant.attribute_items[1].id === selected[1].id) ||
-          (variant.attribute_items[1].id === selected[0].id &&
-            variant.attribute_items[0].id === selected[1].id)
-      );
+  const variant =
+    selected.length === 1
+      ? product.variants.filter(
+          (variant) => variant.attribute_items[0].id === selected[0].id
+        )
+      : product.variants.filter(
+          (variant) =>
+            (variant.attribute_items[0].id === selected[0].id &&
+              variant.attribute_items[1].id === selected[1].id) ||
+            (variant.attribute_items[1].id === selected[0].id &&
+              variant.attribute_items[0].id === selected[1].id)
+        );
+
+  return { ...product, variants: variant };
 };
 
 const getProductStatus = (product: Product) => {
@@ -58,4 +61,4 @@ const getProductStatus = (product: Product) => {
   return "";
 };
 
-export { getVariantByTypes, getVariantByItems, getProductStatus };
+export { getVariantByTypes, getProductByVariantItems, getProductStatus };

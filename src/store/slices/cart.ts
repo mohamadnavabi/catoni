@@ -41,7 +41,8 @@ export const cartSlice = createSlice({
               .filter((item) => item.id !== action.payload.id)
               .concat({
                 ...action.payload,
-                quantity: state.items[findedIndex].quantity + 1,
+                quantity:
+                  state.items[findedIndex].quantity + action.payload.quantity,
               });
 
       state = handleState(state, items);
