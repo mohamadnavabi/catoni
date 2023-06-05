@@ -10,11 +10,12 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { encryptTransform } from "redux-persist-transform-encrypt";
 import logger from "redux-logger";
 
 // Reducers
-import { ProductReducer, CartReducer, AuthReducer } from "./slices";
-import mediaRunningReducer from "./mediaRunning/mediaRunning";
+import { mediaRunningSlice } from "./mediaRunning/mediaRunning";
+import { authSlice, cartSlice, productSlice } from "./slices";
 
 // const isDev = process.env.NODE_ENV === "development";
 const isDev = false;
@@ -23,19 +24,27 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["cart", "auth"],
+  whitelist: ["cart"],
+  transforms: [
+    encryptTransform({
+      secretKey: process.env.REACT_APP_SECURE_LOCAL_STORAGE_HASH_KEY as string,
+      onError: function (error) {
+        // Handle the error.
+      },
+    }),
+  ],
 };
 
 const rootReducer = combineReducers({
-  mediaRunning: mediaRunningReducer,
-  product: ProductReducer,
-  cart: CartReducer,
-  auth: AuthReducer,
+  [mediaRunningSlice.name]: mediaRunningSlice.reducer,
+  [authSlice.name]: authSlice.reducer,
+  [cartSlice.name]: cartSlice.reducer,
+  [productSlice.name]: productSlice.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middlewareLogger: any = !!isDev ? logger : [];
 
-export const store = configureStore({
+const store = configureStore({
   reducer: persistedReducer,
 
   middleware: (getDefaultMiddleware) =>
@@ -50,3 +59,5 @@ export let persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export default store;

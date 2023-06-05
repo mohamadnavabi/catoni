@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { CartItem, removeFromCart } from "store/slices";
+import { CartItem, removeItem } from "store/slices";
 import { BASE_URL } from "contains/contants";
 
 export default function CartDropdown() {
-  const { items, total } = useAppSelector((state) => state.cart);
+  const { cart } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
 
@@ -31,7 +31,10 @@ export default function CartDropdown() {
           <Link
             onClick={close}
             className="absolute inset-0"
-            to={"/product-detail"}
+            to={{
+              pathname: `/product/${item.slug}`,
+              state: { ...item },
+            }}
           />
         </div>
 
@@ -40,7 +43,13 @@ export default function CartDropdown() {
             <div className="flex justify-between ">
               <div>
                 <h3 className="text-base font-medium ">
-                  <Link onClick={close} to={"/product-detail"}>
+                  <Link
+                    onClick={close}
+                    to={{
+                      pathname: `/product/${item.slug}`,
+                      state: { ...item },
+                    }}
+                  >
                     {title}
                   </Link>
                 </h3>
@@ -73,7 +82,7 @@ export default function CartDropdown() {
               <button
                 type="button"
                 className="font-medium text-primary-6000 dark:text-primary-500 "
-                onClick={() => dispatch(removeFromCart(item))}
+                onClick={() => dispatch(removeItem(item))}
               >
                 حذف
               </button>
@@ -96,7 +105,10 @@ export default function CartDropdown() {
             {/* Badge */}
             <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute top-1.5 left-1.5 rounded-full text-[10px] leading-none text-white font-medium z-10">
               <span className="mt-[1px]">
-                {items.reduce((prev, current) => prev + current.quantity, 0)}
+                {cart.items.reduce(
+                  (prev: number, current: CartItem) => prev + current.quantity,
+                  0
+                )}
               </span>
             </div>
             <svg
@@ -157,8 +169,8 @@ export default function CartDropdown() {
                   <div className="max-h-[60vh] p-5 overflow-y-auto hiddenScrollbar">
                     <h3 className="text-xl font-semibold">سبد خرید</h3>
                     <div className="divide-y divide-slate-100 dark:divide-slate-700">
-                      {items.length ? (
-                        items.map((item, index) =>
+                      {cart.items.length ? (
+                        cart.items.map((item: CartItem, index: number) =>
                           renderProduct(item, index, close)
                         )
                       ) : (
@@ -181,7 +193,11 @@ export default function CartDropdown() {
                           Shipping and taxes calculated at checkout.
                         </span> */}
                       </span>
-                      <Prices contentClass="" priceClass="" price={total} />
+                      <Prices
+                        contentClass=""
+                        priceClass=""
+                        price={cart.total}
+                      />
                     </div>
                     <div className="flex space-x-2 space-x-reverse mt-5">
                       <ButtonSecondary

@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { currencyFormat } from "utils/number";
 
 export interface PricesProps {
   className?: string;
@@ -17,9 +18,7 @@ const Prices: FC<PricesProps> = ({
     <div className={`${className}`}>
       <div className={`flex items-center ${contentClass}`}>
         <span className={priceClass}>
-          {`${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${
-            price > 0 ? "ریال" : ""
-          }`}
+          {`${currencyFormat(price)} ${price !== 0 ? "ریال" : ""}`}
         </span>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 export interface NcInputNumberProps {
   className?: string;
@@ -7,6 +7,7 @@ export interface NcInputNumberProps {
   min?: number;
   max?: number;
   onChange?: (value: number) => void;
+  onDelete?: () => void;
   label?: string;
   desc?: string;
 }
@@ -17,6 +18,7 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
   min = 1,
   max = 99,
   onChange,
+  onDelete,
   label,
   desc,
 }) => {
@@ -27,7 +29,11 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
   }, [defaultValue]);
 
   const handleClickDecrement = () => {
-    if (min >= value) return;
+    if (min >= value) {
+      onDelete && onDelete();
+      return;
+    }
+
     setValue((state) => {
       return state - 1;
     });
@@ -66,12 +72,20 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
         className={`nc-NcInputNumber__content flex items-center justify-between w-[104px] sm:w-28`}
       >
         <button
-          className="w-8 h-8 rounded-full flex items-center justify-center border border-neutral-400 dark:border-neutral-500 bg-white dark:bg-neutral-900 focus:outline-none hover:border-neutral-700 dark:hover:border-neutral-400 disabled:hover:border-neutral-400 dark:disabled:hover:border-neutral-500 disabled:opacity-50 disabled:cursor-default"
+          className={
+            onDelete && min >= value
+              ? "w-8 h-8 rounded-full flex items-center justify-center border border-red-400 dark:border-red-500 bg-white dark:bg-red-900 focus:outline-none hover:border-red-700 dark:hover:border-red-400 disabled:hover:border-red-400 dark:disabled:hover:border-red-500 disabled:opacity-50 disabled:cursor-default"
+              : "w-8 h-8 rounded-full flex items-center justify-center border border-neutral-400 dark:border-neutral-500 bg-white dark:bg-neutral-900 focus:outline-none hover:border-neutral-700 dark:hover:border-neutral-400 disabled:hover:border-neutral-400 dark:disabled:hover:border-neutral-500 disabled:opacity-50 disabled:cursor-default"
+          }
           type="button"
           onClick={handleClickDecrement}
-          disabled={min >= value}
+          disabled={!onDelete && min >= value}
         >
-          <MinusIcon className="w-4 h-4" />
+          {onDelete && min >= value ? (
+            <TrashIcon className="w-4 h-4 fill-red-600" />
+          ) : (
+            <MinusIcon className="w-4 h-4" />
+          )}
         </button>
         <span className="select-none block flex-1 text-center leading-none">
           {value}

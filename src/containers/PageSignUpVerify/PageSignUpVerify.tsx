@@ -5,7 +5,7 @@ import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { editNumber, register, verifyOTP } from "store/slices/auth";
+import { register, verifyOTP, editNumber, storeCart } from "store/slices";
 
 type FormValues = {
   otp: string;
@@ -21,6 +21,7 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   const { loading, deviceInfo, otpResult, otpVerified, user } = useAppSelector(
     (state) => state.auth
   );
+  const { items } = useAppSelector((state) => state.cart);
 
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -30,8 +31,16 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   }, [otpResult]);
 
   useEffect(() => {
-    if (user.token !== "") history.push("/");
+    if (user.token !== "") {
+      history.push("/");
+      dispatch(storeCart(items));
+      sendCartItemsToServer();
+    }
   }, [user]);
+
+  const sendCartItemsToServer = () => {
+    console.log(items);
+  };
 
   const onSubmitForm = async ({
     otp,

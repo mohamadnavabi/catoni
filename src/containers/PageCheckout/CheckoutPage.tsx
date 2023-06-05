@@ -12,7 +12,7 @@ import ContactInfo from "./ContactInfo";
 import PaymentMethod from "./PaymentMethod";
 import ShippingAddress from "./ShippingAddress";
 import { BASE_URL } from "contains/contants";
-import { CartItem, removeFromCart, updateQty } from "store/slices";
+import { CartItem, removeItem, updateQuantity } from "store/slices";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const CheckoutPage = () => {
@@ -138,7 +138,10 @@ const CheckoutPage = () => {
             alt={title}
             className="h-full w-full object-contain object-center"
           />
-          <Link to="/product-detail" className="absolute inset-0"></Link>
+          <Link
+            to={{ pathname: `/product/${item.slug}`, state: { ...item } }}
+            className="absolute inset-0"
+          ></Link>
         </div>
 
         <div className="mr-3 sm:mr-6 flex flex-1 flex-col">
@@ -146,7 +149,14 @@ const CheckoutPage = () => {
             <div className="flex justify-between ">
               <div className="flex-[1.5] ">
                 <h3 className="text-base font-semibold">
-                  <Link to="/product-detail">{title}</Link>
+                  <Link
+                    to={{
+                      pathname: `/product/${item.slug}`,
+                      state: { ...item },
+                    }}
+                  >
+                    {title}
+                  </Link>
                 </h3>
                 <div className="mt-1.5 sm:mt-2.5 flex text-sm text-slate-600 dark:text-slate-300">
                   {variants.length > 0 &&
@@ -211,18 +221,11 @@ const CheckoutPage = () => {
                 className="relative z-10"
                 defaultValue={quantity}
                 onChange={(quantity) =>
-                  dispatch(updateQty({ ...item, quantity }))
+                  dispatch(updateQuantity({ ...item, quantity }))
                 }
-              />{" "}
+                onDelete={() => dispatch(removeItem(item))}
+              />
             </div>
-
-            <button
-              type="button"
-              className="relative z-10 flex items-center mt-3 font-medium text-primary-6000 hover:text-primary-500 text-sm "
-              onClick={() => dispatch(removeFromCart(item))}
-            >
-              حذف
-            </button>
           </div>
         </div>
       </div>

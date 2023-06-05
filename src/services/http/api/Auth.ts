@@ -1,10 +1,12 @@
 import { API_URL } from "contains/contants";
-import { HttpClient } from "../httpClient";
+import HttpClient from "../httpClient";
+
+export type DeviceInfo = string;
 
 export type GenerateOTPParams = {
   mobile: string;
   ip: string;
-  device_info: string;
+  device_info: DeviceInfo;
 };
 
 export type VerifyOTPParams = {
@@ -18,14 +20,14 @@ export type RegisterParams = {
   password: string;
   password_confirmation: string;
   otp: string;
-  device_info: string;
+  device_info: DeviceInfo;
 };
 
 export type LoginParams = {
   mobile: string;
   email?: string;
   password: string;
-  device_info: string;
+  device_info: DeviceInfo;
 };
 
 class Auth extends HttpClient {
@@ -65,6 +67,15 @@ class Auth extends HttpClient {
     });
   }
 
+  verify(deviceInfo: DeviceInfo) {
+    return this.instance.get(`/verify`, {
+      params: { device_info: deviceInfo },
+      headers: {
+        xsrfHeaderName: "X-XSRF-TOKEN",
+      },
+    });
+  }
+
   logout() {
     return this.instance.post(
       `/logout`,
@@ -78,4 +89,4 @@ class Auth extends HttpClient {
   }
 }
 
-export default new Auth();
+export const authAPI = new Auth();

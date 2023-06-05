@@ -1,5 +1,5 @@
 import { API_URL } from "contains/contants";
-import { HttpClient } from "../httpClient";
+import HttpClient from "../httpClient";
 
 class Product extends HttpClient {
   constructor() {
@@ -25,4 +25,4 @@ class Product extends HttpClient {
   }
 }
 
-export default new Product();
+export const productAPI = new Product();

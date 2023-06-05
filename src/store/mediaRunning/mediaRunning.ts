@@ -57,5 +57,3 @@ export const {
 
 export const selectCurrentMediaRunning = (state: RootState) =>
   state.mediaRunning;
-
-export default mediaRunningSlice.reducer;

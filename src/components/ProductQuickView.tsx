@@ -193,7 +193,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
         {/* ---------- 1 HEADING ----------  */}
         <div>
           <h2 className="text-2xl font-semibold hover:text-primary-6000 transition-colors text-right">
-            <Link to="/product-detail">Heavy Weight Shoes</Link>
+            <Link to="/product">Heavy Weight Shoes</Link>
           </h2>
 
           <div className="flex items-center mt-5 space-x-4 space-x-reverse sm:space-x-5 sm:space-x-reverse">
@@ -207,7 +207,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
 
             <div className="flex items-center">
               <Link
-                to="/product-detail"
+                to="/product"
                 className="flex items-center text-sm font-medium"
               >
                 <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />

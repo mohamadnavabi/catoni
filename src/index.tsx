@@ -10,7 +10,7 @@ import "rc-slider/assets/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { persistor, store } from "store";
+import store, { persistor } from "store";
 import { PersistGate } from "redux-persist/integration/react";
 
 const root = ReactDOM.createRoot(

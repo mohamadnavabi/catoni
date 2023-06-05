@@ -1,30 +1,24 @@
 import React, { useEffect } from "react";
 import SectionHowItWork from "components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "components/BackgroundSection/BackgroundSection";
-import SectionPromo1 from "components/SectionPromo1";
 import { Helmet } from "react-helmet";
 import SectionHero2 from "components/SectionHero/SectionHero2";
 import SectionSliderLargeProduct from "components/SectionSliderLargeProduct";
 import SectionSliderProductCard from "components/SectionSliderProductCard";
 import DiscoverMoreSlider from "components/DiscoverMoreSlider";
-import SectionGridMoreExplore from "components/SectionGridMoreExplore/SectionGridMoreExplore";
-import SectionPromo2 from "components/SectionPromo2";
-import SectionGridFeatureItems from "./SectionGridFeatureItems";
 import SectionPromo3 from "components/SectionPromo3";
-import SectionClientSay from "components/SectionClientSay/SectionClientSay";
 import SectionMagazine5 from "containers/BlogPage/SectionMagazine5";
 import Heading from "components/Heading/Heading";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
-import { PRODUCTS, SPORT_PRODUCTS } from "data/data";
 import SectionSliderBrands from "components/SectionSliderBrands/SectionSliderBrands";
 import { useDispatch } from "react-redux";
-import { getBestSaleProducts, getLastProducts } from "store/slices/product";
+import { getBestSaleProducts, getLastProducts } from "store/slices";
 import { useAppSelector } from "store/hooks";
 
 function PageHome() {
   const dispatch = useDispatch();
   const { lastProducts, bestSaleProducts } = useAppSelector(
-    (state) => state.product
+    (state) => state.products
   );
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { avatarImgs } from "contains/fakeData";
 import { Link } from "react-router-dom";
 import Avatar from "components/shared/Avatar/Avatar";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { logout } from "store/slices";
+import { cartSlice, logout } from "store/slices";
 
 export default function AvatarDropdown() {
   const { user } = useAppSelector((state) => state.auth);
@@ -13,6 +13,7 @@ export default function AvatarDropdown() {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(cartSlice.actions.resetCart());
   };
 
   if (user.token === "") {

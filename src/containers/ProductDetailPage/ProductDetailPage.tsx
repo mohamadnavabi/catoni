@@ -29,7 +29,7 @@ import {
   getProductByVariantItems,
 } from "utils/apiWorker";
 import { useAppDispatch } from "store/hooks";
-import { addToCart } from "store/slices";
+import { addToCart, cartSlice } from "store/slices";
 
 export interface ProductDetailPageProps {
   className?: string;

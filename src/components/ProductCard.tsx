@@ -15,7 +15,7 @@ import ProductStatus from "./ProductStatus";
 import { BASE_URL } from "contains/contants";
 import { getProductByVariantItems, getVariantByTypes } from "utils/apiWorker";
 import { useAppDispatch } from "store/hooks";
-import { addToCart } from "store/slices";
+import { addToCart, cartSlice } from "store/slices";
 import NotifyAddToCart from "./NotifyAddToCart";
 
 export interface ProductCardProps {
@@ -72,12 +72,14 @@ const ProductCard: FC<ProductCardProps> = ({
 
   const renderColors = () => {
     if (!colors || !colors.length) {
-      return null;
+      return (
+        <div className="flex space-x-1 space-x-reverse justify-center empty-colors" />
+      );
     }
 
     if (colors) {
       return (
-        <div className="flex space-x-1 space-x-reverse">
+        <div className="flex space-x-1 space-x-reverse justify-center">
           {colors.map((variant, index) => (
             <div
               key={index}
@@ -164,14 +166,14 @@ const ProductCard: FC<ProductCardProps> = ({
         data-nc-id="ProductCard"
       >
         <Link
-          to={{ pathname: `/product-detail/${data.slug}`, state: { ...data } }}
+          to={{ pathname: `/product/${data.slug}`, state: { ...data } }}
           className="absolute inset-0"
         ></Link>
 
         <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
           <Link
             to={{
-              pathname: `/product-detail/${data.slug}`,
+              pathname: `/product/${data.slug}`,
               state: { ...data },
             }}
             className="block"
@@ -185,6 +187,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <ProductStatus status={"status"} />
 
+          {/* TODO: check isLike */}
           <LikeButton liked={isLiked} className="absolute top-3 right-3 z-10" />
 
           {variants.length ? renderSizeList() : renderGroupButtons()}
@@ -206,12 +209,17 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <div className="flex justify-between items-end ">
             <div className="flex items-center mb-0.5">
-              <StarIcon className="w-5 h-5 pb-[1px] text-amber-400" />
-              <span className="text-sm mr-1 text-slate-500 dark:text-slate-400">
-                {rating_average}
-                {/* ({Math.floor(Math.random() * 70 + 20)} نظر) */}
-              </span>
+              {rating_average > 0 && (
+                <>
+                  <StarIcon className="w-5 h-5 pb-[1px] text-amber-400" />
+                  <span className="text-sm mr-1 text-slate-500 dark:text-slate-400">
+                    {rating_average}
+                    {/* ({Math.floor(Math.random() * 70 + 20)} نظر) */}
+                  </span>
+                </>
+              )}
             </div>
+
             <Prices price={price} />
           </div>
         </div>

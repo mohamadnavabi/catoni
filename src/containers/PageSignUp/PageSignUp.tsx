@@ -5,7 +5,7 @@ import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { generateOTP } from "store/slices/auth";
+import { generateOTP } from "store/slices";
 import { getDeviceIp } from "utils/device";
 import { validateMobile } from "utils/validation";
 import toast from "react-hot-toast";

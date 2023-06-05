@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import MyRouter from "routers/index";
 import { useAppDispatch } from "store/hooks";
-import { setDeviceInfo } from "store/slices";
+import { setDeviceInfo, verify } from "store/slices";
 import { getDeviceInfo } from "utils/device";
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    (async () => {
-      const deviceInfo = await getDeviceInfo();
-      dispatch(setDeviceInfo(deviceInfo));
-    })();
+    const deviceInfo = getDeviceInfo();
+    dispatch(setDeviceInfo(deviceInfo));
+    dispatch(verify(deviceInfo));
   }, []);
 
   return (

@@ -6,7 +6,7 @@ import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import { Formik } from "formik";
 import { validateMobile } from "utils/validation";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { login } from "store/slices";
+import { login, storeCart } from "store/slices";
 
 type FormValues = {
   username: string;
@@ -19,12 +19,16 @@ export interface PageLoginProps {
 
 const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   const { loading, user, deviceInfo } = useAppSelector((state) => state.auth);
+  const { items } = useAppSelector((state) => state.cart);
 
   const dispatch = useAppDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    if (user.token !== "") window.location.href = "/";
+    if (user.token !== "") {
+      history.goBack();
+      dispatch(storeCart(items));
+    }
   }, [user]);
 
   const onSubmitForm = ({ username, password }: FormValues) => {

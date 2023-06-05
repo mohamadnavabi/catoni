@@ -4,7 +4,6 @@ import {
   Product,
   ProductVariant,
 } from "data/data";
-import product from "store/slices/product";
 
 const getVariantByTypes = (
   variants: ProductVariant[],

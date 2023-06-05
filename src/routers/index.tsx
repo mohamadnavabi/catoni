@@ -36,7 +36,7 @@ export const pages: Page[] = [
   { path: "/home3", exact: true, component: PageHome3 },
   //
   { path: "/home-header-2", exact: true, component: PageHome },
-  { path: "/product-detail", component: ProductDetailPage },
+  { path: "/product", component: ProductDetailPage },
   { path: "/product-detail-2", component: ProductDetailPage2 },
   //
   { path: "/page-collection-2", component: PageCollection2 },

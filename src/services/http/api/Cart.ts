@@ -1,5 +1,6 @@
 import { API_URL } from "contains/contants";
-import { HttpClient } from "../httpClient";
+import { CartItem, Product } from "data/data";
+import HttpClient from "../httpClient";
 
 class Cart extends HttpClient {
   constructor() {
@@ -8,20 +9,48 @@ class Cart extends HttpClient {
 
   get(): Promise<any[]> {
     return this.instance.get("/");
-    // return http.get(`/tutorials/${id}`);
   }
 
-  create(data: any) {
-    // return http.post("/tutorials", data);
+  store(data: Product[]) {
+    return this.instance.post("/", data, {
+      headers: {
+        xsrfHeaderName: "X-XSRF-TOKEN",
+      },
+    });
   }
 
   update(id: number, data: any) {
-    // return http.put(`/tutorials/${id}`, data);
+    // return this.instance.put(`/tutorials/${id}`, data);
   }
 
-  delete(id: number) {
-    // return http.delete(`/tutorials/${id}`);
+  addToCart(item: CartItem) {
+    return this.instance.post("/addToCart", item, {
+      headers: {
+        xsrfHeaderName: "X-XSRF-TOKEN",
+      },
+    });
+  }
+
+  updateQuantity(item: CartItem) {
+    return this.instance.put(
+      `/updateQuantity/${item.item_id}`,
+      { quantity: item.quantity },
+      {
+        headers: {
+          xsrfHeaderName: "X-XSRF-TOKEN",
+        },
+      }
+    );
+  }
+
+  removeItem(item: CartItem) {
+    return this.instance.delete(`/removeItem`, {
+      params: { id: item.item_id },
+      headers: {
+        xsrfHeaderName: "X-XSRF-TOKEN",
+      },
+    });
   }
 }
 
-export default new Cart();
+export const cartAPI = new Cart();

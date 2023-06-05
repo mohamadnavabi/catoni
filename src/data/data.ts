@@ -16,6 +16,13 @@ export type AttributeTypes =
   | "model"
   | "flavors";
 
+export interface CartItem extends Product {
+  quantity: number;
+  variant?: ProductVariant;
+  cart_id?: number;
+  item_id?: number;
+}
+
 export interface Categories {
   active: number;
   description: null | string;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NoSymbolIcon, CheckIcon } from "@heroicons/react/24/outline";
 import NcInputNumber from "components/NcInputNumber";
 import Prices from "components/Prices";
@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { BASE_URL } from "contains/contants";
-import { CartItem, removeFromCart, updateQty } from "store/slices";
+import { CartItem, getCart, removeItem, updateQuantity } from "store/slices";
+import useAuth from "hooks/useAuth";
 
 const CartPage = () => {
   const { items, tax, shipping, discount, total } = useAppSelector(
@@ -17,10 +18,9 @@ const CartPage = () => {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    // TODO:
-    // update cart
-  }, [items]);
+  useAuth(() => {
+    dispatch(getCart());
+  }, []);
 
   const renderStatusSoldout = () => {
     return (
@@ -125,115 +125,121 @@ const CartPage = () => {
   };
 
   const renderProduct = (item: CartItem, index: number) => {
-    const { media, price, title, variants, quantity } = item;
+    const { media, price, title, variants, quantity, message } = item;
     const image =
       media && media.length
         ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[3]
         : "";
 
-    return (
-      <div
-        key={index}
-        className="relative flex py-8 sm:py-10 xl:py-12 first:pt-0 last:pb-0"
-      >
-        <div className="relative h-36 w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
-          <img
-            src={image}
-            alt={title}
-            className="h-full w-full object-contain object-center"
-          />
-          <Link to="/product-detail" className="absolute inset-0"></Link>
-        </div>
+    return React.Children.toArray(
+      <>
+        {message && (
+          <div
+            className={`p-4 mb-4 text-sm text-${message.color}-800 rounded-lg bg-${message.color}-50 dark:bg-gray-800 dark:text-${message.color}-400`}
+            role="alert"
+          >
+            {message.title}
+          </div>
+        )}
 
-        <div className="mr-3 sm:mr-6 flex flex-1 flex-col">
-          <div>
-            <div className="flex justify-between ">
-              <div className="flex-[1.5] ">
-                <h3 className="text-base font-semibold">
-                  <Link to="/product-detail">{title}</Link>
-                </h3>
-                <div className="mt-1.5 sm:mt-2.5 flex text-sm text-slate-600 dark:text-slate-300">
-                  {variants.length > 0 &&
-                    React.Children.toArray(
-                      variants[0].attribute_items.map((attibuteItem, index) => {
-                        const icon = renderVariantIcon(
-                          attibuteItem.attribute.type
-                        );
+        <div className="relative flex py-8 sm:py-10 xl:py-12 first:pt-0 last:pb-0">
+          <div className="relative h-36 w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
+            <img
+              src={image}
+              alt={title}
+              className="h-full w-full object-contain object-center"
+            />
+            <Link
+              to={{ pathname: `/product/${item.slug}`, state: { ...item } }}
+              className="absolute inset-0"
+            ></Link>
+          </div>
 
-                        return index > 0 ? (
-                          <>
-                            <span className="mx-4 border-l border-slate-200 dark:border-slate-700 "></span>
-                            <div className="flex items-center space-x-1.5 space-x-reverse">
-                              {icon}
+          <div className="mr-3 sm:mr-6 flex flex-1 flex-col">
+            <div>
+              <div className="flex justify-between ">
+                <div className="flex-[1.5] ">
+                  <h3 className="text-base font-semibold">
+                    <Link to="/product/">{title}</Link>
+                  </h3>
+                  <div className="mt-1.5 sm:mt-2.5 flex text-sm text-slate-600 dark:text-slate-300">
+                    {variants.length > 0 &&
+                      React.Children.toArray(
+                        variants[0].attribute_items.map(
+                          (attibuteItem, index) => {
+                            const icon = renderVariantIcon(
+                              attibuteItem.attribute.type
+                            );
 
-                              <span>
-                                {`${attibuteItem.attribute.name}: ${attibuteItem.name} `}
-                              </span>
-                            </div>
-                          </>
-                        ) : (
-                          <div className="flex items-center space-x-1.5 space-x-reverse">
-                            {icon}
+                            return index > 0 ? (
+                              <>
+                                <span className="mx-4 border-l border-slate-200 dark:border-slate-700 "></span>
+                                <div className="flex items-center space-x-1.5 space-x-reverse">
+                                  {icon}
 
-                            <span>{`${attibuteItem.attribute.name}: ${attibuteItem.name} `}</span>
-                          </div>
-                        );
-                      })
-                    )}
+                                  <span>
+                                    {`${attibuteItem.attribute.name}: ${attibuteItem.name} `}
+                                  </span>
+                                </div>
+                              </>
+                            ) : (
+                              <div className="flex items-center space-x-1.5 space-x-reverse">
+                                {icon}
+
+                                <span>{`${attibuteItem.attribute.name}: ${attibuteItem.name} `}</span>
+                              </div>
+                            );
+                          }
+                        )
+                      )}
+                  </div>
+
+                  <div className="mt-3 flex justify-between w-full sm:hidden relative">
+                    <select
+                      name="qty"
+                      id="qty"
+                      className="form-select text-sm rounded-md py-1 border-slate-200 dark:border-slate-700 relative z-10 dark:bg-slate-800 "
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                    </select>
+                    <Prices
+                      contentClass="py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium h-full"
+                      price={price}
+                    />
+                  </div>
                 </div>
 
-                <div className="mt-3 flex justify-between w-full sm:hidden relative">
-                  <select
-                    name="qty"
-                    id="qty"
-                    className="form-select text-sm rounded-md py-1 border-slate-200 dark:border-slate-700 relative z-10 dark:bg-slate-800 "
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                  </select>
-                  <Prices
-                    contentClass="py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium h-full"
-                    price={price}
+                <div className="hidden sm:block text-center relative">
+                  <NcInputNumber
+                    className="relative z-10"
+                    defaultValue={quantity}
+                    onChange={(quantity) =>
+                      dispatch(updateQuantity({ ...item, quantity }))
+                    }
+                    onDelete={() => dispatch(removeItem(item))}
                   />
                 </div>
-              </div>
 
-              <div className="hidden sm:block text-center relative">
-                <NcInputNumber
-                  className="relative z-10"
-                  defaultValue={quantity}
-                  onChange={(quantity) =>
-                    dispatch(updateQty({ ...item, quantity }))
-                  }
-                />
-              </div>
-
-              <div className="hidden flex-1 sm:flex justify-end">
-                <Prices price={price} className="mt-0.5" />
+                <div className="hidden flex-1 sm:flex justify-end">
+                  <Prices price={price} className="mt-0.5" />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex mt-auto pt-4 items-end justify-between text-sm">
-            {item.stock_status === "out_of_stock"
-              ? renderStatusSoldout()
-              : renderStatusInstock()}
-
-            <button
-              type="button"
-              className="font-medium text-primary-6000 dark:text-primary-500 "
-              onClick={() => dispatch(removeFromCart(item))}
-            >
-              حذف
-            </button>
+            <div className="flex mt-auto pt-4 items-end justify-between text-sm">
+              {item.stock_status === "out_of_stock"
+                ? renderStatusSoldout()
+                : renderStatusInstock()}
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   };
 

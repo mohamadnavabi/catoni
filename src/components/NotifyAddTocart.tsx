@@ -29,7 +29,7 @@ const NotifyAddToCart: FC<Props> = ({
           />
         </div>
 
-        <div className="ml-4 flex flex-1 flex-col">
+        <div className="mr-4 flex flex-1 flex-col">
           <div>
             <div className="flex justify-between ">
               <div>

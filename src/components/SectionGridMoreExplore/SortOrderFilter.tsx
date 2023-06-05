@@ -92,7 +92,6 @@ const SortOrderFilter: FC<Props> = ({ data = DEMO_DATA, className = "" }) => {
                   value={person}
                 >
                   {({ selected, active }) => {
-                    console.log(selected);
                     return (
                       <>
                         <span
