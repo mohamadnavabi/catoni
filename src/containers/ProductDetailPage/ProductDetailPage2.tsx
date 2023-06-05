@@ -14,7 +14,7 @@ import detail21JPG from "assets/images/temp/products/detail3-1.webp";
 import detail22JPG from "assets/images/temp/products/detail3-2.webp";
 import detail23JPG from "assets/images/temp/products/detail3-3.webp";
 import detail24JPG from "assets/images/temp/products/detail3-4.webp";
-import { PRODUCTS } from "data/data";
+import { AttributeItems, Product } from "data/data";
 import IconDiscount from "components/IconDiscount";
 import NcInputNumber from "components/NcInputNumber";
 import BagIcon from "components/BagIcon";
@@ -24,7 +24,16 @@ import toast from "react-hot-toast";
 import { StarIcon } from "@heroicons/react/24/solid";
 import SectionSliderProductCard from "components/SectionSliderProductCard";
 import ModalViewAllReviews from "./ModalViewAllReviews";
-import NotifyAddTocart from "components/NotifyAddToCart";
+import { useLocation } from "react-router-dom";
+import { BASE_URL } from "contains/contants";
+import {
+  getProductByVariantItems,
+  getProductStatus,
+  getVariantByTypes,
+} from "utils/apiWorker";
+import NotifyAddToCart from "components/NotifyAddToCart";
+import { addToCart } from "store/slices";
+import { useAppDispatch } from "store/hooks";
 
 export interface ProductDetailPage2Props {
   className?: string;
@@ -33,6 +42,8 @@ export interface ProductDetailPage2Props {
 const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   className = "",
 }) => {
+  let { state } = useLocation<Product>();
+
   const LIST_IMAGES_DEMO: string[] = [
     detail21JPG,
     detail22JPG,
@@ -42,16 +53,51 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     detail24JPG,
     detail24JPG,
   ];
-  const PRICE = 1899000;
+  const price = state.price;
 
-  const [variantActive, setVariantActive] = React.useState(0);
-  const [sizeSelected, setSizeSelected] = React.useState("");
+  const thumbnails =
+    state.media && state.media.length
+      ? state.media.map((m) => BASE_URL + m.path + "/" + JSON.parse(m.files)[1])
+      : [];
+
+  const images =
+    state.media && state.media.length
+      ? state.media.map((m) => BASE_URL + m.path + "/" + JSON.parse(m.files)[0])
+      : [];
+  console.log(images, "images");
+  const colors = getVariantByTypes(state.variants, "color");
+  const sizes = getVariantByTypes(state.variants, "select");
+  const status = getProductStatus(state);
+
+  const [activeColor, setActiveColor] = React.useState<AttributeItems>(
+    colors[0]
+  );
+  const [activeSize, setActiveSize] = React.useState<AttributeItems>(sizes[0]);
   const [qualitySelected, setQualitySelected] = React.useState(1);
-
-  const [isOpen, setIsOpen] = useState(false);
   const [isOpenModalViewAllReviews, setIsOpenModalViewAllReviews] =
     useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [openFocusIndex, setOpenFocusIndex] = useState(0);
+
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    const product = getProductByVariantItems(state, [activeColor, activeSize]);
+
+    dispatch(addToCart({ ...product, quantity: qualitySelected }));
+
+    toast.custom(
+      (t) => (
+        <NotifyAddToCart
+          productImage={thumbnails[0]}
+          qualitySelected={qualitySelected}
+          show={t.visible}
+          product={product}
+        />
+      ),
+      { position: "bottom-right", id: "nc-product-notify", duration: 3000 }
+    );
+  };
 
   const handleOpenModal = (index: number) => {
     setIsOpen(true);
@@ -60,163 +106,145 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
 
   const handleCloseModal = () => setIsOpen(false);
 
-  //
   const renderVariants = () => {
-    return null;
+    if (!colors || !colors.length) {
+      return null;
+    }
 
-    // if (!variants || !variants.length) {
-    //   return null;
-    // }
-
-    // return (
-    //   <div>
-    //     <label htmlFor="">
-    //       <span className="text-sm font-medium">
-    //         رنگ:
-    //         <span className="mr-1 font-semibold">
-    //           {variants[variantActive].name}
-    //         </span>
-    //       </span>
-    //     </label>
-    //     <div className="flex mt-3">
-    //       {variants.map((variant, index) => (
-    //         <div
-    //           key={index}
-    //           onClick={() => setVariantActive(index)}
-    //           className={`relative flex-1 max-w-[75px] h-10 sm:h-11 rounded-full border-2 cursor-pointer ${
-    //             variantActive === index
-    //               ? "border-primary-6000 dark:border-primary-500"
-    //               : "border-transparent"
-    //           }`}
-    //         >
-    //           <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
-    //             <img
-    //               src={variant.thumbnail}
-    //               alt=""
-    //               className="absolute w-full h-full object-cover"
-    //             />
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // );
-  };
-
-  const addToCart = () => {
-    // toast.custom(
-    //   (t) => (
-    //     <NotifyAddToCart
-    //       productImage={LIST_IMAGES_DEMO[0]}
-    //       qualitySelected={qualitySelected}
-    //       show={t.visible}
-    //       sizeSelected={sizeSelected}
-    //       variantActive={variantActive}
-    //     />
-    //   ),
-    //   { position: "top-left", id: "nc-product-notify", duration: 3000 }
-    // );
+    return (
+      <div>
+        <label htmlFor="">
+          <span className="text-sm font-medium">
+            رنگ:
+            <span className="mr-1 font-semibold">{activeColor.name}</span>
+          </span>
+        </label>
+        <div className="flex mt-3">
+          {colors.map((variant, index) => (
+            <div
+              key={index}
+              onClick={() => setActiveColor(variant)}
+              className={`relative flex-1 max-w-[75px] h-10 sm:h-11 rounded-full border-2 cursor-pointer ${
+                activeColor.id === variant.id
+                  ? "border-primary-6000 dark:border-primary-500"
+                  : "border-transparent"
+              }`}
+            >
+              <div
+                className="absolute inset-0.5 rounded-full overflow-hidden z-0"
+                style={{
+                  backgroundColor: variant.value,
+                  borderColor:
+                    variant.value === "#ffffff" ? "#e0e0e0" : "transparent",
+                }}
+              >
+                {/* <img
+                  src={variant.thumbnail}
+                  alt=""
+                  className="absolute w-full h-full object-cover"
+                /> */}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   const renderSizeList = () => {
-    return null;
-
-    // if (!allOfSizes || !sizes || !sizes.length) {
-    //   return null;
-    // }
-
-    // return (
-    //   <div>
-    //     <div className="flex justify-between font-medium text-sm">
-    //       <label htmlFor="">
-    //         <span className="">
-    //           اندازه:
-    //           <span className="mr-1 font-semibold">{sizeSelected}</span>
-    //         </span>
-    //       </label>
-    //       <a
-    //         target="_blank"
-    //         rel="noopener noreferrer"
-    //         href="##"
-    //         className="text-primary-6000 hover:text-primary-500"
-    //       >
-    //         راهنمای سایزبندی
-    //       </a>
-    //     </div>
-    //     <div className="grid grid-cols-4 gap-2 mt-3">
-    //       {/* {allOfSizes.map((size, index) => {
-    //         const isActive = size === sizeSelected;
-    //         const sizeOutStock = !sizes.includes(size);
-    //         return (
-    //           <div
-    //             key={index}
-    //             className={`relative h-10 sm:h-11 rounded-2xl border flex items-center justify-center
-    //             text-sm sm:text-base uppercase font-semibold select-none overflow-hidden z-0 ${
-    //               sizeOutStock
-    //                 ? "text-opacity-20 dark:text-opacity-20 cursor-not-allowed"
-    //                 : "cursor-pointer"
-    //             } ${
-    //               isActive
-    //                 ? "bg-primary-6000 border-primary-6000 text-white hover:bg-primary-6000"
-    //                 : "border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200 hover:bg-neutral-50 dark:hover:bg-neutral-700"
-    //             }`}
-    //             onClick={() => {
-    //               if (sizeOutStock) {
-    //                 return;
-    //               }
-    //               setSizeSelected(size);
-    //             }}
-    //           >
-    //             {size}
-    //           </div>
-    //         );
-    //       })} */}
-    //     </div>
-    //   </div>
-    // );
+    if (!sizes || !sizes.length) {
+      return null;
+    }
+    return (
+      <div>
+        <div className="flex justify-between font-medium text-sm">
+          <label htmlFor="">
+            <span className="">
+              اندازه:
+              <span className="mr-1 font-semibold">{activeSize.name}</span>
+            </span>
+          </label>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="##"
+            className="text-primary-6000 hover:text-primary-500"
+          >
+            راهنمای سایز
+          </a>
+        </div>
+        <div className="grid grid-cols-5 sm:grid-cols-7 gap-2 mt-3">
+          {sizes.map((size, index) => {
+            const isActive = size.id === activeSize.id;
+            const sizeOutStock = !sizes.includes(size);
+            return (
+              <div
+                key={index}
+                className={`relative h-10 sm:h-11 rounded-2xl border flex items-center justify-center
+                text-sm sm:text-base uppercase font-semibold select-none overflow-hidden z-0 ${
+                  sizeOutStock
+                    ? "text-opacity-20 dark:text-opacity-20 cursor-not-allowed"
+                    : "cursor-pointer"
+                } ${
+                  isActive
+                    ? "bg-primary-6000 border-primary-6000 text-white hover:bg-primary-6000"
+                    : "border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200 hover:bg-neutral-50 dark:hover:bg-neutral-700"
+                }`}
+                onClick={() => {
+                  if (sizeOutStock) {
+                    return;
+                  }
+                  setActiveSize(size);
+                }}
+              >
+                {size.name}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
   };
 
   const renderStatus = () => {
-    return null;
+    if (status === "") {
+      return null;
+    }
 
-    // if (!status) {
-    //   return null;
-    // }
-    // const CLASSES =
-    //   "text-sm flex items-center text-slate-700 text-slate-900 dark:text-slate-300";
-    // if (status === "جدید") {
-    //   return (
-    //     <div className={CLASSES}>
-    //       <SparklesIcon className="w-3.5 h-3.5" />
-    //       <span className="mr-1 leading-none">{status}</span>
-    //     </div>
-    //   );
-    // }
-    // if (status === "50% تخفیف") {
-    //   return (
-    //     <div className={CLASSES}>
-    //       <IconDiscount className="w-3.5 h-3.5" />
-    //       <span className="mr-1 leading-none">{status}</span>
-    //     </div>
-    //   );
-    // }
-    // if (status === "تمام شد") {
-    //   return (
-    //     <div className={CLASSES}>
-    //       <NoSymbolIcon className="w-3.5 h-3.5" />
-    //       <span className="mr-1 leading-none">{status}</span>
-    //     </div>
-    //   );
-    // }
-    // if (status === "تعداد محدود") {
-    //   return (
-    //     <div className={CLASSES}>
-    //       <ClockIcon className="w-3.5 h-3.5" />
-    //       <span className="mr-1 leading-none">{status}</span>
-    //     </div>
-    //   );
-    // }
-    // return null;
+    const CLASSES =
+      "text-sm flex items-center text-slate-700 text-slate-900 dark:text-slate-300";
+    if (status === "جدید") {
+      return (
+        <div className={CLASSES}>
+          <SparklesIcon className="w-3.5 h-3.5" />
+          <span className="mr-1 leading-none">{status}</span>
+        </div>
+      );
+    }
+    if (status === "50% تخفیف") {
+      return (
+        <div className={CLASSES}>
+          <IconDiscount className="w-3.5 h-3.5" />
+          <span className="mr-1 leading-none">{status}</span>
+        </div>
+      );
+    }
+    if (status === "تمام شد") {
+      return (
+        <div className={CLASSES}>
+          <NoSymbolIcon className="w-3.5 h-3.5" />
+          <span className="mr-1 leading-none">{status}</span>
+        </div>
+      );
+    }
+    if (status === "تعداد محدود") {
+      return (
+        <div className={CLASSES}>
+          <ClockIcon className="w-3.5 h-3.5" />
+          <span className="mr-1 leading-none">{status}</span>
+        </div>
+      );
+    }
   };
 
   const renderSectionSidebar = () => {
@@ -227,7 +255,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
           <div className="">
             {/* ---------- 1 HEADING ----------  */}
             <div className="flex items-center justify-between space-x-5 space-x-reverse">
-              <div className="flex text-2xl font-semibold">{PRICE} تومان</div>
+              <div className="flex text-2xl font-semibold">{price} تومان</div>
 
               <a
                 href="#reviews"
@@ -237,10 +265,9 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                   <StarIcon className="w-5 h-5 pb-[1px] text-orange-400" />
                 </div>
                 <span className="mr-1.5 flex">
-                  <span>4.9 </span>
-                  <span className="mx-1.5">·</span>
-                  <span className="text-slate-700 dark:text-slate-400 underline">
-                    142 نظر
+                  <span>4.9</span>
+                  <span className="text-slate-400 dark:text-slate-400 mr-1">
+                    (142)
                   </span>
                 </span>
               </a>
@@ -260,7 +287,10 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                 onChange={setQualitySelected}
               />
             </div>
-            <ButtonPrimary className="flex-1 flex-shrink-0" onClick={addToCart}>
+            <ButtonPrimary
+              className="flex-1 flex-shrink-0"
+              onClick={handleAddToCart}
+            >
               <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
               <span className="mr-3">افزودن به سبد</span>
             </ButtonPrimary>
@@ -271,12 +301,12 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             <div className="space-y-2.5">
               <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span className="flex">
-                  <span>{`${PRICE}  `}</span>
+                  <span>{`${price}  `}</span>
                   <span className="mx-2">x</span>
                   <span>{`${qualitySelected} `}</span>
                 </span>
 
-                <span>{`${PRICE * qualitySelected} تومان`}</span>
+                <span>{`${price * qualitySelected} تومان`}</span>
               </div>
               <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span>هزینه ارسال</span>
@@ -286,7 +316,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             <div className="border-b border-slate-200 dark:border-slate-700"></div>
             <div className="flex justify-between font-semibold">
               <span>جمع</span>
-              <span>{`${PRICE * qualitySelected} تومان`}</span>
+              <span>{`${price * qualitySelected} تومان`}</span>
             </div>
           </div>
         </div>
@@ -309,9 +339,8 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
               </div>
               <span className="mr-1.5">
                 <span>4.9</span>
-                <span className="mx-1.5">·</span>
-                <span className="text-slate-700 dark:text-slate-400 underline">
-                  142 نظر
+                <span className="text-slate-400 dark:text-slate-400 mr-1">
+                  (142)
                 </span>
               </span>
             </a>
@@ -373,7 +402,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         {/* HEADING */}
         <h2 className="text-2xl font-semibold flex items-center">
           <StarIcon className="w-7 h-7 mb-0.5" />
-          <span className="mr-1.5"> 4,87 · 142 نظر</span>
+          <span className="mr-1.5">4.87 (142)</span>
         </h2>
 
         {/* comment */}
@@ -409,12 +438,14 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             />
           </div>
 
-          <ButtonSecondary
-            onClick={() => setIsOpenModalViewAllReviews(true)}
-            className="mt-10 border border-slate-300 dark:border-slate-700 "
-          >
-            نمایش تمام نظرات
-          </ButtonSecondary>
+          <div className="w-full flex justify-center">
+            <ButtonSecondary
+              onClick={() => setIsOpenModalViewAllReviews(true)}
+              className="mt-10 border border-slate-300 dark:border-slate-700 "
+            >
+              نمایش تمام نظرات
+            </ButtonSecondary>
+          </div>
         </div>
       </div>
     );
@@ -496,7 +527,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                 />
               </svg>
               <span className="mr-2 text-neutral-800 text-sm font-medium">
-                Show all photos
+                تصاویر محصول
               </span>
             </div>
           </div>

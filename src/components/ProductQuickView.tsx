@@ -213,9 +213,8 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
                 <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
                 <div className="mr-1.5 flex">
                   <span>4.9</span>
-                  <span className="block mx-2">·</span>
-                  <span className="text-slate-600 dark:text-slate-400 underline">
-                    142 نظر
+                  <span className="text-slate-400 dark:text-slate-400 mr-1">
+                    (142)
                   </span>
                 </div>
               </Link>

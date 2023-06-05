@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useId, useMemo, useRef } from "react";
-import { Dialog } from "@headlessui/react";
+import React, { Fragment, FC, useEffect, useId, useMemo, useRef } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import NextPrev from "components/shared/NextPrev/NextPrev";
 import ButtonClose from "components/shared/ButtonClose/ButtonClose";
 import Glide from "@glidejs/glide";
@@ -27,10 +27,7 @@ const ModalPhotos: FC<ModalPhotosProps> = ({
   let MY_GLIDEJS = useMemo(() => {
     return new Glide(`.${UNIQUE_CLASS}`, {
       // @ts-ignore
-      direction:
-        document.querySelector("html")?.getAttribute("dir") === "rtl"
-          ? "rtl"
-          : "ltr",
+      direction: "rtl",
       gap: 10,
       perView: 1,
       startAt: initFocus,
@@ -82,12 +79,12 @@ const ModalPhotos: FC<ModalPhotosProps> = ({
         {/*  */}
         <div className="xl:absolute z-20 xl:-inset-x-20 max-w-6xl my-2 mx-auto top-full xl:top-1/2 transform xl:-translate-y-1/2 flex xl:justify-between glide__arrows">
           <NextPrev
-            onlyPrev
+            onlyNext
             className="mr-1.5"
             btnClassName="w-8 h-8 sm:w-10 sm:h-10 "
           />
           <NextPrev
-            onlyNext
+            onlyPrev
             className="ml-1.5"
             btnClassName="w-8 h-8 sm:w-10 sm:h-10 "
           />
@@ -98,6 +95,62 @@ const ModalPhotos: FC<ModalPhotosProps> = ({
 
   const renderModalPhotos = () => {
     return (
+      <Transition show={isOpen} as={Fragment}>
+        <Dialog
+          onClose={onClose}
+          initialFocus={completeButtonRef}
+          className="ProductDetailModalPhotos fixed inset-0 z-50 overflow-y-auto dark bg-neutral-800 text-neutral-200 hiddenScrollbar"
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/30" />
+          </Transition.Child>
+
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <Dialog.Panel>
+              <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+              <div className="min-h-screen px-4 text-center">
+                <Dialog.Overlay className="fixed inset-0 bg-white dark:bg-neutral-800" />
+                <div
+                  ref={completeButtonRef}
+                  className="absolute right-2 top-2 md:top-4 md:right-4 z-50"
+                >
+                  <ButtonClose className=" sm:w-11 sm:h-11" onClick={onClose} />
+                </div>
+                {/* This element is to trick the browser into centering the modal contents. */}
+                <span
+                  className="inline-block h-screen align-middle"
+                  aria-hidden="true"
+                >
+                  &#8203;
+                </span>
+
+                <div className="relative inline-block w-full max-w-5xl py-5 sm:py-8 h-screen align-middle mx-auto">
+                  {renderSlider()}
+                </div>
+              </div>
+            </Dialog.Panel>
+          </Transition.Child>
+        </Dialog>
+      </Transition>
+    );
+
+    return (
       <Dialog
         initialFocus={completeButtonRef}
         as="div"
@@ -105,11 +158,12 @@ const ModalPhotos: FC<ModalPhotosProps> = ({
         onClose={onClose}
         open={isOpen}
       >
+        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
         <div className="min-h-screen px-4 text-center">
           <Dialog.Overlay className="fixed inset-0 bg-white dark:bg-neutral-800" />
           <div
             ref={completeButtonRef}
-            className="absolute left-2 top-2 md:top-4 md:left-4 z-50"
+            className="absolute right-2 top-2 md:top-4 md:right-4 z-50"
           >
             <ButtonClose className=" sm:w-11 sm:h-11" onClick={onClose} />
           </div>

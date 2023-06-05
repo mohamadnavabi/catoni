@@ -327,7 +327,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({
         {/* HEADING */}
         <h2 className="text-2xl font-semibold flex items-center">
           <StarIcon className="w-7 h-7 mb-0.5" />
-          <span className="ml-1.5"> 4,87 · 142 نظر</span>
+          <span className="ml-1.5">4.87 (142)</span>
         </h2>
 
         {/* comment */}
