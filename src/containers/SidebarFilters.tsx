@@ -1,72 +1,46 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Checkbox from "components/shared/Checkbox/Checkbox";
 import Slider from "rc-slider";
-import Radio from "components/shared/Radio/Radio";
 import MySwitch from "components/MySwitch";
+import { AttributeItems, Category } from "data/data";
+import { useAppSelector } from "store/hooks";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
+import { currencyFormat } from "utils/number";
 
-// DEMO DATA
-const DATA_categories = [
-  {
-    name: "Backpacks",
-  },
-  {
-    name: "Travel Bags",
-  },
-  {
-    name: "Laptop Sleeves",
-  },
-  {
-    name: "Organization",
-  },
-  {
-    name: "Accessories",
-  },
-];
-
-const DATA_colors = [
-  { name: "سفید" },
-  { name: "کرمی" },
-  { name: "آبی" },
-  { name: "مشکی" },
-  { name: "قهوه ای" },
-  { name: "سبز" },
-  { name: "سرمه ای" },
-];
-
-const DATA_sizes = [
-  { name: "XS" },
-  { name: "S" },
-  { name: "M" },
-  { name: "L" },
-  { name: "XL" },
-  { name: "2XL" },
-];
-
-const DATA_sortOrderRadios = [
-  { name: "محبوب ترین", id: "Most-Popular" },
-  { name: "بهترین امتیازات", id: "Best-Rating" },
-  { name: "جدیدترین", id: "Newest" },
-  { name: "ارزان ترین", id: "Price-low-hight" },
-  { name: "گران ترین", id: "Price-hight-low" },
-];
-
-const PRICE_RANGE = [1, 500];
-//
 const SidebarFilters = () => {
+  const { slug, category, colors, sizes, maximumProductPrice } = useAppSelector(
+    (state) => state.category
+  );
+
+  const { pathname, search } = useLocation();
+  const history = useHistory();
+
   //
   const [isOnSale, setIsIsOnSale] = useState(true);
   const [rangePrices, setRangePrices] = useState([100, 500]);
-  const [categoriesState, setCategoriesState] = useState<string[]>([]);
   const [colorsState, setColorsState] = useState<string[]>([]);
   const [sizesState, setSizesState] = useState<string[]>([]);
-  const [sortOrderStates, setSortOrderStates] = useState<string>("");
 
-  //
-  const handleChangeCategories = (checked: boolean, name: string) => {
-    checked
-      ? setCategoriesState([...categoriesState, name])
-      : setCategoriesState(categoriesState.filter((i) => i !== name));
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    setColorsState(params.getAll("color"));
+    setSizesState(params.getAll("size"));
+  }, []);
+
+  useEffect(() => {
+    handleChangeURL();
+  }, [colorsState, sizesState]);
+
+  const handleChangeURL = () => {
+    const params = new URLSearchParams();
+    colorsState.forEach((color) => params.append(`color`, color));
+    sizesState.forEach((size) => params.append(`size`, size));
+    history.push({
+      pathname,
+      search: params.toString(),
+    });
   };
 
   const handleChangeColors = (checked: boolean, name: string) => {
@@ -81,35 +55,52 @@ const SidebarFilters = () => {
       : setSizesState(sizesState.filter((i) => i !== name));
   };
 
-  //
+  const renderCategoryItem = (item: Category, padding = "pr-2") => {
+    const isSelected = item.slug === slug;
 
-  // OK
-  const renderTabsCategories = () => {
     return (
-      <div className="relative flex flex-col pb-8 space-y-4">
-        <h3 className="font-semibold mb-2.5">دسته بندی</h3>
-        {DATA_categories.map((item) => (
-          <div key={item.name} className="">
-            <Checkbox
-              name={item.name}
-              label={item.name}
-              defaultChecked={categoriesState.includes(item.name)}
-              sizeClassName="w-5 h-5"
-              labelClassName="text-sm font-normal"
-              onChange={(checked) => handleChangeCategories(checked, item.name)}
-            />
-          </div>
-        ))}
+      <div
+        key={item.id}
+        className={`flex row items-center ${padding} ${
+          isSelected ? "underline" : ""
+        }`}
+      >
+        <ChevronDownIcon className="w-4 h-4" aria-hidden="true" />
+        <Link
+          to={isSelected ? "#" : `/category/${item.slug}`}
+          className="text-sm font-normal pr-2 pl-2 disabled"
+          aria-disabled={true}
+        >
+          {item.name}
+        </Link>
+        {isSelected && <CheckIcon className="w-4 h-4" aria-hidden="true" />}
       </div>
     );
   };
 
-  // OK
+  const renderTabsCategories = () => {
+    return (
+      <div className="relative flex flex-col pb-8 space-y-4">
+        <h3 className="font-semibold mb-2.5">دسته بندی</h3>
+        {category ? (
+          <>
+            {renderCategoryItem(category)}
+            {category.children.map((item: Category) =>
+              renderCategoryItem(item, "pr-4")
+            )}
+          </>
+        ) : null}
+      </div>
+    );
+  };
+
   const renderTabsColor = () => {
+    if (!colors) return null;
+
     return (
       <div className="relative flex flex-col py-8 space-y-4">
-        <h3 className="font-semibold mb-2.5">Colors</h3>
-        {DATA_colors.map((item) => (
+        <h3 className="font-semibold mb-2.5">رنگ ها</h3>
+        {colors.attribute_items.map((item: AttributeItems) => (
           <div key={item.name} className="">
             <Checkbox
               sizeClassName="w-5 h-5"
@@ -125,12 +116,13 @@ const SidebarFilters = () => {
     );
   };
 
-  // OK
   const renderTabsSize = () => {
+    if (!sizes) return null;
+
     return (
       <div className="relative flex flex-col py-8 space-y-4">
-        <h3 className="font-semibold mb-2.5">Sizes</h3>
-        {DATA_sizes.map((item) => (
+        <h3 className="font-semibold mb-2.5">اندازه ها</h3>
+        {sizes.attribute_items.map((item: AttributeItems) => (
           <div key={item.name} className="">
             <Checkbox
               name={item.name}
@@ -146,18 +138,21 @@ const SidebarFilters = () => {
     );
   };
 
-  // OK
-  const renderTabsPriceRage = () => {
+  const renderTabsPriceRage = useCallback(() => {
+    const max = Number(maximumProductPrice);
+    if (max === 0) return null;
+
     return (
       <div className="relative flex flex-col py-8 space-y-5 pr-3">
         <div className="space-y-5">
           {/* <span className="font-semibold">Price range</span> */}
           <Slider
+            reverse
             range
-            min={PRICE_RANGE[0]}
-            max={PRICE_RANGE[1]}
-            step={1}
-            defaultValue={[rangePrices[0], rangePrices[1]]}
+            min={0}
+            max={max}
+            step={10000}
+            defaultValue={[0, max]}
             allowCross={false}
             onChange={(_input: number | number[]) =>
               setRangePrices(_input as number[])
@@ -182,8 +177,8 @@ const SidebarFilters = () => {
                 name="minPrice"
                 disabled
                 id="minPrice"
-                className="block w-32 pr-10 pl-4 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full bg-transparent"
-                value={rangePrices[0]}
+                className="block w-32 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full bg-transparent"
+                value={currencyFormat(rangePrices[0])}
               />
             </div>
           </div>
@@ -203,36 +198,15 @@ const SidebarFilters = () => {
                 disabled
                 name="maxPrice"
                 id="maxPrice"
-                className="block w-32 pr-10 pl-4 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full bg-transparent"
-                value={rangePrices[1]}
+                className="block w-32 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full bg-transparent"
+                value={currencyFormat(rangePrices[1])}
               />
             </div>
           </div>
         </div>
       </div>
     );
-  };
-
-  // OK
-  const renderTabsSortOrder = () => {
-    return (
-      <div className="relative flex flex-col py-8 space-y-4">
-        <h3 className="font-semibold mb-2.5">مرتب سازی</h3>
-        {DATA_sortOrderRadios.map((item) => (
-          <Radio
-            id={item.id}
-            key={item.id}
-            name="radioNameSort"
-            label={item.name}
-            defaultChecked={sortOrderStates === item.id}
-            sizeClassName="w-5 h-5"
-            onChange={setSortOrderStates}
-            className="!text-sm"
-          />
-        ))}
-      </div>
-    );
-  };
+  }, [rangePrices, maximumProductPrice]);
 
   return (
     <div className="divide-y divide-slate-200 dark:divide-slate-700">
@@ -248,7 +222,6 @@ const SidebarFilters = () => {
           onChange={setIsIsOnSale}
         />
       </div>
-      {renderTabsSortOrder()}
     </div>
   );
 };

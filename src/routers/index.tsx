@@ -39,7 +39,7 @@ export const pages: Page[] = [
   { path: "/product", component: ProductDetailPage2 },
   { path: "/product-detail-2", component: ProductDetailPage },
   //
-  { path: "/page-collection-2", component: PageCollection2 },
+  { path: "/category", component: PageCollection2 },
   { path: "/page-collection", component: PageCollection },
   { path: "/page-search", component: PageSearch },
   //

@@ -1,14 +1,15 @@
+import React, { FC, Fragment, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import CardCategory3 from "components/CardCategories/CardCategory3";
-import React, { FC, Fragment, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { LocationStates } from "routers/types";
+import { useAppSelector } from "store/hooks";
 
 export interface NavItemType {
   id: string;
   name: string;
-  href: keyof LocationStates | "#" | "/#";
+  // href: keyof LocationStates | "#" | "/#";
+  href: string;
   targetBlank?: boolean;
   children?: NavItemType[];
   type?: "dropdown" | "megaMenu" | "none";
@@ -20,6 +21,8 @@ export interface NavigationItemProps {
 }
 
 const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
+  const { category } = useAppSelector((state) => state.category);
+
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
 
   const onMouseEnterMenu = (id: string) => {
@@ -224,7 +227,9 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
           strict
           target={item.targetBlank ? "_blank" : undefined}
           rel="noopener noreferrer"
-          className="inline-flex items-center text-sm lg:text-[16px] font-medium text-slate-700 dark:text-slate-300 py-2.5 px-4 xl:px-5 rounded-full hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+          className={`inline-flex items-center text-sm lg:text-[16px] font-medium text-slate-700 dark:text-slate-300 py-2.5 px-4 xl:px-5 rounded-full hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-200 ${
+            category && category.id == menuItem.id && "bg-slate-100"
+          }`}
           to={{
             pathname: item.href || undefined,
           }}

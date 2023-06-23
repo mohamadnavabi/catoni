@@ -1,6 +1,12 @@
 import { API_URL } from "contains/contants";
 import HttpClient from "../httpClient";
 
+export interface CategoryParams {
+  slug: string;
+  color: string[];
+  size: string[];
+}
+
 class Product extends HttpClient {
   constructor() {
     super(`${API_URL}/products`);
@@ -22,6 +28,19 @@ class Product extends HttpClient {
 
   findBySlug(slug: string) {
     return this.instance.get(`/tutorials?title=${slug}`);
+  }
+
+  getProductsByCategory(categoryParams: CategoryParams) {
+    return this.instance.get("/getProductsByCategory/" + categoryParams.slug, {
+      params: {
+        color: categoryParams?.color,
+        size: categoryParams?.size,
+      },
+    });
+  }
+
+  getMaximumProductPrice(categorySlug: string) {
+    return this.instance.get("/getMaximumProductPrice/" + categorySlug);
   }
 }
 

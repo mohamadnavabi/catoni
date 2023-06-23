@@ -72,9 +72,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
   const renderColors = () => {
     if (!colors || !colors.length) {
-      return (
-        <div className="flex space-x-1 space-x-reverse justify-center empty-colors" />
-      );
+      return null;
     }
 
     if (colors) {

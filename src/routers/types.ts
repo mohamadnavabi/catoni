@@ -9,7 +9,7 @@ export interface LocationStates {
   "/product"?: {};
   "/product-detail-2"?: {};
   "/page-collection"?: {};
-  "/page-collection-2"?: {};
+  "/category"?: {};
   "/page-search"?: {};
   "/home-header-2"?: {};
   //

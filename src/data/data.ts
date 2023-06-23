@@ -23,7 +23,7 @@ export interface CartItem extends Product {
   item_id?: number;
 }
 
-export interface Categories {
+export interface Category {
   active: number;
   description: null | string;
   icon: null | string;
@@ -81,6 +81,7 @@ export interface Attribute {
   variable: Boolean;
   created_at: string;
   updated_at: string;
+  attribute_items: AttributeItems[];
 }
 
 export interface AttributeItems {
@@ -162,7 +163,7 @@ export interface Product {
   weight_unit: string;
   length_unit: string;
   count_unit: string;
-  categories: Categories[];
+  categories: Category[];
   guarantees: Guarantees[];
   tags: Tags[];
   media: Media[];

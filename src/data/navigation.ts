@@ -75,7 +75,7 @@ export const MEGAMENU_TEMPLATES: NavItemType[] = [
     name: "Shop Pages",
     children: [
       { id: ncNanoId(), href: "/page-collection", name: "Category Page 1" },
-      { id: ncNanoId(), href: "/page-collection-2", name: "Category Page 2" },
+      { id: ncNanoId(), href: "/category", name: "Category Page 2" },
       { id: ncNanoId(), href: "/product", name: "Product Page 1" },
       { id: ncNanoId(), href: "/product-detail-2", name: "Product Page 2" },
       { id: ncNanoId(), href: "/cart", name: "Cart Page" },
@@ -134,7 +134,7 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
       },
       {
         id: ncNanoId(),
-        href: "/page-collection-2",
+        href: "/category",
         name: "Category page 2",
       },
     ],
@@ -232,13 +232,13 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
 
 export const NAVIGATION_DEMO: NavItemType[] = [
   {
-    id: ncNanoId(),
-    href: "/#",
+    id: "1",
+    href: "/category/woman",
     name: "زنـانـه",
   },
   {
-    id: ncNanoId(),
-    href: "/#",
+    id: "2",
+    href: "/category/man",
     name: "مردانه",
   },
 ];

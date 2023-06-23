@@ -545,6 +545,7 @@ const TabFilters = () => {
                     <div className="space-y-5">
                       {/* <span className="font-medium">Price range</span> */}
                       <Slider
+                        reverse
                         range
                         min={PRICE_RANGE[0]}
                         max={PRICE_RANGE[1]}
@@ -862,6 +863,7 @@ const TabFilters = () => {
                           <div className="relative flex flex-col space-y-8">
                             <div className="space-y-5">
                               <Slider
+                                reverse
                                 range
                                 className="text-red-400"
                                 min={PRICE_RANGE[0]}
