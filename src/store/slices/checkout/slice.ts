@@ -1,61 +1,79 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CategoryState } from "./interfaces";
+import { CheckoutState } from "./interfaces";
 import {
-  getCategory,
-  getColorAttributeItems,
-  getMaximumProductPrice,
-  getProductsByCategory,
-  getSizeAttributeItems,
+  getAddresses,
+  getAddress,
+  storeAddress,
+  updateAddress,
+  destroyAddress,
+  touchAddress,
 } from "./thunks";
 
-const initialState: CategoryState = {
-  slug: "",
-  products: [],
-  maximumProductPrice: 0,
-  category: undefined,
-  colors: undefined,
-  sizes: undefined,
+const initialState: CheckoutState = {
+  addresses: [],
+  selectedAddress: undefined,
+  addressFormButtonLoading: false,
 };
 
-export const categorySlice = createSlice({
-  name: "category",
+export const checkoutSlice = createSlice({
+  name: "checkout",
   initialState,
   reducers: {
-    setSlug: (state, action) => ({
-      ...state,
-      slug: action.payload,
-    }),
     reset: (state) => ({
       ...state,
-      slug: "",
-      products: [],
-      maximumProductPrice: 0,
-      category: undefined,
-      colors: undefined,
-      sizes: undefined,
+      addresses: [],
+      selectedAddress: undefined,
+      addressFormButtonLoading: false,
     }),
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getCategory.fulfilled, (state, action) => ({
-        ...state,
-        category: action.payload,
-      }))
-      .addCase(getProductsByCategory.fulfilled, (state, action) => ({
-        ...state,
-        products: action.payload.data,
-      }))
-      .addCase(getMaximumProductPrice.fulfilled, (state, action: any) => ({
-        ...state,
-        maximumProductPrice: action.payload,
-      }))
-      .addCase(getColorAttributeItems.fulfilled, (state, action: any) => ({
-        ...state,
-        colors: action.payload,
-      }))
-      .addCase(getSizeAttributeItems.fulfilled, (state, action: any) => ({
-        ...state,
-        sizes: action.payload,
-      }));
+    builder.addCase(getAddresses.fulfilled, (state, action) => ({
+      ...state,
+      addresses: action.payload,
+      selectedAddress: action.payload[0],
+    }));
+    builder.addCase(getAddress.fulfilled, (state, action) => ({
+      ...state,
+      addresses: [action.payload, ...state.addresses],
+      selectedAddress: action.payload,
+    }));
+    builder.addCase(storeAddress.pending, (state, action) => ({
+      ...state,
+      addressFormButtonLoading: true,
+    }));
+    builder.addCase(storeAddress.fulfilled, (state, action) => ({
+      ...state,
+      addresses: action.payload,
+      selectedAddress: action.payload[0],
+      addressFormButtonLoading: false,
+    }));
+    builder.addCase(storeAddress.rejected, (state, action) => ({
+      ...state,
+      addressFormButtonLoading: false,
+    }));
+    builder.addCase(updateAddress.pending, (state, action) => ({
+      ...state,
+      addressFormButtonLoading: true,
+    }));
+    builder.addCase(updateAddress.fulfilled, (state, action) => ({
+      ...state,
+      addresses: action.payload,
+      selectedAddress: action.payload[0],
+      addressFormButtonLoading: false,
+    }));
+    builder.addCase(updateAddress.rejected, (state, action) => ({
+      ...state,
+      addressFormButtonLoading: false,
+    }));
+    builder.addCase(destroyAddress.fulfilled, (state, action) => ({
+      ...state,
+      addresses: action.payload,
+      selectedAddress: action.payload[0],
+    }));
+    builder.addCase(touchAddress.fulfilled, (state, action) => ({
+      ...state,
+      addresses: action.payload,
+      selectedAddress: action.payload[0],
+    }));
   },
 });

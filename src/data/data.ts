@@ -2,6 +2,90 @@ type Boolean = 0 | 1;
 
 export type StockStatus = "in_stock" | "low_stock" | "out_of_stock";
 
+export interface User {
+  id: number;
+  first_name?: string;
+  last_name?: string;
+  national_id?: string;
+  company_name?: string;
+  banking_number?: string;
+  mobile: string;
+  email?: string;
+  password?: string;
+  about?: string;
+  role_id?: string;
+  date_of_birth?: string;
+  mobile_verified_at?: string;
+  email_verified_at?: string;
+}
+
+export interface Country {
+  id: number;
+  name: string;
+  code: string;
+  area_code?: number;
+}
+
+export interface State {
+  id: number;
+  name: string;
+  code: string;
+  area_code?: number;
+  latitude?: string;
+  longitude?: string;
+  approved: boolean;
+  country: Country;
+}
+
+export interface City {
+  id: number;
+  name: string;
+  code: string;
+  latitude?: string;
+  longitude?: string;
+  approved: boolean;
+  state: State;
+}
+
+export interface Address {
+  id: number;
+  title: string;
+  latitude?: string;
+  longitude?: string;
+  postal_address: string;
+  postal_code: string;
+  phone: string;
+  plate: string;
+  unit?: string;
+  receptor_first_name: string;
+  receptor_last_name: string;
+  receptor_national_id?: string;
+  receptor_mobile: string;
+  type: "home" | "work";
+  user: User;
+  city: City;
+  city_id?: number;
+}
+
+export interface AddressParams {
+  id?: number;
+  title: string;
+  latitude?: string;
+  longitude?: string;
+  postal_address: string;
+  postal_code: string;
+  phone: string;
+  plate: string;
+  unit?: string;
+  receptor_first_name: string;
+  receptor_last_name: string;
+  receptor_national_id?: string;
+  receptor_mobile: string;
+  type: "home" | "work";
+  city_id: number;
+  city?: City;
+}
+
 export type AttributeTypes =
   | "multiple-select"
   | "text"
@@ -1026,3 +1110,28 @@ export const SPORT_PRODUCTS: Product[] = [
     deleted_at: null,
   },
 ];
+
+export type maxWidthType =
+  | "max-w-0"
+  | "max-w-none"
+  | "max-w-xs"
+  | "max-w-sm"
+  | "max-w-md"
+  | "max-w-lg"
+  | "max-w-xl"
+  | "max-w-2xl"
+  | "max-w-3xl"
+  | "max-w-4xl"
+  | "max-w-5xl"
+  | "max-w-6xl"
+  | "max-w-7xl"
+  | "max-w-full"
+  | "max-w-min"
+  | "max-w-max"
+  | "max-w-fit"
+  | "max-w-prose"
+  | "max-w-screen-sm"
+  | "max-w-screen-md"
+  | "max-w-screen-lg"
+  | "max-w-screen-xl"
+  | "max-w-screen-2xl";

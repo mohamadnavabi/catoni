@@ -8,6 +8,7 @@ export interface RadioProps {
   defaultChecked?: boolean;
   sizeClassName?: string;
   label?: string;
+  checked?: boolean;
 }
 
 const Radio: FC<RadioProps> = ({
@@ -18,6 +19,7 @@ const Radio: FC<RadioProps> = ({
   label,
   sizeClassName = "w-6 h-6",
   defaultChecked,
+  checked,
 }) => {
   return (
     <div className={`flex items-center text-sm sm:text-base ${className}`}>
@@ -29,6 +31,7 @@ const Radio: FC<RadioProps> = ({
         onChange={(e) => onChange && onChange(e.target.value)}
         defaultChecked={defaultChecked}
         value={id}
+        checked={checked}
       />
       {label && (
         <label

@@ -5,14 +5,19 @@ import Prices from "components/Prices";
 import { AttributeTypes, Product, PRODUCTS } from "data/data";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import Input from "components/shared/Input/Input";
 import ContactInfo from "./ContactInfo";
 import PaymentMethod from "./PaymentMethod";
 import ShippingAddress from "./ShippingAddress";
 import { BASE_URL } from "contains/contants";
-import { CartItem, removeItem, updateQuantity } from "store/slices";
+import {
+  CartItem,
+  getAddresses,
+  removeItem,
+  updateQuantity,
+} from "store/slices";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const CheckoutPage = () => {
@@ -22,15 +27,18 @@ const CheckoutPage = () => {
 
   const { items, tax, shipping, discount, total, totalWithoutDiscount } =
     useAppSelector((state) => state.cart);
+  const { token } = useAppSelector((state) => state.auth);
+  const { selectedAddress } = useAppSelector((state) => state.checkout);
 
   const dispatch = useAppDispatch();
 
+  const history = useHistory();
+
   useEffect(() => {
-    // TODO:
-    // items.length === 0 navigate to home
-    // user not login navigate to login
-    // update cart
-  }, [items]);
+    if (!token) history.replace("/login");
+    else if (!items.length) history.replace("/cart");
+    else dispatch(getAddresses());
+  }, []);
 
   const handleScrollToEl = (id: string) => {
     const element = document.getElementById(id);
@@ -235,20 +243,6 @@ const CheckoutPage = () => {
   const renderLeft = () => {
     return (
       <div className="space-y-8">
-        <div id="ContactInfo" className="scroll-mt-24">
-          <ContactInfo
-            isActive={tabActive === "ContactInfo"}
-            onOpenActive={() => {
-              setTabActive("ContactInfo");
-              handleScrollToEl("ContactInfo");
-            }}
-            onCloseActive={() => {
-              setTabActive("ShippingAddress");
-              handleScrollToEl("ShippingAddress");
-            }}
-          />
-        </div>
-
         <div id="ShippingAddress" className="scroll-mt-24">
           <ShippingAddress
             isActive={tabActive === "ShippingAddress"}

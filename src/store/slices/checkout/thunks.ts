@@ -1,33 +1,32 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  attributeAPI,
-  categoryAPI,
-  CategoryParams,
-  productAPI,
-} from "services/http/api";
+import { Address } from "data/data";
+import { addressAPI } from "services/http/api";
 
-export const getCategory = createAsyncThunk(
-  "category/getCategory",
-  async (categorySlug: string) => categoryAPI.get(categorySlug)
+export const getAddresses = createAsyncThunk("checkout/getAddresses", () =>
+  addressAPI.all()
 );
 
-export const getProductsByCategory = createAsyncThunk(
-  "category/getProductsByCategory",
-  (categoryParams: CategoryParams) =>
-    productAPI.getProductsByCategory(categoryParams)
+export const getAddress = createAsyncThunk(
+  "checkout/getAddress",
+  (address: Address) => addressAPI.get(address.id)
 );
 
-export const getMaximumProductPrice = createAsyncThunk(
-  "category/getMaximumProductPrice",
-  (categorySlug: string) => productAPI.getMaximumProductPrice(categorySlug)
+export const storeAddress = createAsyncThunk(
+  "checkout/storeAddress",
+  (address: Address) => addressAPI.store(address)
 );
 
-export const getColorAttributeItems = createAsyncThunk(
-  "category/getColorAttributeItems",
-  () => attributeAPI.get("color")
+export const updateAddress = createAsyncThunk(
+  "checkout/updateAddress",
+  (address: Address) => addressAPI.update(address.id, address)
 );
 
-export const getSizeAttributeItems = createAsyncThunk(
-  "category/getSizeAttributeItems",
-  () => attributeAPI.get("size")
+export const destroyAddress = createAsyncThunk(
+  "checkout/destroyAddress",
+  (address: Address) => addressAPI.destroy(address.id)
+);
+
+export const touchAddress = createAsyncThunk(
+  "checkout/touchAddress",
+  (address: Address) => addressAPI.touch(address.id)
 );
