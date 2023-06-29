@@ -56,6 +56,8 @@ const ShippingAddress: FC<Props> = ({
   const { addressFormButtonLoading, addresses, selectedAddress } =
     useAppSelector((state) => state.checkout);
 
+  const dispatch = useAppDispatch();
+
   const isEditMode = addressForEdit.hasOwnProperty("id");
 
   useEffect(() => {
@@ -69,8 +71,6 @@ const ShippingAddress: FC<Props> = ({
   useEffect(() => {
     if (addressFormModalIsOpen === false) setCities(tehranCities);
   }, [addressFormModalIsOpen]);
-
-  const dispatch = useAppDispatch();
 
   const renderAddressModal = () => (
     <Modal

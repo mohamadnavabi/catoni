@@ -3,7 +3,7 @@ import { PRODUCTS } from "data/data";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import CommonLayout from "./CommonLayout";
 
-const AccountSavelists = () => {
+const Wishlist = () => {
   const renderSection1 = () => {
     return (
       <div className="space-y-10 sm:space-y-12">
@@ -32,4 +32,4 @@ const AccountSavelists = () => {
   );
 };
 
-export default AccountSavelists;
+export default Wishlist;

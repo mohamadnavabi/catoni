@@ -13,6 +13,7 @@
     "@glidejs/glide": "^3.6.0",
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
+    "@ijavad805/react-datepicker": "^2.0.4",
     "@reduxjs/toolkit": "^1.9.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",

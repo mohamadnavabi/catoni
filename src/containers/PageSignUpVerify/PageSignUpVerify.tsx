@@ -5,10 +5,10 @@ import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { register, verifyOTP, editNumber, storeCart } from "store/slices";
+import { register, verifyPasscode, editNumber, storeCart } from "store/slices";
 
 type FormValues = {
-  otp: string;
+  passcode: string;
   password: string;
   password_confirmation: string;
 };
@@ -18,20 +18,19 @@ export interface PageSignUpProps {
 }
 
 const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
-  const { loading, deviceInfo, otpResult, otpVerified, user } = useAppSelector(
-    (state) => state.auth
-  );
+  const { loading, deviceInfo, passcodeResult, passcodeVerified, user } =
+    useAppSelector((state) => state.auth);
   const { items } = useAppSelector((state) => state.cart);
 
   const dispatch = useAppDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    if (otpResult.otp_count === 0) history.goBack();
-  }, [otpResult]);
+    if (passcodeResult.passcode_count === 0) history.goBack();
+  }, [passcodeResult]);
 
   useEffect(() => {
-    if (user.token !== "") {
+    if (user && user.token !== "") {
       history.push("/");
       dispatch(storeCart(items));
       sendCartItemsToServer();
@@ -43,18 +42,18 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   };
 
   const onSubmitForm = async ({
-    otp,
+    passcode,
     password,
     password_confirmation,
   }: FormValues) => {
-    if (!otpVerified) {
-      dispatch(verifyOTP({ mobile: otpResult.mobile, otp }));
+    if (!passcodeVerified) {
+      dispatch(verifyPasscode({ mobile: passcodeResult.mobile, passcode }));
     } else {
       dispatch(
         register({
-          mobile: otpResult.mobile,
+          mobile: passcodeResult.mobile,
           device_info: deviceInfo,
-          otp,
+          passcode,
           password,
           password_confirmation,
         })
@@ -63,21 +62,21 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   };
 
   const initialValues: FormValues = {
-    otp: "",
+    passcode: "",
     password: "",
     password_confirmation: "",
   };
 
   const registerValidate = ({
-    otp,
+    passcode,
     password,
     password_confirmation,
   }: FormValues) => {
     const errors: any = {};
 
-    if (!otpVerified) {
-      if (otp === "") {
-        errors.otp = "کد تایید لازم است";
+    if (!passcodeVerified) {
+      if (passcode === "") {
+        errors.passcode = "کد تایید لازم است";
       }
     } else {
       if (password === "") {
@@ -125,22 +124,22 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
               handleSubmit,
             }) => (
               <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
-                {!otpVerified ? (
+                {!passcodeVerified ? (
                   <label className="block">
                     <span className="text-neutral-800 dark:text-neutral-200">
                       کد تایید
                     </span>
                     <Input
-                      name="otp"
+                      name="passcode"
                       type="text"
                       placeholder="XXXXX"
                       className="mt-1 text-center"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.otp}
+                      value={values.passcode}
                     />
                     <span className="text-red-500 text-xs">
-                      {errors.otp && touched.otp && errors.otp}
+                      {errors.passcode && touched.passcode && errors.passcode}
                     </span>
                   </label>
                 ) : (
@@ -185,16 +184,16 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
                 )}
                 <ButtonPrimary
                   type="submit"
-                  disabled={touched.otp && !!errors.otp}
+                  disabled={touched.passcode && !!errors.passcode}
                   loading={loading}
                 >
-                  {otpVerified ? "ثبت نام" : "ادامه"}
+                  {passcodeVerified ? "ثبت نام" : "ادامه"}
                 </ButtonPrimary>
               </form>
             )}
           </Formik>
 
-          {!otpVerified && (
+          {!passcodeVerified && (
             <span className="block text-center text-neutral-700 dark:text-neutral-300">
               <Link
                 className="text-green-600"

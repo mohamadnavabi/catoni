@@ -9,7 +9,7 @@ const useAuth = (callback: Callback, deps: DependencyList = []) => {
   const dependencyList = useMemo(() => [user, ...deps], [user, deps]);
 
   useEffect(() => {
-    if (user.token) {
+    if (user && user.token) {
       callback();
     }
   }, dependencyList);

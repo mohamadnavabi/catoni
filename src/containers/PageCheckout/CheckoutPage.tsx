@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 import { Link, useHistory } from "react-router-dom";
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import Input from "components/shared/Input/Input";
-import ContactInfo from "./ContactInfo";
 import PaymentMethod from "./PaymentMethod";
 import ShippingAddress from "./ShippingAddress";
 import { BASE_URL } from "contains/contants";

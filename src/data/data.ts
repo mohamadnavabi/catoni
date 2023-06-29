@@ -2,6 +2,8 @@ type Boolean = 0 | 1;
 
 export type StockStatus = "in_stock" | "low_stock" | "out_of_stock";
 
+export type Gender = "male" | "female";
+
 export interface User {
   id: number;
   first_name?: string;
@@ -17,6 +19,20 @@ export interface User {
   date_of_birth?: string;
   mobile_verified_at?: string;
   email_verified_at?: string;
+  token: string;
+}
+
+export interface UserParams {
+  first_name: string;
+  last_name: string;
+  mobile: string;
+  national_id?: string;
+  date_of_birth?: string;
+  gender: Gender;
+  banking_number?: string;
+  email?: string;
+  password?: string;
+  about?: string;
 }
 
 export interface Country {

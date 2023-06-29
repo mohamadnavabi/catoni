@@ -25,7 +25,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (user.token !== "") {
+    if (user && user.token !== "") {
       history.goBack();
       dispatch(storeCart(items));
     }

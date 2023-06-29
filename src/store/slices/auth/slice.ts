@@ -3,34 +3,27 @@ import toast from "react-hot-toast";
 import { storeEncryptData } from "utils/storage";
 import { AuthState } from "./interfaces";
 import {
-  generateOTP,
+  generatePasscode,
   login,
   logout,
   register,
+  updatePassword,
+  updateProfile,
   verify,
-  verifyOTP,
+  verifyPasscode,
 } from "./thunks";
 
 const initialState: AuthState = {
   loading: false,
-  user: {
-    token: "",
-    user: {
-      id: -1,
-      email: null,
-      mobile: null,
-      created_at: "",
-      updated_at: "null",
-    },
-  },
+  user: null,
   deviceInfo: "",
-  otpResult: {
+  passcodeResult: {
     mobile: "",
     expire_at: "",
     user_exist: false,
-    otp_count: 0,
+    passcode_count: 0,
   },
-  otpVerified: false,
+  passcodeVerified: false,
   error: false,
 };
 
@@ -45,54 +38,48 @@ export const authSlice = createSlice({
       state.deviceInfo = action.payload;
     },
     editNumber: (state) => {
-      state.otpResult = {
+      state.passcodeResult = {
         mobile: "",
         expire_at: "",
         user_exist: false,
-        otp_count: 0,
+        passcode_count: 0,
       };
     },
   },
   extraReducers: (builder) => {
-    // Generate otp
+    // Generate passcode
     builder
-      .addCase(generateOTP.pending, (state) => {
+      .addCase(generatePasscode.pending, (state) => {
         return {
           ...state,
           loading: true,
           error: false,
         };
       })
-      .addCase(
-        generateOTP.fulfilled,
-        (state, action: PayloadAction<AuthState["otpResult"]>) => {
-          return { ...state, loading: false, otpResult: action.payload };
-        }
-      )
-      .addCase(generateOTP.rejected, (state, action) => {
+      .addCase(generatePasscode.fulfilled, (state, action) => {
+        return { ...state, loading: false, passcodeResult: action.payload };
+      })
+      .addCase(generatePasscode.rejected, (state, action) => {
         state = Object.assign(state, {
           loading: false,
         });
       });
-    // verify otp
+    // Verify passcode
     builder
-      .addCase(verifyOTP.pending, (state) => {
+      .addCase(verifyPasscode.pending, (state) => {
         return {
           ...state,
           loading: true,
           error: false,
         };
       })
-      .addCase(
-        verifyOTP.fulfilled,
-        (state, action: PayloadAction<AuthState["otpResult"]>) => {
-          state = Object.assign(state, {
-            loading: false,
-            otpVerified: action.payload,
-          });
-        }
-      )
-      .addCase(verifyOTP.rejected, (state, action) => {
+      .addCase(verifyPasscode.fulfilled, (state, action) => {
+        state = Object.assign(state, {
+          loading: false,
+          passcodeVerified: action.payload,
+        });
+      })
+      .addCase(verifyPasscode.rejected, (state, action) => {
         state = Object.assign(state, {
           loading: false,
         });
@@ -106,13 +93,10 @@ export const authSlice = createSlice({
           error: false,
         };
       })
-      .addCase(
-        register.fulfilled,
-        (state, action: PayloadAction<AuthState["user"]>) => {
-          storeEncryptData("@token", action.payload.token);
-          return { ...state, loading: false, user: action.payload };
-        }
-      )
+      .addCase(register.fulfilled, (state, action) => {
+        storeEncryptData("@token", action.payload.token);
+        return { ...state, loading: false, user: action.payload };
+      })
       .addCase(register.rejected, (state, action) => {
         return {
           ...state,
@@ -129,17 +113,14 @@ export const authSlice = createSlice({
           error: false,
         };
       })
-      .addCase(
-        login.fulfilled,
-        (state, action: PayloadAction<AuthState["user"]>) => {
-          storeEncryptData("@token", action.payload.token);
-          return {
-            ...state,
-            loading: false,
-            user: action.payload,
-          };
-        }
-      )
+      .addCase(login.fulfilled, (state, action) => {
+        storeEncryptData("@token", action.payload.token);
+        return {
+          ...state,
+          loading: false,
+          user: action.payload,
+        };
+      })
       .addCase(login.rejected, (state, action) => {
         return {
           ...state,
@@ -149,24 +130,21 @@ export const authSlice = createSlice({
       });
     // Verify
     builder
-      .addCase(verify.pending, (state) => {
+      .addCase(verify.pending, (state, action) => {
         return {
           ...state,
           loading: true,
           error: false,
         };
       })
-      .addCase(
-        verify.fulfilled,
-        (state, action: PayloadAction<AuthState["user"]>) => {
-          storeEncryptData("@token", action.payload.token);
-          return {
-            ...state,
-            loading: false,
-            user: action.payload,
-          };
-        }
-      )
+      .addCase(verify.fulfilled, (state, action) => {
+        storeEncryptData("@token", action.payload.token);
+        return {
+          ...state,
+          loading: false,
+          user: action.payload,
+        };
+      })
       .addCase(verify.rejected, (state, action) => {
         return {
           ...state,
@@ -183,19 +161,64 @@ export const authSlice = createSlice({
           error: false,
         };
       })
-      .addCase(
-        logout.fulfilled,
-        (state, action: PayloadAction<AuthState["user"]>) => {
-          localStorage.removeItem("@token");
-          toast.success("از حساب کاربری خارج شدید");
-          return {
-            ...state,
-            loading: false,
-            user: action.payload,
-          };
-        }
-      )
+      .addCase(logout.fulfilled, (state, action) => {
+        localStorage.removeItem("@token");
+        toast.success("از حساب کاربری خارج شدید");
+        return {
+          ...state,
+          loading: false,
+          user: null,
+        };
+      })
       .addCase(logout.rejected, (state, action) => {
+        return {
+          ...state,
+          loading: false,
+          error: true,
+        };
+      });
+    // Update profile
+    builder
+      .addCase(updateProfile.pending, (state) => {
+        return {
+          ...state,
+          loading: true,
+        };
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        toast.success("اطلاعات با موفقیت بروز شد");
+        return {
+          ...state,
+          loading: false,
+          user: action.payload,
+        };
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        return {
+          ...state,
+          loading: false,
+          error: true,
+        };
+      });
+    // Logout
+    builder
+      .addCase(updatePassword.pending, (state) => {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      })
+      .addCase(updatePassword.fulfilled, (state, action) => {
+        localStorage.removeItem("@token");
+        toast.success("کلمه عبور تفییر کرد لطفا مجددا وارد شوید");
+        return {
+          ...state,
+          loading: false,
+          user: null,
+        };
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
         return {
           ...state,
           loading: false,

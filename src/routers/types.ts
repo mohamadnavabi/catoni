@@ -14,10 +14,10 @@ export interface LocationStates {
   "/home-header-2"?: {};
   //
   "/account"?: {};
-  "/account-savelists"?: {};
-  "/account-change-password"?: {};
+  "/wishlist"?: {};
+  "/change-password"?: {};
   "/account-billing"?: {};
-  "/account-my-order"?: {};
+  "/my-orders"?: {};
   //
   "/cart"?: {};
   "/checkout"?: {};
@@ -29,7 +29,7 @@ export interface LocationStates {
   "/contact"?: {};
   "/login"?: {};
   "/signup"?: {};
-  "/verify-otp"?: {};
+  "/verify-passcode"?: {};
   "/forgot-pass"?: {};
   "/page404"?: {};
   "/subscription"?: {};

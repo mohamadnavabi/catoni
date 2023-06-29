@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { avatarImgs } from "contains/fakeData";
 import { Link } from "react-router-dom";
 import Avatar from "components/shared/Avatar/Avatar";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { cartSlice, logout } from "store/slices";
+import avatar from "assets/images/avatar.png";
 
 export default function AvatarDropdown() {
   const { user } = useAppSelector((state) => state.auth);
@@ -16,7 +16,7 @@ export default function AvatarDropdown() {
     dispatch(cartSlice.actions.resetCart());
   };
 
-  if (user.token === "") {
+  if (user === null || user.token === "") {
     return (
       <Link
         to={"/login"}
@@ -90,16 +90,22 @@ export default function AvatarDropdown() {
               <Popover.Panel className="absolute z-10 w-screen max-w-[260px] px-4 mt-3.5 -left-10 sm:left-0 sm:px-0">
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
-                    <div className="flex items-center space-x-3 space-x-reverse">
-                      <Avatar imgUrl={avatarImgs[7]} sizeClass="w-12 h-12" />
+                    {user.first_name && (
+                      <>
+                        <div className="flex items-center space-x-3 space-x-reverse">
+                          <Avatar imgUrl={avatar} sizeClass="w-12 h-12" />
 
-                      <div className="flex-grow">
-                        <h4 className="font-semibold">آیسان خیابانی</h4>
-                        <p className="text-xs mt-0.5">تهران</p>
-                      </div>
-                    </div>
+                          <div className="flex-grow">
+                            <h4 className="font-semibold">
+                              {user.first_name} {user.last_name}
+                            </h4>
+                            <p className="text-xs mt-0.5">{user.mobile}</p>
+                          </div>
+                        </div>
 
-                    <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
+                        <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
+                      </>
+                    )}
 
                     {/* ------------------ 1 --------------------- */}
                     <Link
@@ -138,7 +144,7 @@ export default function AvatarDropdown() {
 
                     {/* ------------------ 2 --------------------- */}
                     <Link
-                      to={"/checkout"}
+                      to={"/my-orders"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
@@ -190,7 +196,7 @@ export default function AvatarDropdown() {
 
                     {/* ------------------ 2 --------------------- */}
                     <Link
-                      to={"/account-savelists"}
+                      to={"/wishlist"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >

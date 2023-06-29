@@ -1,62 +1,46 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { authAPI } from "services/http/api";
 import {
-  authAPI,
   DeviceInfo,
-  GenerateOTPParams,
+  GeneratePasscodeParams,
   LoginParams,
   RegisterParams,
-  VerifyOTPParams,
-} from "services/http/api";
+  UpdateParams,
+  UpdatePasswordParams,
+  VerifyPasscodeParams,
+} from "./interfaces";
 
-export const generateOTP = createAsyncThunk(
-  "auth/generateOTP",
-  async (params: GenerateOTPParams) => {
-    try {
-      return authAPI.generateOTP(params);
-    } catch (error) {}
-  }
+export const generatePasscode = createAsyncThunk(
+  "auth/generatePasscode",
+  (params: GeneratePasscodeParams) => authAPI.generatePasscode(params)
 );
 
-export const verifyOTP = createAsyncThunk(
-  "auth/verifyOTP",
-  async (params: VerifyOTPParams) => {
-    try {
-      return authAPI.verifyOTP(params);
-    } catch (error) {}
-  }
+export const verifyPasscode = createAsyncThunk(
+  "auth/verifyPasscode",
+  (params: VerifyPasscodeParams) => authAPI.verifyPasscode(params)
 );
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (params: RegisterParams) => {
-    try {
-      return authAPI.register(params);
-    } catch (error) {}
-  }
+  (params: RegisterParams) => authAPI.register(params)
 );
 
-export const login = createAsyncThunk(
-  "auth/login",
-  async (params: LoginParams) => {
-    try {
-      return authAPI.login(params);
-    } catch (error) {}
-  }
+export const login = createAsyncThunk("auth/login", (params: LoginParams) =>
+  authAPI.login(params)
 );
 
-export const verify = createAsyncThunk(
-  "auth/verify",
-  async (params: DeviceInfo) => {
-    try {
-      return authAPI.verify(params);
-    } catch (error) {
-      console.log("error", error);
-    }
-  }
+export const verify = createAsyncThunk("auth/verify", (params: DeviceInfo) =>
+  authAPI.verify(params)
 );
 
-export const logout = createAsyncThunk("auth/logout", async () => {
-  try {
-    return authAPI.logout();
-  } catch (error) {}
-});
+export const logout = createAsyncThunk("auth/logout", () => authAPI.logout());
+
+export const updateProfile = createAsyncThunk(
+  "auth/updateProfile",
+  (params: UpdateParams) => authAPI.update(params)
+);
+
+export const updatePassword = createAsyncThunk(
+  "auth/updatePassword",
+  (params: UpdatePasswordParams) => authAPI.updatePassword(params)
+);

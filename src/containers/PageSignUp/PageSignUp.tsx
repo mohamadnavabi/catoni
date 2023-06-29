@@ -5,7 +5,7 @@ import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { generateOTP } from "store/slices";
+import { generatePasscode } from "store/slices";
 import { getDeviceIp } from "utils/device";
 import { validateMobile } from "utils/validation";
 import toast from "react-hot-toast";
@@ -21,7 +21,7 @@ export interface PageSignUpProps {
 const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   const [ip, setIp] = useState("");
 
-  const { loading, deviceInfo, otpResult } = useAppSelector(
+  const { loading, deviceInfo, passcodeResult } = useAppSelector(
     (state) => state.auth
   );
 
@@ -36,17 +36,19 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   }, []);
 
   useEffect(() => {
-    if (otpResult.otp_count > 0) {
-      if (otpResult.user_exist) {
+    if (passcodeResult.passcode_count > 0) {
+      if (passcodeResult.user_exist) {
         toast.error("شما قبلا عضو شده‌اید لطفا وارد شوید.");
       } else {
-        history.push("verify-otp");
+        history.push("verify-passcode");
       }
     }
-  }, [otpResult]);
+  }, [passcodeResult]);
 
   const onSubmitForm = async ({ username }: FormValues) => {
-    dispatch(generateOTP({ ip, device_info: deviceInfo, mobile: username }));
+    dispatch(
+      generatePasscode({ ip, device_info: deviceInfo, mobile: username })
+    );
   };
 
   const initialValues: FormValues = { username: "" };

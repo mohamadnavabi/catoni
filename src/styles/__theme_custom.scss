@@ -366,3 +366,30 @@ input[type="number"] {
 .empty-colors {
   min-height: 24px;
 }
+
+select {
+  background-position: left 0.5rem center !important;
+  padding-left: 2.5rem !important;
+  padding-right: 1rem !important;
+}
+
+.__datepicker.__datepicker-theme-blue * {
+  --primary: rgb(17, 24, 39) !important;
+  --secondary: rgb(107, 114, 128) !important;
+}
+
+.__datepicker input:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+    var(--tw-shadow, 0 0 #0000) !important;
+}
+.__datepicker input {
+  --tw-border-opacity: 1 !important;
+  border-color: rgba(var(--c-neutral-200), var(--tw-border-opacity)) !important;
+  border-width: 1px;
+  border-left-color: transparent !important;
+  outline: none !important;
+}

@@ -21,7 +21,7 @@ import PageHome2 from "containers/PageHome/PageHome2";
 import PageHome3 from "containers/PageHome/PageHome3";
 import ProductDetailPage from "containers/ProductDetailPage/ProductDetailPage";
 import ProductDetailPage2 from "containers/ProductDetailPage/ProductDetailPage2";
-import AccountSavelists from "containers/AccountPage/AccountSavelists";
+import Wishlist from "containers/AccountPage/Wishlist";
 import AccountPass from "containers/AccountPage/AccountPass";
 import AccountBilling from "containers/AccountPage/AccountBilling";
 import AccountOrder from "containers/AccountPage/AccountOrder";
@@ -44,10 +44,10 @@ export const pages: Page[] = [
   { path: "/page-search", component: PageSearch },
   //
   { path: "/account", component: AccountPage },
-  { path: "/account-savelists", component: AccountSavelists },
-  { path: "/account-change-password", component: AccountPass },
+  { path: "/wishlist", component: Wishlist },
+  { path: "/change-password", component: AccountPass },
   { path: "/account-billing", component: AccountBilling },
-  { path: "/account-my-order", component: AccountOrder },
+  { path: "/my-orders", component: AccountOrder },
   //
   { path: "/cart", component: CartPage },
   { path: "/checkout", component: CheckoutPage },
@@ -58,7 +58,7 @@ export const pages: Page[] = [
   { path: "/contact", component: PageContact },
   { path: "/about", component: PageAbout },
   { path: "/signup", component: PageSignUp },
-  { path: "/verify-otp", component: PageSignUpVerify },
+  { path: "/verify-passcode", component: PageSignUpVerify },
   { path: "/login", component: PageLogin },
   { path: "/subscription", component: PageSubcription },
 ];

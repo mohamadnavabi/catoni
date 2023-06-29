@@ -1,57 +1,39 @@
 import { API_URL } from "contains/contants";
 import HttpClient from "../httpClient";
-
-export type DeviceInfo = string;
-
-export type GenerateOTPParams = {
-  mobile: string;
-  ip: string;
-  device_info: DeviceInfo;
-};
-
-export type VerifyOTPParams = {
-  mobile: string;
-  otp: number | string;
-};
-
-export type RegisterParams = {
-  mobile: string;
-  email?: string;
-  password: string;
-  password_confirmation: string;
-  otp: string;
-  device_info: DeviceInfo;
-};
-
-export type LoginParams = {
-  mobile: string;
-  email?: string;
-  password: string;
-  device_info: DeviceInfo;
-};
+import {
+  DeviceInfo,
+  GeneratePasscodeParams,
+  LoginParams,
+  PasscodeResult,
+  RegisterParams,
+  UpdateParams,
+  UpdatePasswordParams,
+  User,
+  VerifyPasscodeParams,
+} from "store/slices";
 
 class Auth extends HttpClient {
   constructor() {
     super(`${API_URL}/auth`);
   }
 
-  generateOTP(data: GenerateOTPParams) {
-    return this.instance.post("/generate-otp", data, {
+  generatePasscode(data: GeneratePasscodeParams): Promise<PasscodeResult> {
+    return this.instance.post("/generate-passcode", data, {
       headers: {
         xsrfHeaderName: "X-XSRF-TOKEN",
       },
     });
   }
 
-  verifyOTP(data: VerifyOTPParams) {
-    return this.instance.post("/verify-otp", data, {
+  verifyPasscode(data: VerifyPasscodeParams): Promise<boolean> {
+    return this.instance.post("/verify-passcode", data, {
       headers: {
         xsrfHeaderName: "X-XSRF-TOKEN",
       },
     });
   }
 
-  register(data: RegisterParams) {
+  register(data: RegisterParams): Promise<User> {
     return this.instance.post("/register", data, {
       headers: {
         xsrfHeaderName: "X-XSRF-TOKEN",
@@ -59,7 +41,7 @@ class Auth extends HttpClient {
     });
   }
 
-  login(data: LoginParams) {
+  login(data: LoginParams): Promise<User> {
     return this.instance.post(`/login`, data, {
       headers: {
         xsrfHeaderName: "X-XSRF-TOKEN",
@@ -67,7 +49,7 @@ class Auth extends HttpClient {
     });
   }
 
-  verify(deviceInfo: DeviceInfo) {
+  verify(deviceInfo: DeviceInfo): Promise<User> {
     return this.instance.get(`/verify`, {
       params: { device_info: deviceInfo },
       headers: {
@@ -76,7 +58,7 @@ class Auth extends HttpClient {
     });
   }
 
-  logout() {
+  logout(): Promise<null> {
     return this.instance.post(
       `/logout`,
       {},
@@ -86,6 +68,22 @@ class Auth extends HttpClient {
         },
       }
     );
+  }
+
+  update(data: UpdateParams): Promise<User> {
+    return this.instance.put(`/update`, data, {
+      headers: {
+        xsrfHeaderName: "X-XSRF-TOKEN",
+      },
+    });
+  }
+
+  updatePassword(data: UpdatePasswordParams): Promise<null> {
+    return this.instance.put(`/update-password`, data, {
+      headers: {
+        xsrfHeaderName: "X-XSRF-TOKEN",
+      },
+    });
   }
 }
 
