@@ -391,8 +391,11 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({
                 />
               </div>
               {renderStatus()}
-              {/* META FAVORITES */}
-              <LikeButton className="absolute right-3 top-3 " />
+
+              <LikeButton
+                productId={state.id}
+                className="absolute right-3 top-3 "
+              />
             </div>
             <div className="grid grid-cols-2 gap-3 mt-3 sm:gap-6 sm:mt-6 xl:gap-8 xl:mt-8">
               {thumbnails.map((item, index) => {

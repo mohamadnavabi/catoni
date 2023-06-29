@@ -4,3 +4,4 @@ export * from "./Auth";
 export * from "./Category";
 export * from "./Attribute";
 export * from "./Address";
+export * from "./Wishlist";

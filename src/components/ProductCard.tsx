@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { Link, useHistory } from "react-router-dom";
 import NcImage from "components/shared/NcImage/NcImage";
 import LikeButton from "./LikeButton";
@@ -20,14 +20,14 @@ import NotifyAddToCart from "./NotifyAddToCart";
 
 export interface ProductCardProps {
   className?: string;
-  data: Product;
-  isLiked?: boolean;
+  data: Product | any;
+  showWishlist?: boolean;
 }
 
 const ProductCard: FC<ProductCardProps> = ({
   className = "",
   data,
-  isLiked,
+  showWishlist = false,
 }) => {
   const { title, subtitle, price, variants, media, rating_average } = data;
 
@@ -185,8 +185,12 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <ProductStatus status={"status"} />
 
-          {/* TODO: check isLike */}
-          <LikeButton liked={isLiked} className="absolute top-3 right-3 z-10" />
+          {showWishlist && (
+            <LikeButton
+              productId={data.id}
+              className="absolute top-3 right-3 z-10"
+            />
+          )}
 
           {variants.length ? renderSizeList() : renderGroupButtons()}
         </div>

@@ -32,7 +32,7 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
                 link: "/my-orders",
               },
               {
-                name: "لیست ها",
+                name: "لیست علاقه‌مندی",
                 link: "/wishlist",
               },
               {

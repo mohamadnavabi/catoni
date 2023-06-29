@@ -15,7 +15,13 @@ import logger from "redux-logger";
 
 // Reducers
 import { mediaRunningSlice } from "./mediaRunning/mediaRunning";
-import { authSlice, cartSlice, checkoutSlice, productSlice } from "./slices";
+import {
+  authSlice,
+  cartSlice,
+  checkoutSlice,
+  productSlice,
+  wishlistSlice,
+} from "./slices";
 import { categorySlice } from "./slices/category";
 
 // const isDev = process.env.NODE_ENV === "development";
@@ -43,6 +49,7 @@ const rootReducer = combineReducers({
   [productSlice.name]: productSlice.reducer,
   [categorySlice.name]: categorySlice.reducer,
   [checkoutSlice.name]: checkoutSlice.reducer,
+  [wishlistSlice.name]: wishlistSlice.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middlewareLogger: any = !!isDev ? logger : [];

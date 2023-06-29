@@ -7,7 +7,6 @@ import {
 import ButtonPrimary from "components/shared/Button/ButtonPrimary";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import NcImage from "components/shared/NcImage/NcImage";
-import LikeSaveBtns from "./LikeSaveBtns";
 import ModalPhotos from "./ModalPhotos";
 import ReviewItem from "components/ReviewItem";
 import detail21JPG from "assets/images/temp/products/detail3-1.webp";
@@ -34,6 +33,7 @@ import {
 import NotifyAddToCart from "components/NotifyAddToCart";
 import { addToCart } from "store/slices";
 import { useAppDispatch } from "store/hooks";
+import LikeButton from "components/LikeButton";
 
 export interface ProductDetailPage2Props {
   className?: string;
@@ -348,7 +348,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             {renderStatus()}
 
             <div className="mr-auto">
-              <LikeSaveBtns />
+              <LikeButton productId={state.id} type="detail" />
             </div>
           </div>
         </div>

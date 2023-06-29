@@ -217,7 +217,9 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="mr-4">
-                        <p className="text-sm font-medium ">{"لیست ها"}</p>
+                        <p className="text-sm font-medium ">
+                          {"لیست علاقه‌مندی"}
+                        </p>
                       </div>
                     </Link>
 
