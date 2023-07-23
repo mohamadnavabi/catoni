@@ -8,6 +8,7 @@ export interface MessagesType {
 
 export interface CartItem extends Product {
   quantity: number;
+  item_id?: number;
   message?: MessagesType;
 }
 

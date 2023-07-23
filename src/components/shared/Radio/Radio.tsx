@@ -9,6 +9,7 @@ export interface RadioProps {
   sizeClassName?: string;
   label?: string;
   checked?: boolean;
+  disabled?: boolean;
 }
 
 const Radio: FC<RadioProps> = ({
@@ -20,6 +21,7 @@ const Radio: FC<RadioProps> = ({
   sizeClassName = "w-6 h-6",
   defaultChecked,
   checked,
+  disabled,
 }) => {
   return (
     <div className={`flex items-center text-sm sm:text-base ${className}`}>
@@ -32,10 +34,12 @@ const Radio: FC<RadioProps> = ({
         defaultChecked={defaultChecked}
         value={id}
         checked={checked}
+        disabled={disabled}
       />
       {label && (
         <label
           htmlFor={id}
+          aria-disabled={disabled}
           className="pr-2.5 sm:pr-3 block text-slate-900 dark:text-slate-100 select-none"
           dangerouslySetInnerHTML={{ __html: label }}
         ></label>

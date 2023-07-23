@@ -14,10 +14,16 @@ import { BASE_URL } from "contains/contants";
 import {
   CartItem,
   getAddresses,
+  getCart,
+  getPaymentMethods,
+  getShippingMethods,
   removeItem,
+  storeOrder,
   updateQuantity,
 } from "store/slices";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { getLowPrice } from "store/slices/cart/helpers";
+import ShippingMethod from "./ShippingMethod";
 
 const CheckoutPage = () => {
   const [tabActive, setTabActive] = useState<
@@ -26,18 +32,35 @@ const CheckoutPage = () => {
 
   const { items, tax, shipping, discount, total, totalWithoutDiscount } =
     useAppSelector((state) => state.cart);
-  const { token } = useAppSelector((state) => state.auth);
-  const { selectedAddress } = useAppSelector((state) => state.checkout);
+  const { user, deviceInfo } = useAppSelector((state) => state.auth);
+  const { selectedAddress, selectedPaymentMethod, selectedShippingMethod } =
+    useAppSelector((state) => state.checkout);
+  const { loading, activeOrder } = useAppSelector((state) => state.order);
 
   const dispatch = useAppDispatch();
 
   const history = useHistory();
 
   useEffect(() => {
-    if (!token) history.replace("/login");
+    if (!user || !user.token) history.replace("/login");
     else if (!items.length) history.replace("/cart");
-    else dispatch(getAddresses());
+    else {
+      dispatch(getAddresses());
+      dispatch(getPaymentMethods());
+      dispatch(getShippingMethods());
+    }
   }, []);
+
+  useEffect(() => {
+    if (activeOrder) {
+      if (activeOrder.tracking_url) {
+        window.location.href = activeOrder.tracking_url;
+      } else {
+        history.replace("/order", activeOrder);
+      }
+      dispatch(getCart());
+    }
+  }, [activeOrder]);
 
   const handleScrollToEl = (id: string) => {
     const element = document.getElementById(id);
@@ -134,8 +157,12 @@ const CheckoutPage = () => {
     const { media, price, title, variants, quantity } = item;
     const image =
       media && media.length
-        ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[3]
+        ? BASE_URL +
+          media[0].path +
+          "/" +
+          JSON.parse(media[0].resized)[2]["name"]
         : "";
+    const lowPrices = getLowPrice(item);
 
     return (
       <div key={index} className="relative flex py-7 first:pt-0 last:pb-0">
@@ -210,14 +237,14 @@ const CheckoutPage = () => {
                     <option value="7">7</option>
                   </select>
                   <Prices
+                    {...lowPrices}
                     contentClass="py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium h-full"
-                    price={price}
                   />
                 </div>
               </div>
 
               <div className="hidden flex-1 sm:flex justify-end">
-                <Prices price={price} className="mt-0.5" />
+                <Prices {...lowPrices} className="mt-0.5" />
               </div>
             </div>
           </div>
@@ -257,16 +284,29 @@ const CheckoutPage = () => {
         </div>
 
         <div id="PaymentMethod" className="scroll-mt-24">
-          <PaymentMethod
-            isActive={tabActive === "PaymentMethod"}
-            onOpenActive={() => {
-              setTabActive("PaymentMethod");
-              handleScrollToEl("PaymentMethod");
-            }}
-            onCloseActive={() => setTabActive("PaymentMethod")}
-          />
+          <PaymentMethod />
+        </div>
+
+        <div id="ShippingMethod" className="scroll-mt-24">
+          <ShippingMethod />
         </div>
       </div>
+    );
+  };
+
+  const onPayment = () => {
+    dispatch(
+      storeOrder({
+        ordered_device: deviceInfo,
+        total: total,
+        discount: discount,
+        shipping_total: shipping,
+        address_id: selectedAddress?.id,
+        coupon_id: null,
+        shipping_method_id: selectedShippingMethod.id,
+        payment_method_id: selectedPaymentMethod.id,
+        items: items.map((item: CartItem) => item.item_id),
+      })
     );
   };
 
@@ -358,7 +398,11 @@ const CheckoutPage = () => {
                 />
               </div>
             </div>
-            <ButtonPrimary className="mt-8 w-full">
+            <ButtonPrimary
+              loading={loading}
+              className="mt-8 w-full"
+              onClick={onPayment}
+            >
               پرداخت و ثبت نهایی
             </ButtonPrimary>
             {/* <div className="mt-5 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center">

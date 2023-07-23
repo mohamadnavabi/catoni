@@ -7,18 +7,32 @@ import {
   updateAddress,
   destroyAddress,
   touchAddress,
+  getPaymentMethods,
+  getShippingMethods,
 } from "./thunks";
 
 const initialState: CheckoutState = {
   addresses: [],
   selectedAddress: undefined,
   addressFormButtonLoading: false,
+  paymentMethods: [],
+  selectedPaymentMethod: {},
+  shippingMethods: [],
+  selectedShippingMethod: {},
 };
 
 export const checkoutSlice = createSlice({
   name: "checkout",
   initialState,
   reducers: {
+    setSelectedPaymentMethod: (state, action) => ({
+      ...state,
+      selectedPaymentMethod: action.payload,
+    }),
+    setSelectedShippingMethod: (state, action) => ({
+      ...state,
+      selectedShippingMethod: action.payload,
+    }),
     reset: (state) => ({
       ...state,
       addresses: [],
@@ -74,6 +88,14 @@ export const checkoutSlice = createSlice({
       ...state,
       addresses: action.payload,
       selectedAddress: action.payload[0],
+    }));
+    builder.addCase(getPaymentMethods.fulfilled, (state, action) => ({
+      ...state,
+      paymentMethods: action.payload,
+    }));
+    builder.addCase(getShippingMethods.fulfilled, (state, action) => ({
+      ...state,
+      shippingMethods: action.payload,
     }));
   },
 });

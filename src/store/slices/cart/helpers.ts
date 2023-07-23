@@ -1,4 +1,4 @@
-import { PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, current } from "@reduxjs/toolkit";
 import { currencyFormat } from "utils/number";
 import { CartItem, CartState, MessagesType } from "./interfaces";
 
@@ -23,41 +23,41 @@ export function handleItems(state: CartState, action: PayloadAction<CartItem>) {
   return items;
 }
 
-export function handleExpenses(items: CartItem[]) {
-  return {
-    tax: 0,
-    shipping: 0,
-    discount: items.reduce(
-      (prev, current) =>
-        prev +
-        (current.sale_price > 0 ? current.sale_price - current.price : 0) *
-          current.quantity,
-      0
-    ),
-    totalWithoutDiscount: items.reduce(
-      (prev, current) => prev + current.price * current.quantity,
-      0
-    ),
-    total: items.reduce(
-      (prev, current) =>
-        prev +
-        (current.sale_price > 0 ? current.sale_price : current.price) *
-          current.quantity,
-      0
-    ),
-  };
-}
+export const handleExpenses = (items: CartItem[]) => ({
+  tax: 0,
+  shipping: 0,
+  discount: items.reduce((prev, current) => {
+    const currentPrices = getPrice(current);
+    return (
+      prev +
+      (currentPrices.sale_price > 0
+        ? currentPrices.sale_price - currentPrices.price
+        : 0) *
+        current.quantity
+    );
+  }, 0),
+  totalWithoutDiscount: items.reduce((prev, current) => {
+    const currentPrices = getPrice(current);
+    return prev + currentPrices.price * current.quantity;
+  }, 0),
+  total: items.reduce((prev, current) => {
+    const currentPrices = getPrice(current);
+    return (
+      prev +
+      (currentPrices.sale_price > 0
+        ? currentPrices.sale_price
+        : currentPrices.price) *
+        current.quantity
+    );
+  }, 0),
+});
 
 export function compareCart(prev: CartItem[], next: any): CartItem[] {
   let items = next.map((item: any) => ({
     cart_id: item.itemable_id,
     item_id: item.id,
     ...item.product,
-    price: Number(
-      item.product.sale_price && item.product.sale_price !== "0"
-        ? item.product.sale_price
-        : item.product.price
-    ),
+    ...getPrice(item.product),
     variants: [item.variant],
     quantity: item.quantity,
     guarantee_id: item.guarantee_id,
@@ -77,8 +77,8 @@ export function compareCart(prev: CartItem[], next: any): CartItem[] {
 
     if (!updatedItem) return;
 
-    const newPrice = Number(updatedItem.price);
-    const oldPrice = Number(item.price);
+    const newPrice = getPrice(updatedItem).price;
+    const oldPrice = getPrice(item).price;
 
     // Handle message
     let message: MessagesType | undefined = undefined;
@@ -116,3 +116,35 @@ export function compareCart(prev: CartItem[], next: any): CartItem[] {
 
   return items;
 }
+
+const getVariantPrice = (item: any): number =>
+  item.hasOwnProperty("variants") &&
+  item.variants.length &&
+  Number(item.variants[0].price);
+
+const getVariantSalePrice = (item: any): number =>
+  item.hasOwnProperty("variants") &&
+  item.variants.length &&
+  Number(item.variants[0].sale_price);
+
+const getPrice = (item: any): { price: number; sale_price: number } => {
+  const salePrice = getVariantSalePrice(item) || Number(item.sale_price);
+  const price = getVariantPrice(item) || Number(item.price);
+
+  return { price, sale_price: salePrice };
+};
+
+export const getLowPrice = (
+  item: any
+): { price: number; sale_price: number } => {
+  const minPriceVariable = item.hasOwnProperty("variants")
+    ? item.variants.reduce((prev: any, curr: any) =>
+        prev.sale_price != 0 && prev.sale_price < curr.sale_price ? prev : curr
+      )
+    : item.sale_price;
+  const salePrice =
+    Number(minPriceVariable.sale_price) || Number(item.sale_price);
+  const price = Number(minPriceVariable.price) || Number(item.price);
+
+  return { price, sale_price: salePrice };
+};

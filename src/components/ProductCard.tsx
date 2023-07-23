@@ -17,6 +17,7 @@ import { getProductByVariantItems, getVariantByTypes } from "utils/apiWorker";
 import { useAppDispatch } from "store/hooks";
 import { addToCart, cartSlice } from "store/slices";
 import NotifyAddToCart from "./NotifyAddToCart";
+import { getLowPrice } from "store/slices/cart/helpers";
 
 export interface ProductCardProps {
   className?: string;
@@ -30,11 +31,10 @@ const ProductCard: FC<ProductCardProps> = ({
   showWishlist = false,
 }) => {
   const { title, subtitle, price, variants, media, rating_average } = data;
-
   const colors = getVariantByTypes(variants, "color");
   const image =
     media && media.length
-      ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[2]
+      ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].resized)[1]["name"]
       : "";
 
   const [activeColor, setActiveColor] = React.useState<AttributeItems | null>(
@@ -222,7 +222,7 @@ const ProductCard: FC<ProductCardProps> = ({
               )}
             </div>
 
-            <Prices price={price} />
+            <Prices {...getLowPrice(data)} />
           </div>
         </div>
       </div>

@@ -9,10 +9,6 @@ import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import NcImage from "components/shared/NcImage/NcImage";
 import ModalPhotos from "./ModalPhotos";
 import ReviewItem from "components/ReviewItem";
-import detail21JPG from "assets/images/temp/products/detail3-1.webp";
-import detail22JPG from "assets/images/temp/products/detail3-2.webp";
-import detail23JPG from "assets/images/temp/products/detail3-3.webp";
-import detail24JPG from "assets/images/temp/products/detail3-4.webp";
 import { AttributeItems, Product } from "data/data";
 import IconDiscount from "components/IconDiscount";
 import NcInputNumber from "components/NcInputNumber";
@@ -44,27 +40,21 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
 }) => {
   let { state } = useLocation<Product>();
 
-  const LIST_IMAGES_DEMO: string[] = [
-    detail21JPG,
-    detail22JPG,
-    detail23JPG,
-    detail24JPG,
-    detail24JPG,
-    detail24JPG,
-    detail24JPG,
-  ];
   const price = state.price;
-
   const thumbnails =
     state.media && state.media.length
-      ? state.media.map((m) => BASE_URL + m.path + "/" + JSON.parse(m.files)[1])
+      ? state.media.map(
+          (m) => BASE_URL + m.path + "/" + JSON.parse(m.resized)[1]?.name
+        )
       : [];
 
   const images =
     state.media && state.media.length
-      ? state.media.map((m) => BASE_URL + m.path + "/" + JSON.parse(m.files)[0])
+      ? state.media.map(
+          (m) => BASE_URL + m.path + "/" + JSON.parse(m.resized)[0]?.name
+        )
       : [];
-  console.log(images, "images");
+
   const colors = getVariantByTypes(state.variants, "color");
   const sizes = getVariantByTypes(state.variants, "select");
   const status = getProductStatus(state);
@@ -468,7 +458,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                 <NcImage
                   containerClassName="aspect-w-3 aspect-h-4 md:absolute md:inset-0"
                   className="object-cover w-full h-full rounded-md sm:rounded-xl"
-                  src={LIST_IMAGES_DEMO[0]}
+                  src={images[0]}
                 />
                 <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-40 transition-opacity"></div>
               </div>
@@ -481,13 +471,13 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                 <NcImage
                   containerClassName="absolute inset-0"
                   className="object-cover w-full h-full rounded-md sm:rounded-xl"
-                  src={LIST_IMAGES_DEMO[1]}
+                  src={images[1]}
                 />
                 <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-40 transition-opacity"></div>
               </div>
 
               {/*  */}
-              {[LIST_IMAGES_DEMO[2], LIST_IMAGES_DEMO[3]].map((item, index) => (
+              {[images[2], images[3]].map((item, index) => (
                 <div
                   key={index}
                   className={`relative rounded-md sm:rounded-xl overflow-hidden ${
@@ -534,7 +524,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         </header>
         {/* MODAL PHOTOS */}
         <ModalPhotos
-          imgs={LIST_IMAGES_DEMO}
+          imgs={images}
           isOpen={isOpen}
           onClose={handleCloseModal}
           initFocus={openFocusIndex}

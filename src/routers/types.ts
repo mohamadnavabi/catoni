@@ -21,6 +21,7 @@ export interface LocationStates {
   //
   "/cart"?: {};
   "/checkout"?: {};
+  "/order"?: {};
   //
   "/blog"?: {};
   "/blog-single"?: {};

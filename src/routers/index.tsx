@@ -28,6 +28,7 @@ import AccountOrder from "containers/AccountPage/AccountOrder";
 import CartPage from "containers/ProductDetailPage/CartPage";
 import CheckoutPage from "containers/PageCheckout/CheckoutPage";
 import PageCollection2 from "containers/PageCollection2";
+import OrderPage from "containers/PageCheckout/OrderPage";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -51,6 +52,7 @@ export const pages: Page[] = [
   //
   { path: "/cart", component: CartPage },
   { path: "/checkout", component: CheckoutPage },
+  { path: "/order", component: OrderPage },
   //
   { path: "/blog", component: BlogPage },
   { path: "/blog-single", component: BlogSingle },

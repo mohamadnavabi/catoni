@@ -8,7 +8,6 @@ class Wishlist extends HttpClient {
     super(`${API_URL}/wishlist`);
   }
 
-  // TODO: fix paginate type
   all(): Promise<Paginate<WishlistType>> {
     return this.instance.get("/");
   }

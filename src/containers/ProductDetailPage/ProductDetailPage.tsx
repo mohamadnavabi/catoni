@@ -43,12 +43,16 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({
 
   const thumbnails =
     state.media && state.media.length
-      ? state.media.map((m) => BASE_URL + m.path + "/" + JSON.parse(m.files)[1])
+      ? state.media.map(
+          (m) => BASE_URL + m.path + "/" + JSON.parse(m.resized)[1]["name"]
+        )
       : [];
 
   const images =
     state.media && state.media.length
-      ? state.media.map((m) => BASE_URL + m.path + "/" + JSON.parse(m.files)[0])
+      ? state.media.map(
+          (m) => BASE_URL + m.path + "/" + JSON.parse(m.resized)[0]["name"]
+        )
       : [];
 
   const colors = getVariantByTypes(state.variants, "color");

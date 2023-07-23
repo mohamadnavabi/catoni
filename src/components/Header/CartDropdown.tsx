@@ -7,6 +7,7 @@ import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { CartItem, removeItem } from "store/slices";
 import { BASE_URL } from "contains/contants";
+import { getLowPrice } from "store/slices/cart/helpers";
 
 export default function CartDropdown() {
   const { cart } = useAppSelector((state) => state);
@@ -17,7 +18,10 @@ export default function CartDropdown() {
     const { title, price, media, variants, quantity } = item;
     const image =
       media && media.length
-        ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[3]
+        ? BASE_URL +
+          media[0].path +
+          "/" +
+          JSON.parse(media[0].resized)[2]["name"]
         : "";
 
     return (
@@ -70,7 +74,7 @@ export default function CartDropdown() {
                   </p>
                 )}
               </div>
-              <Prices price={price} className="mt-0.5" />
+              <Prices {...getLowPrice(item)} className="mt-0.5" />
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">

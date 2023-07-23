@@ -2,13 +2,12 @@ import React, { FC, useEffect, useMemo, useState } from "react";
 import ButtonSecondary from "components/shared/Button/ButtonSecondary";
 import Radio from "components/shared/Radio/Radio";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import OnlinePaymentSVG from "assets/svg/OnlinePaymentSVG";
-import PaymentUponReceiptSVG from "assets/svg/PaymentUponReceiptSVG";
 import { checkoutSlice } from "store/slices";
+import { CubeIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { isAddressCovered } from "utils/location";
 
-const PaymentMethod: FC = () => {
-  const { paymentMethods, selectedPaymentMethod, selectedAddress } =
+const ShippingMethod: FC = () => {
+  const { shippingMethods, selectedShippingMethod, selectedAddress } =
     useAppSelector((state) => state.checkout);
 
   const [openChangeMode, setOpenChangeMode] = useState(false);
@@ -16,16 +15,16 @@ const PaymentMethod: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (paymentMethods.length)
+    if (shippingMethods.length)
       dispatch(
-        checkoutSlice.actions.setSelectedPaymentMethod(paymentMethods[0])
+        checkoutSlice.actions.setSelectedShippingMethod(shippingMethods[0])
       );
-  }, [paymentMethods, selectedAddress]);
+  }, [shippingMethods, selectedAddress]);
 
-  const renderOnlinePayment = useMemo(() => {
+  const renderOnlineShipping = useMemo(() => {
     return React.Children.toArray(
-      paymentMethods.map((item: any) => {
-        const active = selectedPaymentMethod.id === item.id;
+      shippingMethods.map((item: any) => {
+        const active = selectedShippingMethod.id === item.id;
         const zonesLength = item.zones.length;
         const isCovered = isAddressCovered(selectedAddress, item.zones);
 
@@ -38,11 +37,11 @@ const PaymentMethod: FC = () => {
             <Radio
               disabled={!isCovered}
               className="pl-3"
-              name="payment-method"
+              name="shipping-method"
               id={item.id}
               defaultChecked={active}
               onChange={(e) =>
-                dispatch(checkoutSlice.actions.setSelectedPaymentMethod(item))
+                checkoutSlice.actions.setSelectedShippingMethod(item)
               }
             />
             <div className="flex-1">
@@ -51,10 +50,10 @@ const PaymentMethod: FC = () => {
                 className="flex items-center space-x-4 sm:space-x-6 space-x-reverse"
               >
                 <div>
-                  {item.title === "پرداخت آنلاین" ? (
-                    <OnlinePaymentSVG />
+                  {item.title === "پست" ? (
+                    <CubeIcon className="w-6 h-6 sm:w-5 sm:h-5 ml-2" />
                   ) : (
-                    <PaymentUponReceiptSVG />
+                    <RocketLaunchIcon className="w-6 h-6 sm:w-5 sm:h-5 ml-2" />
                   )}
                 </div>
                 <p className="font-medium">
@@ -81,63 +80,32 @@ const PaymentMethod: FC = () => {
         );
       })
     );
-  }, [paymentMethods, selectedPaymentMethod, selectedAddress]);
+  }, [shippingMethods, selectedShippingMethod, selectedAddress]);
 
-  if (!Object.keys(selectedPaymentMethod).length) return null;
+  if (!Object.keys(selectedShippingMethod).length) return null;
 
   return (
     <div className="border border-slate-200 dark:border-slate-700 rounded-xl ">
       <div className="p-6 flex flex-col sm:flex-row items-start">
         <span className="hidden sm:block">
           <svg
-            className="w-6 h-6 text-slate-700 dark:text-slate-400 mt-0.5"
-            viewBox="0 0 24 24"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
           >
             <path
-              d="M3.92969 15.8792L15.8797 3.9292"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeMiterlimit="10"
               strokeLinecap="round"
               strokeLinejoin="round"
-            />
-            <path
-              d="M11.1013 18.2791L12.3013 17.0791"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeMiterlimit="10"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M13.793 15.5887L16.183 13.1987"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeMiterlimit="10"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M3.60127 10.239L10.2413 3.599C12.3613 1.479 13.4213 1.469 15.5213 3.569L20.4313 8.479C22.5313 10.579 22.5213 11.639 20.4013 13.759L13.7613 20.399C11.6413 22.519 10.5813 22.529 8.48127 20.429L3.57127 15.519C1.47127 13.419 1.47127 12.369 3.60127 10.239Z"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M2 21.9985H22"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
             />
           </svg>
         </span>
         <div className="sm:mr-8">
           <h3 className=" text-slate-700 dark:text-slate-400 flex ">
-            <span className="uppercase tracking-tight">روش پرداخت</span>
+            <span className="uppercase tracking-tight">روش ارسال</span>
             <svg
               fill="none"
               viewBox="0 0 24 24"
@@ -153,8 +121,8 @@ const PaymentMethod: FC = () => {
             </svg>
           </h3>
           <div className="font-semibold mt-1 text-sm">
-            <span className="">{selectedPaymentMethod.title}</span>
-            {selectedPaymentMethod.title === "پرداخت آنلاین" && (
+            <span className="">{selectedShippingMethod.title}</span>
+            {selectedShippingMethod.title === "پرداخت آنلاین" && (
               <span className="mr-1 text-xs">(درگاه پرداخت سامان)</span>
             )}
           </div>
@@ -175,10 +143,10 @@ const PaymentMethod: FC = () => {
           openChangeMode ? "block" : "hidden"
         }`}
       >
-        <div>{renderOnlinePayment}</div>
+        <div>{renderOnlineShipping}</div>
       </div>
     </div>
   );
 };
 
-export default PaymentMethod;
+export default ShippingMethod;

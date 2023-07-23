@@ -152,7 +152,11 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
 
                         <Datepicker
                           closeWhenSelectADay
-                          value={moment(formik.values.date_of_birth)}
+                          value={
+                            formik.values.date_of_birth
+                              ? moment(formik.values.date_of_birth)
+                              : moment()
+                          }
                           input={
                             <Input
                               className="!rounded-l-none"

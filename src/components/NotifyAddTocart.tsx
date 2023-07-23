@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Transition } from "@headlessui/react";
 import Prices from "components/Prices";
 import { Product } from "data/data";
+import { getLowPrice } from "store/slices/cart/helpers";
 
 interface Props {
   show: boolean;
@@ -50,7 +51,7 @@ const NotifyAddToCart: FC<Props> = ({
                   </p>
                 )}
               </div>
-              <Prices price={price} className="mt-0.5" />
+              <Prices {...getLowPrice(product)} className="mt-0.5" />
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">

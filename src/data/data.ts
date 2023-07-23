@@ -160,7 +160,7 @@ export interface Media {
   name: string;
   path: string;
   size: number;
-  files: string;
+  resized: string;
   product_id: number;
   directory_id: null | number;
   created_at: string;

@@ -10,11 +10,11 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { BASE_URL } from "contains/contants";
 import { CartItem, getCart, removeItem, updateQuantity } from "store/slices";
 import useAuth from "hooks/useAuth";
+import { getLowPrice } from "store/slices/cart/helpers";
 
 const CartPage = () => {
-  const { items, tax, shipping, discount, total } = useAppSelector(
-    (state) => state.cart
-  );
+  const { items, tax, shipping, discount, total, totalWithoutDiscount } =
+    useAppSelector((state) => state.cart);
 
   const dispatch = useAppDispatch();
 
@@ -128,8 +128,12 @@ const CartPage = () => {
     const { media, price, title, variants, quantity, message } = item;
     const image =
       media && media.length
-        ? BASE_URL + media[0].path + "/" + JSON.parse(media[0].files)[3]
+        ? BASE_URL +
+          media[0].path +
+          "/" +
+          JSON.parse(media[0].resized)[2]["name"]
         : "";
+    const lowPrices = getLowPrice(item);
 
     return React.Children.toArray(
       <>
@@ -209,8 +213,8 @@ const CartPage = () => {
                       <option value="7">7</option>
                     </select>
                     <Prices
+                      {...lowPrices}
                       contentClass="py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium h-full"
-                      price={price}
                     />
                   </div>
                 </div>
@@ -227,7 +231,7 @@ const CartPage = () => {
                 </div>
 
                 <div className="hidden flex-1 sm:flex justify-end">
-                  <Prices price={price} className="mt-0.5" />
+                  <Prices {...lowPrices} className="mt-0.5" />
                 </div>
               </div>
             </div>
@@ -288,7 +292,7 @@ const CartPage = () => {
                 <div className="flex justify-between pb-4">
                   <span>جمع سبد</span>
                   <Prices
-                    price={total}
+                    price={totalWithoutDiscount}
                     priceClass="font-semibold text-slate-900 dark:text-slate-200"
                     contentClass=""
                   />

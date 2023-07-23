@@ -19,6 +19,7 @@ import {
   authSlice,
   cartSlice,
   checkoutSlice,
+  orderSlice,
   productSlice,
   wishlistSlice,
 } from "./slices";
@@ -31,7 +32,7 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["cart"],
+  whitelist: ["auth", "cart"],
   transforms: [
     encryptTransform({
       secretKey: process.env.REACT_APP_SECURE_LOCAL_STORAGE_HASH_KEY as string,
@@ -50,6 +51,7 @@ const rootReducer = combineReducers({
   [categorySlice.name]: categorySlice.reducer,
   [checkoutSlice.name]: checkoutSlice.reducer,
   [wishlistSlice.name]: wishlistSlice.reducer,
+  [orderSlice.name]: orderSlice.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middlewareLogger: any = !!isDev ? logger : [];

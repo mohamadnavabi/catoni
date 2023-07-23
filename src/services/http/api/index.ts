@@ -5,3 +5,5 @@ export * from "./Category";
 export * from "./Attribute";
 export * from "./Address";
 export * from "./Wishlist";
+export * from "./Order";
+export * from "./Payment";

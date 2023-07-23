@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Address } from "data/data";
-import { addressAPI } from "services/http/api";
+import { addressAPI, paymentAPI } from "services/http/api";
+import { shippingAPI } from "services/http/api/Shipping";
 
 export const getAddresses = createAsyncThunk("checkout/getAddresses", () =>
   addressAPI.all()
@@ -29,4 +30,14 @@ export const destroyAddress = createAsyncThunk(
 export const touchAddress = createAsyncThunk(
   "checkout/touchAddress",
   (address: Address) => addressAPI.touch(address.id)
+);
+
+export const getPaymentMethods = createAsyncThunk(
+  "checkout/getPaymentMethods",
+  () => paymentAPI.all()
+);
+
+export const getShippingMethods = createAsyncThunk(
+  "checkout/getShippingMethods",
+  () => shippingAPI.all()
 );
